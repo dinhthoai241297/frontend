@@ -64,7 +64,10 @@ export const deleteSectorState = id => {
 };
 
 export const loadAllSectorApi = page => {
-    return dispatch => sectorApi.getAll({ page }).then(res => {
+    return dispatch => sectorApi.getAll({
+        page,
+        session: 'dd79e826f181a0ffc3c1fa9a6231af26'
+    }).then(res => {
         if (res.body.code === 200) {
             dispatch(loadAllSectorState(res.body.data));
             return true;

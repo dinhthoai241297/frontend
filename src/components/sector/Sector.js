@@ -9,17 +9,22 @@ class Sector extends Component {
     }
 
     genSectors = () => {
-        let { sector } = this.props.sector;
+        let { sectors } = this.props;
         let rs = null;
-        rs = sector.map((s, i) => (
-            <h2 key={i}>{s.name}</h2>
-        ));
+        if (sectors) {
+            rs = sectors.map((s, i) => (
+                <h2 key={i}>{s.name}</h2>
+            ));
+        }
         return rs;
     }
 
     render() {
         return (
             <div>
+                <h2>
+                    Sector page
+                </h2>
                 {this.genSectors()}
             </div>
         );
@@ -28,7 +33,7 @@ class Sector extends Component {
 
 const mapStateToProps = state => {
     return {
-        sector: state.SectorReducer
+        sectors: state.SectorReducer.sectors
     }
 }
 
