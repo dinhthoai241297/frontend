@@ -1,4 +1,4 @@
-    const path = require('path');
+const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
@@ -36,12 +36,16 @@ module.exports = {
                 test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/
             },
             {
-  loader: 'file-loader',
-  options: {
-    regExp: /\/([a-z0-9]+)\/[a-z0-9]+\.png$/,
-    name: '[1]-[name].[ext]'
-  }
-}
+                use : [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                        }
+                    }
+                ],
+                test : /\.(png|jpg|gif)$/
+            }
         ]
     },
     plugins: [
