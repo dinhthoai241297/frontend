@@ -1,0 +1,164 @@
+/*
+============================ HEADER ============================
+*/
+
+@font-face {
+	font-family: Anton-Regular;
+	src: url(../font/Anton-Regular.ttf);
+}
+
+$color-bor: rgb(173, 173, 173);
+$color-bor-ac: rgb(111, 111, 111);
+$color-text: rgb(85, 85, 85);
+
+header {
+	background-image: url('../img/background.png');
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-position: center center;
+
+	#form-search {
+		text-align: center;
+
+		#label-search {
+			font-size: 8vmin;
+			margin-bottom: 10px;
+			color: white;
+			font-family: Anton-Regular;
+		}
+
+		#nor-search {
+			position: relative;
+			
+			button {
+				position: absolute;
+				outline: none !important;
+				padding: 0 15px;
+				top: 0;
+				right: 0;
+				background: transparent;
+				border: none;
+				height: 100%;
+				border: 1px solid $color-bor;
+				color: $color-bor;
+				transition: all .3s;
+				cursor: pointer;
+				-webkit-border-radius: 0 !important;
+				-moz-border-radius: 0 !important;
+				border-radius: 0 !important;
+
+				&:hover {
+					color: white;
+					background-color: $color-bor;
+				}
+			}
+
+			input {
+				padding-left: 15px;
+				padding-right: 45px;
+			}
+		}
+
+		#nor-search, #adv-search > div > div {
+			margin-bottom: 20px;
+		}
+
+		input, select {
+			width: 100%;
+			font-size: 1.1em;
+			border: 1px solid $color-bor;
+			padding: 10px 5px;
+			outline: none !important;
+			transition: all .3s;
+			cursor: pointer;
+			color: $color-text;
+			background-color: white;
+			-webkit-border-radius: 0 !important;
+			-moz-border-radius: 0 !important;
+			border-radius: 0 !important;
+		}
+
+		#adv-search {
+
+			display: none;
+
+			select {
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				-o-appearance: none;
+				-ms-appearance: none;
+				appearance: none;
+
+				option {
+					width: 100%;
+				}
+			}
+
+			select::-ms-expand {
+				display: none;
+			}
+
+			div > div {
+				position: relative;
+			}
+
+			i {
+				position: absolute;
+				top: 0;
+				right: 15px;
+				pointer-events: none;
+				height: 100%;
+				top: 35%;
+				color: $color-text;
+			}
+		}
+
+		#adv-toggle {
+			text-align: right;
+			margin-bottom: 15px;
+			margin-top: -15px;
+
+			a {
+				text-decoration: none;
+				color: white;
+				transition: all .3s;
+
+				&:hover {
+					color: #FFC657;
+					color: #adadad;
+				}
+			}
+		}
+	}
+}
+
+content {
+	.container {
+		padding-top: 30px;
+		padding-bottom: 30px;
+
+		table {
+			tr {
+				*:nth-child(3), *:nth-child(4) {
+					display: none;
+				}
+
+				@media (min-width: 768px) {
+					*:nth-child(4) {
+						display: table-cell;
+					}
+				}
+
+				@media (min-width: 992px) {
+					*:nth-child(3), *:nth-child(4) {
+						display: table-cell;
+					}
+				}
+			}
+		}
+	}
+}
+
+
