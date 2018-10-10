@@ -3,7 +3,7 @@ import React, { Component, Fragment, PropTypes } from 'react';
 import Home from './components/home/Home';
 import Search from './components/search/Search';
 import Detail from './components/detail/Detail';
-
+import $ from "jquery";
 
 
 
