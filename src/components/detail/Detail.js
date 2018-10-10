@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom'
 import logo from '../../assets/styles/img/logo.png';
+import logonlu from '../../assets/styles/img/001.png';
 import '../../assets/styles/css/styledetail.css';
 
 class Detail extends Component {
@@ -13,7 +14,7 @@ class Detail extends Component {
 				<div className="row justify-content-between">
 					<div className="col-auto">
 						<div id="logo">
-							<img src="{logo}" />
+							<img src={logo} />
 						</div>
 					</div>
 					<div className="col-auto">
@@ -56,7 +57,7 @@ class Detail extends Component {
 					<div className="container-fluid">
 						<div className="row">
 							<div className="col-md-4 video">
-								<img src="img/001.png"></img>
+								<img src={logonlu}></img>
 							</div>
 							<div className="col-md-8 video-info">
 								<br />

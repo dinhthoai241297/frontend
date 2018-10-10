@@ -15,7 +15,7 @@ class Search extends Component {
 				<div className="row justify-content-between">
 					<div className="col-auto">
 						<div id="logo">
-							<img src="{logo}" />
+							<img src={logo} />
 						</div>
 					</div>
 					<div className="col-auto">

@@ -3,6 +3,8 @@ import {Link, NavLink, Route, BrowserRouter } from 'react-router-dom';
 import logo from '../../assets/styles/img/logo.png';
 import '../../assets/styles/css/stylehome.css';
 
+console.log(logo);
+
 class Home extends Component {
     render() {
         return (
@@ -14,7 +16,7 @@ class Home extends Component {
 				<div className="row justify-content-between">
 					<div className="col-auto">
 						<div id="logo">
-							<img src="{logo}" alt={"logo"} />
+							<img src={logo} alt="{logo}" />
 						</div>
 					</div>
 					<div className="col-auto">
