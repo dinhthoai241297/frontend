@@ -1,10 +1,53 @@
 import React, { Component, Fragment } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import logo from '../../assets/styles/img/logo.png';
+import '../../assets/styles/css/stylesearch.css';
+import $ from "jquery";
 
 class Search extends Component {
     render() {
         return (
             <div>
             <header>
+            <div className="searchPage">
+            <div id="logo-menu">
+			<div className="container-fluid">
+				<div className="row justify-content-between">
+					<div className="col-auto">
+						<div id="logo">
+							<img src="{logo}" />
+						</div>
+					</div>
+					<div className="col-auto">
+						<nav>
+							<div>
+								<button id="btn-menu"><i className="fas fa-2x fa-bars"></i></button>
+							</div>
+							<ul id="nav-menu">
+								<li>
+									<Link to="/">Trang chủ</Link>
+								</li>
+								<li>
+									<NavLink to="/search" activeClassName="active">Tra cứu</NavLink>
+								</li>
+								<li>
+									<a href="#">Tư vấn</a>
+								</li>
+								<li>
+									<a href="#">Tin tức</a>
+								</li>
+								<li>
+									<a href="#">Liên hệ</a>
+								</li>
+								<div className="clearfix"></div>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
              	<div className="container">
 					<div className="row">
 					<div className="col-12 col-lg-10 offset-lg-1 col-xl-8 offset-xl-2">
@@ -78,12 +121,13 @@ class Search extends Component {
 				</div>
 			</div>
 		</div>
+		</div>
 		</header>
 	
          
 
            
-            <content>
+         <content>
 		<div className="container">
 			<div>
 				<h3>Kết quả tìm kiếm</h3>
@@ -101,7 +145,7 @@ class Search extends Component {
 					<tbody>
 						<tr>
 							<td>
-								<a href="detail.html">NLS</a>
+								<Link to="detail">NLS</Link>
 							</td>
 							<td>
 								Đại học Nông Lâm
@@ -110,7 +154,7 @@ class Search extends Component {
 								TP Hồ Chí Minh
 							</td>
 							<td>
-								<a href="detail.html">Chi tiết</a>
+								<Link to="detail">Chi tiết</Link>
 							</td>
 						</tr>
 					</tbody>
@@ -139,9 +183,102 @@ class Search extends Component {
 			</div>
 		</div>
 	</content>
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-lg-4">
+					<div>
+						<h3>Tuyensinh.com.vn</h3>
+						<p>Website tư vấn tuyển sinh uy tín, chất lượng</p>
+						<p>Dữ liệu được cập nhật và đánh giá liên tục để đem lại cái nhìn đúng đắn cho các bạn học sinh, sinh viên.</p>
+					</div>
+				</div>
+				<div class="col-12 col-md-6 col-lg-4">
+					<div>
+						<h3>Site map</h3>
+						<ul>
+							<li>
+								<a href="index.html">
+									<i class="fas fa-hand-point-right"></i>
+								Trang chủ</a>
+							</li>
+							<li>
+								<a href="about.html">
+									<i class="fas fa-hand-point-right"></i>
+								Tra cứu</a>
+							</li>
+							<li>
+								<a href="program.html">
+									<i class="fas fa-hand-point-right"></i>
+								Tư vấn</a>
+							</li>
+							<li>
+								<a href="blog.html">
+									<i class="fas fa-hand-point-right"></i>
+								Tin tức</a>
+							</li>	
+							<li>
+								<a href="gallery.html">
+									<i class="fas fa-hand-point-right"></i>
+								Liên hệ</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-12 col-md-6 col-lg-4">
+					<div>
+						<h3>Truy cập nhanh</h3>
+						<ul>
+							<li>
+								<a href="about.html">
+									<i class="fas fa-hand-point-right"></i>
+								Tra cứu điểm chuẩn</a>
+							</li>
+							<li>
+								<a href="about.html">
+									<i class="fas fa-hand-point-right"></i>
+								Tra cứu điểm thi</a>
+							</li>
+							<li>
+								<a href="gallery.html">
+									<i class="fas fa-hand-point-right"></i>
+								Xu hướng chọn trường</a>
+							</li>
+							<li>
+								<a href="blog.html">
+									<i class="fas fa-hand-point-right"></i>
+								Tin tức tuyển sinh</a>
+							</li>	
+							<li>
+								<a href="about.html">
+									<i class="fas fa-hand-point-right"></i>
+								Tư vấn truyển sinh</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div className="copyright">
+			Copyright © 2018 Nong Lam University. All rights reserved | Design by HCMUAF
+			</div>
+		</footer>
    </div>
         );
     }
+
+    componentDidMount() {
+		$("#btn-menu").click(function() {
+			$("#nav-menu").toggle(400);
+		});
+		$("#adv-toggle a").click(function(e) {
+			e.preventDefault();
+			let text = $(this).text();
+			$(this).text(text == "Tìm kiếm nâng cao" ? "Ẩn tìm kiếm nâng cao" : "Tìm kiếm nâng cao");
+			$("#adv-search").toggle(300);
+		});
+  	}
 }
 
 export default Search;

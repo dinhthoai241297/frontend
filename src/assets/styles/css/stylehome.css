@@ -1,1 +1,46 @@
-header{height:100vh;background-image:url("../img/background.png");background-size:cover;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-position:center center}header #logo-menu{padding-bottom:0}header .carousel-caption{position:initial;padding:20px 12vw;font-size:calc((5vw + 5vh) / 2);line-height:1.2}header .container .col-12{text-align:center}header .container .col-12 a{display:inline-block;width:100%;padding:10px 0;border:3px solid white;border-radius:100px;font-weight:500;color:white;text-decoration:none !important;transition:all .3s}header .container .col-12 a:hover{border-color:#1874cd;color:#1874cd;background-color:white}header .copyright{position:absolute;bottom:0;text-align:center;padding:5px 20px;background-color:#1874cd;color:white;width:100%}
+.homePage {
+    height: 100vh;
+    background-image: url("../img/background.png");
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-position: center center;
+}
+.homePage #logo-menu {
+    padding-bottom: 0;
+}
+.homePage .carousel-caption {
+    position: initial;
+    padding: 20px 12vw;
+    font-size: calc((5vw + 5vh) / 2);
+    line-height: 1.2;
+}
+.homePage .container .col-12 {
+    text-align: center;
+}
+.homePage .container .col-12 a {
+    display: inline-block;
+    width: 100%;
+    padding: 10px 0;
+    border: 3px solid white;
+    border-radius: 100px;
+    font-weight: 500;
+    color: white;
+    text-decoration: none !important;
+    transition: all .3s;
+}
+.homePage .container .col-12 a:hover {
+    border-color: #1874cd;
+    color: #1874cd;
+    background-color: white;
+}
+
+.homePage .copyright {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    padding: 5px 20px;
+    background-color: #1874cd;
+    color: white;
+    width: 100%}

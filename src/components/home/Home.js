@@ -1,11 +1,51 @@
 import React, { Component, Fragment } from 'react';
-import {Link, NavLink} from 'react-router-dom';
+import {Link, NavLink, Route, BrowserRouter } from 'react-router-dom';
+import logo from '../../assets/styles/img/logo.png';
+import '../../assets/styles/css/stylehome.css';
 
 class Home extends Component {
     render() {
         return (
         	<div>
-        	
+        	<header>
+        	<div className="homePage">
+        	<div id="logo-menu">
+			<div className="container-fluid">
+				<div className="row justify-content-between">
+					<div className="col-auto">
+						<div id="logo">
+							<img src="{logo}" alt={"logo"} />
+						</div>
+					</div>
+					<div className="col-auto">
+						<nav>
+							<div>
+								<button id="btn-menu"><i className="fas fa-2x fa-bars"></i></button>
+							</div>
+							<ul id="nav-menu">
+								<li>
+									<NavLink to="/" activeClassName="active">Trang chủ</NavLink>
+								</li>
+								<li>
+									<Link to="search">Tra cứu</Link>
+								</li>
+								<li>
+									<a href="#">Tư vấn</a>
+								</li>
+								<li>
+									<a href="#">Tin tức</a>
+								</li>
+								<li>
+									<a href="#">Liên hệ</a>
+								</li>
+								<div className="clearfix"></div>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+
             <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
 			<div className="carousel-inner">
 				<div className="carousel-item active">
@@ -56,6 +96,14 @@ class Home extends Component {
 				</div>
 			</div>
 		</div>
+
+		<div className="copyright">
+			Copyright © 2018 Nong Lam University. All rights reserved | Design by HCMUAF
+			</div>
+			</div>
+		</header>
+
+
 
 		</div>
         );

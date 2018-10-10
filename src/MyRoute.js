@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import App from './App';
 import Home from './components/home/Home';
 import Search from './components/search/Search';
@@ -14,16 +14,16 @@ class MyRoute extends Component {
 
     render() {
         return (
-            <Router>
-                <App>
-                    <Switch>
+            <BrowserRouter>
+                <div>
+                    
                             <Route exact path="/" component={Home} />
-                            <Route path="sector" component={Sector} />
-                            <Route path="search" component={Search} />
-                            <Route path="detail" component={Detail} />
-                    </Switch>
-                </App>
-            </Router>
+                            <Route path="/sector" component={Sector} />
+                            <Route path="/search" component={Search} />
+                            <Route path="/detail" component={Detail} />
+                    
+                </div>
+            </BrowserRouter>
         );
     }
 }

@@ -6,7 +6,7 @@ class Footer extends Component {
         return (
         	<div>
           	<footer>
-			<div class="copyright">
+			<div className="copyright">
 			Copyright © 2018 Nong Lam University. All rights reserved | Design by HCMUAF
 			</div>
 			</footer>

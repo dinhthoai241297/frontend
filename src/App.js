@@ -1,9 +1,10 @@
 import React, { Component, Fragment, PropTypes } from 'react';
-import Header from './components/common/Header';
-import Footer from './components/common/Footer';
+
 import Home from './components/home/Home';
 import Search from './components/search/Search';
+import Detail from './components/detail/Detail';
 import $ from "jquery";
+
 
 
 
@@ -11,13 +12,8 @@ class App extends Component {
     render() {
         let { user } = this.props;
         return (
-            <Fragment>
-            	<header>
-            	<Header />
+            <Fragment>	
                 <Home />
-                </header>
-                <Footer />
-            
             </Fragment>
         );
     }
