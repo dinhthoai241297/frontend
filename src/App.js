@@ -10,7 +10,7 @@ import $ from "jquery";
 
 class App extends Component {
     render() {
-        let { user } = this.props;
+       
         return (
             <Fragment>	
                 <Home />

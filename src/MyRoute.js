@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, BrowserRouter as Router} from 'react-router-dom';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import App from './App';
 import Home from './components/home/Home';
 import Search from './components/search/Search';
@@ -14,8 +14,8 @@ class MyRoute extends Component {
 
     render() {
         return (
-            <Router>
-                <switch>
+            <BrowserRouter>
+                <div>
                     
                     
                                 <Route exact path="/" component={Home} />
@@ -23,8 +23,8 @@ class MyRoute extends Component {
                                 <Route path="/search" component={Search} />
                                 <Route path="/detail" component={Detail} />
                     
-                </switch>
-            </Router>
+                </div>
+            </BrowserRouter>
         );
     }
 }

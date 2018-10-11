@@ -24,19 +24,29 @@ module.exports = {
                 test: /\.css$/
             },
             {
-                test: /\.(jpg|png|svg)$/,
-                loader: 'url-loader',
-                options: {
-                  limit: 25000,
-                },
+                use : [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'fonts/'
+                        }
+                    }
+                ],
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/
             },
             {
-                test: /\.(jpg|png|svg)$/,
-                loader: 'file-loader',
-                options: {
-                  name: '[path][name].[hash].[ext]',
-                },
-            },
+                use : [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'imgs/'
+                        }
+                    }
+                ],
+                test : /\.(png|jpg|gif)$/
+            }
         ]
     },
     plugins: [

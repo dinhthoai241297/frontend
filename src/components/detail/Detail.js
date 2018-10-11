@@ -3,9 +3,59 @@ import { Link, NavLink } from 'react-router-dom'
 import logo from '../../assets/styles/img/logo.png';
 import logonlu from '../../assets/styles/img/001.png';
 import '../../assets/styles/css/styledetail.css';
+import DetailResult from './DetailResult';
 
 class Detail extends Component {
     render() {
+    	var detailResults = [
+    		{
+    			id : 1,
+    			kyHieu : 'NLS',
+    			tenTruong : 'Đại học Nông Lâm',
+    			loaiHinh : 'Công lập',
+    			address : 'Khu phố 6, P. Linh Trung, Q. Thủ Đức, TP.Hồ Chí Minh',
+    			status : true,
+    			phone : 123456,
+    			website : 'http://hcmuaf.edu.vn',
+    		},
+    		{
+    			id : 2,
+    			kyHieu : 'NEU',
+    			tenTruong : 'Đại học Kinh Tế Quốc Dân',
+    			loaiHinh : 'Công lập',
+    			address : '207 Giải Phóng, Đồng Tâm, Quận Hai Bà Trưng, Hà Nội',
+    			status : false,
+    			phone : 1234567,
+    			website : 'http://neu.edu.vn',
+    		},
+    		{
+    			id : 3,
+    			kyHieu : 'UIT',
+    			tenTruong : 'Đại học Công Nghệ Thông Tin',
+    			loaiHinh : 'Công lập',
+    			address : 'ĐHQG, Khu phố 6, P.Linh Trung, Q.Thủ Đức, Tp.Hồ Chí Minh.',
+    			status : false,
+    			phone : 12345678,
+    			website : 'http://uit.edu.vn',
+    		},
+    	];
+
+    	let elements = detailResults.map((result, index) => {
+    		if(result.status) {
+    		return <DetailResult 	key= { result.id }
+    								kyHieu={ result.kyHieu }
+    								tenTruong={ result.tenTruong }
+    								loaiHinh={ result.loaiHinh }
+    								address={ result.address }
+    								phone={ result.phone }
+    								website={ result.website }
+    				/>
+    		}
+    		
+    	});
+
+
+
         return (
             <div>
                 <header>
@@ -59,37 +109,7 @@ class Detail extends Component {
 							<div className="col-md-4 video">
 								<img src={logonlu}></img>
 							</div>
-							<div className="col-md-8 video-info">
-								<br />
-								<h3>Trường Đại học Nông Lâm TP.Hồ Chí Minh</h3>
-								<h4>Nong Lam University - Ho Chi Minh City</h4>
-								<div className="table-responsive">
-									<table className="table-borderless">
-										<tr>
-											<td><strong>Ký hiệu: </strong></td>
-											<td className="column2">NLS</td>
-										</tr>
-										<tr>
-											<td><strong>Loại hình: </strong></td>
-											<td className="column2">Công lập</td>
-										</tr>
-										<tr>
-											<td><strong>Địa chỉ: </strong></td>
-											<td className="column2">Khu phố 6, P. Linh Trung, Q. Thủ Đức,
-											TPHCM</td>
-										</tr>
-										<tr>
-											<td><strong>Điện thoại: </strong></td>
-											<td className="column2">028.3896.3350<br />028.3896.6780<br />028.3897.4716
-											</td>
-										</tr>
-										<tr>
-											<td><strong>Website:</strong></td>
-											<td className="column2"><a href="http://hcmuaf.edu.vn">www.hcmuaf.edu.vn</a></td>
-										</tr>
-									</table>
-								</div>
-							</div>
+							{elements}
 						</div>
 					</div>
 				</div>

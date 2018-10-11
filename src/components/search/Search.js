@@ -3,9 +3,64 @@ import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/styles/img/logo.png';
 import '../../assets/styles/css/stylesearch.css';
 import $ from "jquery";
+import SearchList from './SearchList';
+
 
 class Search extends Component {
     render() {
+    	var areaSearch = [
+	    	{
+	    		id : 1,
+	    		area : 'Miền Bắc',
+	    	},
+	    	{
+	    		id : 2,
+	    		area : 'Miền Trung',
+	    	},
+	    	{
+	    		id : 3,
+	    		area : 'Miền Nam',
+	    	},
+
+    	];
+
+    	var searchResults = [
+    		{
+    			id : 1,
+    			kyHieu : 'NLS',
+    			tenTruong : 'Đại học Nông Lâm',
+    			city : 'Hồ Chí Minh',
+    			status : true,
+    		},
+    		{
+    			id : 2,
+    			kyHieu : 'NEU',
+    			tenTruong : 'Đại học Kinh Tế Quốc Dân',
+    			city : 'Hà Nội',
+    			status : true,
+    		},
+    		{
+    			id : 3,
+    			kyHieu : 'UIT',
+    			tenTruong : 'Đại học Công Nghệ Thông Tin',
+    			city : 'Hồ Chí Minh',
+    			status : false,
+    		},
+    	];
+
+    	let elements = searchResults.map((result, index) => {
+    		if(result.status) {
+    		return <SearchList 	key= { result.id }
+    						kyHieu={ result.kyHieu }
+    						tenTruong={ result.tenTruong }
+    						city={ result.city } 
+    				/>
+    		}	
+    	});
+
+    	
+    	
+
         return (
             <div>
             <header>
@@ -143,20 +198,7 @@ class Search extends Component {
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>
-								<Link to="detail">NLS</Link>
-							</td>
-							<td>
-								Đại học Nông Lâm
-							</td>
-							<td>
-								TP Hồ Chí Minh
-							</td>
-							<td>
-								<Link to="detail">Chi tiết</Link>
-							</td>
-						</tr>
+					{elements}
 					</tbody>
 				</table>
 			</div>
@@ -185,74 +227,74 @@ class Search extends Component {
 	</content>
 
 	<footer>
-		<div class="container">
-			<div class="row">
-				<div class="col-12 col-lg-4">
+		<div className="container">
+			<div className="row">
+				<div className="col-12 col-lg-4">
 					<div>
 						<h3>Tuyensinh.com.vn</h3>
 						<p>Website tư vấn tuyển sinh uy tín, chất lượng</p>
 						<p>Dữ liệu được cập nhật và đánh giá liên tục để đem lại cái nhìn đúng đắn cho các bạn học sinh, sinh viên.</p>
 					</div>
 				</div>
-				<div class="col-12 col-md-6 col-lg-4">
+				<div className="col-12 col-md-6 col-lg-4">
 					<div>
 						<h3>Site map</h3>
 						<ul>
 							<li>
 								<a href="index.html">
-									<i class="fas fa-hand-point-right"></i>
+									<i className="fas fa-hand-point-right"></i>
 								Trang chủ</a>
 							</li>
 							<li>
 								<a href="about.html">
-									<i class="fas fa-hand-point-right"></i>
+									<i className="fas fa-hand-point-right"></i>
 								Tra cứu</a>
 							</li>
 							<li>
 								<a href="program.html">
-									<i class="fas fa-hand-point-right"></i>
+									<i className="fas fa-hand-point-right"></i>
 								Tư vấn</a>
 							</li>
 							<li>
 								<a href="blog.html">
-									<i class="fas fa-hand-point-right"></i>
+									<i className="fas fa-hand-point-right"></i>
 								Tin tức</a>
 							</li>	
 							<li>
 								<a href="gallery.html">
-									<i class="fas fa-hand-point-right"></i>
+									<i className="fas fa-hand-point-right"></i>
 								Liên hệ</a>
 							</li>
 						</ul>
 					</div>
 				</div>
-				<div class="col-12 col-md-6 col-lg-4">
+				<div className="col-12 col-md-6 col-lg-4">
 					<div>
 						<h3>Truy cập nhanh</h3>
 						<ul>
 							<li>
 								<a href="about.html">
-									<i class="fas fa-hand-point-right"></i>
+									<i className="fas fa-hand-point-right"></i>
 								Tra cứu điểm chuẩn</a>
 							</li>
 							<li>
 								<a href="about.html">
-									<i class="fas fa-hand-point-right"></i>
+									<i className="fas fa-hand-point-right"></i>
 								Tra cứu điểm thi</a>
 							</li>
 							<li>
 								<a href="gallery.html">
-									<i class="fas fa-hand-point-right"></i>
+									<i className="fas fa-hand-point-right"></i>
 								Xu hướng chọn trường</a>
 							</li>
 							<li>
 								<a href="blog.html">
-									<i class="fas fa-hand-point-right"></i>
+									<i className="fas fa-hand-point-right"></i>
 								Tin tức tuyển sinh</a>
 							</li>	
 							<li>
 								<a href="about.html">
-									<i class="fas fa-hand-point-right"></i>
+									<i className="fas fa-hand-point-right"></i>
 								Tư vấn truyển sinh</a>
 							</li>
 						</ul>
