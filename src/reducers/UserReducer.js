@@ -9,13 +9,15 @@ const UserReducer = (state = intitState, action) => {
         case actions.LOGIN: {
             return {
                 ...state,
-                user: action.user
+                user: action.data.user,
+                session: action.data.session
             }
         }
         case actions.LOGOUT: {
             return {
                 ...state,
-                user: undefined
+                user: undefined,
+                session: undefined
             }
         }
         default: {

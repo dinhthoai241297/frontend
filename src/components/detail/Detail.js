@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import logonlu from '../../assets/img/001.png';
-import '../../assets/styles/styledetail.css';
 import DetailResult from './DetailResult';
-import Header from '../common/Header';
 import Footer from '../common/Footer';
 
 class Detail extends Component {
@@ -56,7 +54,6 @@ class Detail extends Component {
         return (
             <div>
                 <div className="bg-main">
-                    <Header />
                 </div>
 
                 <content>

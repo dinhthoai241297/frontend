@@ -5,7 +5,7 @@ export const loginApi = (username, password) => {
     return dispatch => UserApi.login({ username, password }).then(res => {
         if (res.body.code === 200) {
             dispatch(loginState(res.body.data));
-            localStorage.setItem('data', res.body.data);
+            localStorage.setItem('data', JSON.stringify(res.body.data));
         }
         return res;
     }).catch(error => {
@@ -13,17 +13,19 @@ export const loginApi = (username, password) => {
     });
 }
 
-export const loginState = user => {
+export const loginState = data => {
     return {
         type: actionTypes.LOGIN,
-        user
+        data
     }
 }
 
 export const logoutApi = () => {
-    return dispatch => UserApi.logout().then(res => {
+    return (dispatch, getState) => UserApi.logout({
+        session: getState().UserReducer.session
+    }).then(res => {
         if (res.body.code === 200) {
-            dispatch(loginState());
+            dispatch(logoutState());
             localStorage.setItem('data', null);
         }
     }).catch(error => {

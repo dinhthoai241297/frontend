@@ -5,7 +5,7 @@ import Home from './components/home/Home';
 import Search from './components/search/Search';
 import Detail from './components/detail/Detail';
 import Login from './components/page/Login';
-import * as actions from './../../actions/UserActions';
+import * as actions from './actions/UserActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -44,13 +44,14 @@ MyRoute.propTypes = {
 
 const mapStateToProps = state => {
     return {
-        user: state.LoginReducer.user
+        user: state.UserReducer.user
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        logout: () => dispatch(actions.logout())
+        logout: () => dispatch(actions.logoutApi()),
+        login: (data) => dispatch(actions.loginState(data))
     }
 }
 

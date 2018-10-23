@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import Header from './../common/Header';
-import './../../assets/styles/stylelogin.css';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import * as actions from './../../actions/UserActions';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import Nav from './../common/Nav';
+import background from './../../assets/img/background.png';
 
 class Login extends Component {
 
@@ -24,7 +24,15 @@ class Login extends Component {
             if (res.body.code === 803) {
                 mes = 'Sai tài khoản hoặc mật khẩu'
             }
+
+            this.setState({ mes });
+        }).catch(error => {
+            this.setState({ mes: 'Error!' });
         });
+    }
+
+    clearMes = () => {
+        this.setState({ mes: '' });
     }
 
     handleChangeInput = (e) => {
@@ -41,49 +49,60 @@ class Login extends Component {
         }
 
         return (
-            <div className="bg-main h-100vh">
+            <Fragment>
+                <Nav />
 
-                <Header />
-
-                <div className="container">
-                    <div id="login-form">
-                        <div className="row">
-                            <div className="col-12 col-lg-6 offset-lg-3 text-center">
-                                <h3>
-                                    Đăng nhập
-                                </h3>
-                            </div>
-                            <div className="col-12 col-lg-6 offset-lg-3 mb-3">
-                                <label>Tên đăng nhập</label>
-                                <input
-                                    type="text"
-                                    name="username"
-                                    value={this.state.username}
-                                    onChange={this.handleChangeInput}
-                                    autoComplete="off"
-                                />
-                            </div>
-                            <div className="col-12 col-lg-6 offset-lg-3 mb-3">
-                                <label>Mật khẩu</label>
-                                <input
-                                    type="password"
-                                    name="password"
-                                    value={this.state.password}
-                                    onChange={this.handleChangeInput}
-                                    autoComplete="off"
-                                />
-                            </div>
-                            <div className="col-12 col-lg-6 offset-lg-3 text-right">
-                                <button onClick={this.login} className="btn btn-default">Đăng nhập</button>
+                <section className="bg-dark-alfa-30 parallax-2" id="home" style={{ backgroundImage: `url(${background})`, backgroundPosition: '50% 0px' }}>
+                    <div className="js-height-full container" style={{ height: 626 }}>
+                        {/* Hero Content */}
+                        <div className="home-content">
+                            <div className="home-text">
+                                <div className="row">
+                                    <div className="col-xs-12 col-lg-4 col-lg-offset-4 mb-20">
+                                        <h1 className="cus-h1 mb-0">Đăng nhập</h1>
+                                    </div>
+                                    <div style={{color: 'red'}} className="col-xs-12 col-lg-4 col-lg-offset-4 mb-10 text-center">
+                                        {this.state.mes}
+                                    </div>
+                                    <div className="col-xs-12 col-lg-4 col-lg-offset-4 mb-20">
+                                        <input
+                                            type="text"
+                                            className="cus-input cus-light"
+                                            placeholder="Tên đăng nhập"
+                                            onChange={this.handleChangeInput}
+                                            value={this.props.username}
+                                            name="username"
+                                            onClick={this.clearMes}
+                                        />
+                                    </div>
+                                    <div className="col-xs-12 col-lg-4 col-lg-offset-4 mb-10">
+                                        <input
+                                            type="password"
+                                            className="cus-input cus-light"
+                                            placeholder="Mật khẩu"
+                                            onChange={this.handleChangeInput}
+                                            value={this.props.password}
+                                            name="password"
+                                            onClick={this.clearMes}
+                                        />
+                                    </div>
+                                    <div className="col-xs-12 col-lg-4 col-lg-offset-4 mb-10">
+                                        <a href="#">Quên mật khẩu?</a>
+                                    </div>
+                                    <div className="col-xs-12 col-lg-4 col-lg-offset-4">
+                                        <a
+                                            href="#"
+                                            className="btn btn-mod btn-border-w btn-round btn-large"
+                                            onClick={this.login}
+                                        >Đăng nhập</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        {/* End Hero Content */}
                     </div>
-                </div>
-
-                <div className="copyright">
-                    Copyright © 2018 Nong Lam University. All rights reserved | Design by HCMUAF
-			    </div>
-            </div>
+                </section>
+            </Fragment>
         );
     }
 }
@@ -95,7 +114,7 @@ Login.propTypes = {
 
 const mapStateToProps = state => {
     return {
-        user: state.LoginReducer.user
+        user: state.UserReducer.user
     }
 }
 

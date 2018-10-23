@@ -52,8 +52,9 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.ProvidePlugin({
-            $: 'jquery/dist/jquery.min.js',
-            jQuery: 'jquery/dist/jquery.min.js'
+            $: path.resolve(__dirname, './src/assets/vendor/js/jquery-1.11.2.min.js'),
+            "window.jQuery": path.resolve(__dirname, './src/assets/vendor/js/jquery-1.11.2.min.js'),
+            "jQuery": path.resolve(__dirname, './src/assets/vendor/js/jquery-1.11.2.min.js'),
         })
     ]
 };
