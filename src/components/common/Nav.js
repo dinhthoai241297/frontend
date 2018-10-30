@@ -23,14 +23,19 @@ class Nav extends Component {
                     <div className="nav-logo-wrap local-scroll">
                         <a href="/" className="logo"><b>EDUCATION</b></a>
                     </div>
-                    <div className="mobile-nav"><i className="fa fa-bars" /></div>
+                    <div
+                        className="mobile-nav"
+                        style={{ height: 75, lineHeight: 75, width: 75 }}
+                    >
+                        <i className="fa fa-bars" />
+                    </div>
                     {/* Main Menu */}
                     <div className="inner-nav desktop-nav">
                         <ul className="clearlist scroll-nav local-scroll">
                             <li><NavLink exact to='/'>Trang chủ</NavLink></li>
                             <li><NavLink to='/search'>Tra cứu</NavLink></li>
-                            <li><a href="#home">Tư vấn</a></li>
-                            <li><a href="#home">Tin Tức</a></li>
+                            <li><a href="#">Tư vấn</a></li>
+                            <li><a href="#">Tin Tức</a></li>
                             <li>{user ? (<a href="#" onClick={this.logout}>{user.fullName} (Đăng xuất)</a>) : (<NavLink to='/login'>Đăng nhập</NavLink>)}</li>
                             {/* End Item With Sub */}
                         </ul>

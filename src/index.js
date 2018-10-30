@@ -15,7 +15,8 @@ import './assets/vendor/css/owl.carousel.css';
 import './assets/vendor/css/magnific-popup.css';
 import './assets/styles/mainstyles.css';
 
-import './assets/vendor/js/jquery-1.11.2.min.js';
+import jQueryBridget from 'jquery-bridget';
+
 import './assets/vendor/js/jquery.easing.1.3.js';
 import './assets/vendor/js/bootstrap.min.js';
 import './assets/vendor/js/SmoothScroll.js';
@@ -28,17 +29,20 @@ import './assets/vendor/js/jquery.sticky.js';
 import './assets/vendor/js/jquery.parallax-1.1.3.js';
 import './assets/vendor/js/jquery.fitvids.js';
 import './assets/vendor/js/owl.carousel.min.js';
-import './assets/vendor/js/isotope.pkgd.min.js';
-import './assets/vendor/js/imagesloaded.pkgd.min.js';
-import './assets/vendor/js/jquery.magnific-popup.min.js';
+import Isotope from './assets/vendor/js/isotope.pkgd.min.js';
+jQueryBridget( 'isotope', Isotope, $ );
+import './assets/vendor/js/imagesloaded.pkgd.js';
+import './assets/vendor/js/jquery.magnific-popup.js';
 
 import './assets/vendor/js/gmap3.min.js';
 import './assets/vendor/js/wow.min.js';
-import './assets/vendor/js/masonry.pkgd.min.js';
+import Masonry from './assets/vendor/js/masonry.pkgd.min.js';
+jQueryBridget( 'masonry', Masonry, $ );
 import './assets/vendor/js/jquery.simple-text-rotator.min.js';
-import './assets/vendor/js/all.js';
+// import './assets/vendor/js/all.js';
 import './assets/vendor/js/contact-form.js';
 import './assets/vendor/js/jquery.ajaxchimp.min.js';
+
 
 const store = configureStore();
 

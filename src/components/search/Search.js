@@ -2,11 +2,9 @@ import React, { Component, Fragment } from 'react';
 import Footer from './../common/Footer';
 import Nav from '../common/Nav';
 import background from '../../assets/img/background.png';
-import $ from '../../assets/vendor/js/jquery-1.11.2.min.js';
-
 
 class Search extends Component {
-
+    
     constructor(props) {
         super(props);
         this.state = {

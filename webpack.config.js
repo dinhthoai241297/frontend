@@ -52,9 +52,12 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.ProvidePlugin({
-            $: path.resolve(__dirname, './src/assets/vendor/js/jquery-1.11.2.min.js'),
-            "window.jQuery": path.resolve(__dirname, './src/assets/vendor/js/jquery-1.11.2.min.js'),
-            "jQuery": path.resolve(__dirname, './src/assets/vendor/js/jquery-1.11.2.min.js'),
+            '$': path.resolve(__dirname, './src/assets/vendor/js/jquery-1.11.2.min.js'),
+            'jQuery': path.resolve(__dirname, './src/assets/vendor/js/jquery-1.11.2.min.js'),
+            'jquery': path.resolve(__dirname, './src/assets/vendor/js/jquery-1.11.2.min.js'),
+            'window.jQuery': path.resolve(__dirname, './src/assets/vendor/js/jquery-1.11.2.min.js'),
+            'window.$': path.resolve(__dirname, './src/assets/vendor/js/jquery-1.11.2.min.js'),
+            'window.OniREM' : '2412',
         })
     ]
 };

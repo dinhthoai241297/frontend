@@ -144,6 +144,7 @@
      --------------------------------------------- */
 
     var mobile_nav = $(".mobile-nav");
+    $("#my-test").click(() => alert('test'));
     var desktop_nav = $(".desktop-nav");
 
     function init_classic_menu_resize() {
