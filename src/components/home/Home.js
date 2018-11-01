@@ -2,8 +2,13 @@ import React, { Component, Fragment } from 'react';
 import { Link, NavLink, Route, BrowserRouter } from 'react-router-dom';
 import Nav from '../common/Nav';
 import background from '../../assets/img/background.png';
+import { init_all } from '../../assets/vendor/js/all';
 
 class Home extends Component {
+
+    componentDidMount() {
+        init_all();
+    } 
 
     render() {
         return (

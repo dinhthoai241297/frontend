@@ -21,7 +21,7 @@ class Nav extends Component {
                 <div className="full-wrapper relative clearfix">
                     {/* Logo ( * your text or image into link tag *) */}
                     <div className="nav-logo-wrap local-scroll">
-                        <a href="/" className="logo"><b>EDUCATION</b></a>
+                        <NavLink exact to='/' className="logo"><b>EDUCATION</b></NavLink>
                     </div>
                     <div
                         className="mobile-nav"

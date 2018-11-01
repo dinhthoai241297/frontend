@@ -5,8 +5,13 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import Nav from './../common/Nav';
 import background from './../../assets/img/background.png';
+import { init_all } from '../../assets/vendor/js/all';
 
 class Login extends Component {
+
+    componentDidMount() {
+        init_all();
+    } 
 
     constructor(props) {
         super(props);
@@ -58,13 +63,13 @@ class Login extends Component {
                         <div className="home-content">
                             <div className="home-text">
                                 <div className="row">
-                                    <div className="col-xs-12 col-lg-4 col-lg-offset-4 mb-20">
+                                    <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 mb-20">
                                         <h1 className="cus-h1 mb-0">Đăng nhập</h1>
                                     </div>
-                                    <div style={{color: 'red'}} className="col-xs-12 col-lg-4 col-lg-offset-4 mb-10 text-center">
+                                    <div style={{color: 'red'}} className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 mb-10 text-center">
                                         {this.state.mes}
                                     </div>
-                                    <div className="col-xs-12 col-lg-4 col-lg-offset-4 mb-20">
+                                    <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 mb-20">
                                         <input
                                             type="text"
                                             className="cus-input cus-light"
@@ -75,7 +80,7 @@ class Login extends Component {
                                             onClick={this.clearMes}
                                         />
                                     </div>
-                                    <div className="col-xs-12 col-lg-4 col-lg-offset-4 mb-10">
+                                    <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 mb-10">
                                         <input
                                             type="password"
                                             className="cus-input cus-light"
@@ -86,10 +91,10 @@ class Login extends Component {
                                             onClick={this.clearMes}
                                         />
                                     </div>
-                                    <div className="col-xs-12 col-lg-4 col-lg-offset-4 mb-10">
+                                    <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 mb-10">
                                         <a href="#">Quên mật khẩu?</a>
                                     </div>
-                                    <div className="col-xs-12 col-lg-4 col-lg-offset-4">
+                                    <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
                                         <a
                                             href="#"
                                             className="btn btn-mod btn-border-w btn-round btn-large"

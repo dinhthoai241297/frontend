@@ -2,8 +2,13 @@ import React, { Component, Fragment } from 'react';
 import Footer from './../common/Footer';
 import Nav from '../common/Nav';
 import background from '../../assets/img/background.png';
+import { init_all } from '../../assets/vendor/js/all';
 
 class Search extends Component {
+
+    componentDidMount() {
+        init_all();
+    }
     
     constructor(props) {
         super(props);
@@ -145,15 +150,6 @@ class Search extends Component {
                 <Footer />
             </Fragment>
         );
-    }
-
-    componentDidMount() {
-        $("#adv-toggle a").click(function (e) {
-            e.preventDefault();
-            let text = $(this).text();
-            $(this).text(text == "Tìm kiếm nâng cao" ? "Ẩn tìm kiếm nâng cao" : "Tìm kiếm nâng cao");
-            $("#adv-search").toggle(300);
-        });
     }
 }
 

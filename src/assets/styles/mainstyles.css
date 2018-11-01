@@ -111,8 +111,16 @@ header {
 }
 
 .cus-cen {
-    display: inline-block;
+    display: block;
     text-align: left;
+}
+
+/* following bootstrap 3, col-md */
+@media (min-width: 992px) {
+    .cus-cen {
+        display: inline-block;
+        text-align: left;
+    }
 }
 
 .cus-cen ul {

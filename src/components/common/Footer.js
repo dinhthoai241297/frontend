@@ -6,7 +6,7 @@ class Footer extends Component {
             <footer>
                 <div className="container mb-30">
                     <div className="row">
-                        <div className="col-xs-12 col-lg-4">
+                        <div className="col-xs-12 col-md-4">
                             <div>
                                 <h3>Tuyensinh.com.vn</h3>
                                 <p>Website tư vấn tuyển sinh uy tín, chất lượng</p>
@@ -14,7 +14,7 @@ class Footer extends Component {
                       sinh, sinh viên.</p>
                             </div>
                         </div>
-                        <div className="col-xs-12 col-lg-4 text-center">
+                        <div className="col-xs-12 col-md-4 text-center">
                             <div className="cus-cen">
                                 <h3>Site map</h3>
                                 <ul>
@@ -26,7 +26,7 @@ class Footer extends Component {
                                 </ul>
                             </div>
                         </div>
-                        <div className="col-xs-12 col-lg-4 text-center">
+                        <div className="col-xs-12 col-md-4 text-center">
                             <div className="cus-cen">
                                 <h3>Truy cập nhanh</h3>
                                 <ul>
