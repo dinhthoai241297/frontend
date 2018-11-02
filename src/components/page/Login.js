@@ -18,21 +18,26 @@ class Login extends Component {
         this.state = {
             username: '',
             password: '',
-            mes: ''
+            mes: '',
+            processing: false
         }
     }
 
     login = (e) => {
+        this.setState({processing: true});
         e.preventDefault();
         let { username, password } = this.state;
+        let mes = '';
         this.props.login(username, password).then(res => {
             if (res.body.code === 803) {
                 mes = 'Sai tài khoản hoặc mật khẩu'
+            } else {
+                mes = res.body.code;
             }
 
-            this.setState({ mes });
+            this.setState({ mes, processing: false });
         }).catch(error => {
-            this.setState({ mes: 'Error!' });
+            this.setState({ mes: 'Error!', processing: false });
         });
     }
 
@@ -45,6 +50,10 @@ class Login extends Component {
         this.setState({
             [name]: value
         });
+    }
+
+    enter = (e) => {
+        console.log(e.keyCode);
     }
 
     render() {
@@ -78,6 +87,7 @@ class Login extends Component {
                                             value={this.props.username}
                                             name="username"
                                             onClick={this.clearMes}
+                                            onKeyPress={e => this.enter(e)}
                                         />
                                     </div>
                                     <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 mb-10">
@@ -89,6 +99,7 @@ class Login extends Component {
                                             value={this.props.password}
                                             name="password"
                                             onClick={this.clearMes}
+                                            onKeyPress={e => this.enter(e)}
                                         />
                                     </div>
                                     <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 mb-10">
@@ -99,7 +110,8 @@ class Login extends Component {
                                             href="#"
                                             className="btn btn-mod btn-border-w btn-round btn-large"
                                             onClick={this.login}
-                                        >Đăng nhập</a>
+                                            disabled={this.state.processing}
+                                        >Đăng nhập {this.state.processing && (<i className="fas fa-spinner fa-spin"></i>)}</a>
                                     </div>
                                 </div>
                             </div>

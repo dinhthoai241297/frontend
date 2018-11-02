@@ -14,6 +14,8 @@ import './assets/vendor/css/vertical-rhythm.min.css';
 import './assets/vendor/css/owl.carousel.css';
 import './assets/vendor/css/magnific-popup.css';
 import './assets/styles/mainstyles.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'font-awesome-animation/dist/font-awesome-animation.min.css';
 
 import jQueryBridget from 'jquery-bridget';
 

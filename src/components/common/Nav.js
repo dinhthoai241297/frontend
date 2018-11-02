@@ -3,13 +3,15 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as actions from './../../actions/UserActions';
+import { init_all } from '../../assets/vendor/js/all';
 
 class Nav extends Component {
 
     logout = e => {
-        console.log('here');
         e.preventDefault();
-        this.props.logout();
+        this.props.logout().then(res => {
+            init_all();
+        });
     }
 
     render() {
