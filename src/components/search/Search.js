@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import Footer from './../common/Footer';
+import { connect } from 'react-redux';
+import * as actions from './../../actions/SearchActions';
 import Nav from '../common/Nav';
 import background from '../../assets/img/background.png';
 import { init_all } from '../../assets/vendor/js/all';
@@ -13,9 +15,22 @@ class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            label: 'Tìm kiếm nâng cao'
+            label: 'Tìm kiếm nâng cao',
+            inputSearch: '',
+            warning: '',
+            processing: false
         }
     }
+
+    search = (e) => {
+        this.setState({processing: true});
+        e.preventDefault();
+        let { inputsearch } = this.state;
+        let warning = '';
+        this.props.getOneName(inputsearch);
+    }
+
+   
 
     toggleAdvSearch = () => {
         let { label } = this.state;
@@ -47,7 +62,13 @@ class Search extends Component {
                                 <div className="row mb-10" id="form-search">
                                     <div className="col-xs-12 mb-20" id="normal-search">
                                         <div className="relative">
-                                            <input className="cus-input cus-light" placeholder="Tìm kiếm" />
+                                            <input 
+                                            className="cus-input cus-light" 
+                                            placeholder="Tìm kiếm" 
+                                            type="text"
+                                            value={this.props.searchText}
+                                            name="inputsearch"
+                                            />
                                             <a className="cus-btn-search cus-light">
                                                 <i className="fa fa-fw"></i>
                                             </a>
@@ -153,4 +174,17 @@ class Search extends Component {
     }
 }
 
-export default Search;
+const mapStateToProps = (state) => {
+    return {
+        search: state.SearchReducer.search
+
+    }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        getOneName: (name, code, province, description) => dispatch(actions.getOneNameApi(name, code, province, description))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

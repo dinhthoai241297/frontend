@@ -1,4 +1,4 @@
-import request from 'superagent';
+     import request from 'superagent';
 import { HOST } from './../contants/index';
 
 class SectorApi {
