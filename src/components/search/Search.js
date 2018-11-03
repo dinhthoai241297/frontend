@@ -44,7 +44,7 @@ class Search extends Component {
 
         return (
             <Fragment>
-                <header style={{ backgroundImage: `url(${background})`, backgroundPosition: '50% 0px' }}>
+                <header style={{ backgroundImage: 'linear-gradient(to bottom right, #00a6c1, #a9c3ea)' }}>
                     <div className="cover" />
                     {/* Navigation panel */}
 

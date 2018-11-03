@@ -38,3 +38,9 @@ export const logoutState = () => {
         type: actionTypes.LOGOUT
     }
 }
+
+export const registerApi = (fullName, email, gender, dob, phone, province, subjectGroup) => UserApi.register({ fullName, email, gender, dob, phone, province, subjectGroup }).then(res => {
+    return res;
+}).catch(error => {
+    throw (error);
+});

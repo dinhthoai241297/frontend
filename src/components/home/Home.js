@@ -8,14 +8,14 @@ class Home extends Component {
 
     componentDidMount() {
         init_all();
-    } 
+    }
 
     render() {
         return (
             <Fragment>
                 <Nav />
 
-                <section className="bg-dark-alfa-30 parallax-2" id="home" style={{ backgroundImage: `url(${background})`, backgroundPosition: '50% 0px' }}>
+                <section className="bg-dark-alfa-30 parallax-2" id="home" style={{ backgroundImage: 'linear-gradient(to bottom right, #00a6c1, #a9c3ea)' }}>
                     <div className="js-height-full container" style={{ height: 626 }}>
                         {/* Hero Content */}
                         <div className="home-content">

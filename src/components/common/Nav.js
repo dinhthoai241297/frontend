@@ -1,16 +1,30 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as actions from './../../actions/UserActions';
-import { init_all } from '../../assets/vendor/js/all';
 
 class Nav extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: false
+        }
+    }
 
     logout = e => {
         e.preventDefault();
         this.props.logout().then(res => {
-            init_all();
+            this.setState({
+                open: false
+            });
+        });
+    }
+
+    switchNav = () => {
+        this.setState({
+            open: !this.state.open
         });
     }
 
@@ -27,9 +41,9 @@ class Nav extends Component {
                     </div>
                     <div
                         className="mobile-nav"
-                        style={{ height: 75, lineHeight: 75, width: 75 }}
+                        onClick={this.switchNav}
                     >
-                        <i className="fa fa-bars" />
+                        <i className={"fa " + (this.state.open ? "fa-times" : "fa-bars")} />
                     </div>
                     {/* Main Menu */}
                     <div className="inner-nav desktop-nav">
@@ -38,7 +52,29 @@ class Nav extends Component {
                             <li><NavLink to='/search'>Tra cứu</NavLink></li>
                             <li><a href="#">Tư vấn</a></li>
                             <li><a href="#">Tin Tức</a></li>
-                            <li>{user ? (<a href="#" onClick={this.logout}>{user.fullName} (Đăng xuất)</a>) : (<NavLink to='/login'>Đăng nhập</NavLink>)}</li>
+                            <li>
+                                {user ? (<Fragment>
+                                    <a href="#" className="mn-has-sub"><i className="fas fa-user"></i> {user.fullName} <i className="fa fa-angle-down"></i></a>
+                                    <ul className="mn-sub to-left">
+                                        <li>
+                                            <NavLink to='/profile'><i className="fas fa-info"></i> Thông tin</NavLink>
+                                        </li>
+                                        <li>
+                                            <a href="#" onClick={this.logout}><i className="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                                        </li>
+                                    </ul>
+                                </Fragment>) : (<Fragment>
+                                    <a href="#" className="mn-has-sub">Tài khoản <i className="fa fa-angle-down"></i></a>
+                                    <ul className="mn-sub to-left">
+                                        <li>
+                                            <NavLink to='/login'><i className="fas fa-sign-in-alt"></i> Đăng nhập</NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to='/register'><i className="fas fa-user-plus"></i> Đăng ký</NavLink>
+                                        </li>
+                                    </ul>
+                                </Fragment>)}
+                            </li>
                             {/* End Item With Sub */}
                         </ul>
                     </div>

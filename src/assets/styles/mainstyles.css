@@ -140,3 +140,13 @@ footer {
     box-shadow: none;
     color: rgba(255,255,255, .7);
 }
+
+body {
+    padding: 0 !important;
+}
+
+.tpl-tabs li {
+    width: 50%;
+    text-align: center;
+    float: left !important;
+}
