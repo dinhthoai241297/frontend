@@ -5,9 +5,11 @@ import Home from './components/home/Home';
 import Search from './components/search/Search';
 import Detail from './components/detail/Detail';
 import Login from './components/page/Login';
+import Register from './components/page/Register';
 import * as actions from './actions/UserActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import ResetPassword from './components/page/ResetPassword';
 
 class MyRoute extends Component {
 
@@ -29,6 +31,8 @@ class MyRoute extends Component {
                             <Route path="/login" component={Login} />
                             <Route path="/search" component={Search} />
                             <Route path="/detail" component={Detail} />
+                            <Route path="/register" component={Register} />
+                            <Route path="/resetPassword" component={ResetPassword} />
                         </Switch>
                     </App>
                 )} />

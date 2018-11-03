@@ -9,6 +9,18 @@ class UserApi {
     static logout(data) {
         return request.post(`${HOST}user/logout`).send({ data });
     }
+
+    static register(data) {
+        return request.post(`${HOST}user/register`).send({ data });
+    }
+
+    static forgotPassword(data) {
+        return request.post(`${HOST}user/forgotPassword`).send({ data });
+    }
+
+    static changePassword(data) {
+        return request.post(`${HOST}user/changePassword`).send({ data });
+    }
 }
 
 export default UserApi;
