@@ -1,8 +1,6 @@
 import * as actionTypes from './../actionTypes/SearchActionTypes';
 
 let initialState = {
-    search: [],
-    next: false
 }
 
 

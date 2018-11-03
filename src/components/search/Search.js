@@ -1,10 +1,11 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, PropTypes } from 'react';
 import Footer from './../common/Footer';
 import { connect } from 'react-redux';
 import * as actions from './../../actions/SearchActions';
 import Nav from '../common/Nav';
 import background from '../../assets/img/background.png';
 import { init_all } from '../../assets/vendor/js/all';
+import SearchList from './SearchList';
 
 class Search extends Component {
 
@@ -16,9 +17,6 @@ class Search extends Component {
         super(props);
         this.state = {
             label: 'Tìm kiếm nâng cao',
-            inputSearch: '',
-            warning: '',
-            processing: false
         }
     }
 
@@ -63,13 +61,14 @@ class Search extends Component {
                                     <div className="col-xs-12 mb-20" id="normal-search">
                                         <div className="relative">
                                             <input 
+                                            type="text"
+                                            name="inputsearch"
                                             className="cus-input cus-light" 
                                             placeholder="Tìm kiếm" 
-                                            type="text"
-                                            value={this.props.searchText}
-                                            name="inputsearch"
+                                           
                                             />
-                                            <a className="cus-btn-search cus-light">
+                                            <a className="cus-btn-search cus-light"
+                                            onClick={this.search}>
                                                 <i className="fa fa-fw"></i>
                                             </a>
                                         </div>
@@ -118,30 +117,7 @@ class Search extends Component {
                             </div>
                             <div className="col-xs-12">
                                 <div>
-                                    <table className="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col" width="15%">Ký hiệu</th>
-                                                <th scope="col">Tên trường</th>
-                                                <th scope="col" width="25%">Thành phố</th>
-                                                <th scope="col" width="15%">Thông tin</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><a href="/detail">NLS</a></td>
-                                                <td>Đại học Nông Lâm</td>
-                                                <td>Hồ Chí Minh</td>
-                                                <td><a href="/detail">Chi tiết</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="/detail">NEU</a></td>
-                                                <td>Đại học Kinh Tế Quốc Dân</td>
-                                                <td>Hà Nội</td>
-                                                <td><a href="/detail">Chi tiết</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <SearchList searchs={this.props.searchs}/>
                                 </div>
                             </div>
                             <div className="col-xs-12">
@@ -174,9 +150,11 @@ class Search extends Component {
     }
 }
 
+
+
 const mapStateToProps = (state) => {
     return {
-        search: state.SearchReducer.search
+        searchs: state.searchs
 
     }
 }
