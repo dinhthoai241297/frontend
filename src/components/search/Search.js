@@ -1,8 +1,11 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, PropTypes } from 'react';
 import Footer from './../common/Footer';
+import { connect } from 'react-redux';
+import * as actions from './../../actions/SearchActions';
 import Nav from '../common/Nav';
 import background from '../../assets/img/background.png';
 import { init_all } from '../../assets/vendor/js/all';
+import SearchList from './SearchList';
 
 class Search extends Component {
 
@@ -13,9 +16,19 @@ class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            label: 'Tìm kiếm nâng cao'
+            label: 'Tìm kiếm nâng cao',
         }
     }
+
+    search = (e) => {
+        this.setState({processing: true});
+        e.preventDefault();
+        let { inputsearch } = this.state;
+        let warning = '';
+        this.props.getOneName(inputsearch);
+    }
+
+   
 
     toggleAdvSearch = () => {
         let { label } = this.state;
@@ -47,8 +60,15 @@ class Search extends Component {
                                 <div className="row mb-10" id="form-search">
                                     <div className="col-xs-12 mb-20" id="normal-search">
                                         <div className="relative">
-                                            <input className="cus-input cus-light" placeholder="Tìm kiếm" />
-                                            <a className="cus-btn-search cus-light">
+                                            <input 
+                                            type="text"
+                                            name="inputsearch"
+                                            className="cus-input cus-light" 
+                                            placeholder="Tìm kiếm" 
+                                           
+                                            />
+                                            <a className="cus-btn-search cus-light"
+                                            onClick={this.search}>
                                                 <i className="fa fa-fw"></i>
                                             </a>
                                         </div>
@@ -97,30 +117,7 @@ class Search extends Component {
                             </div>
                             <div className="col-xs-12">
                                 <div>
-                                    <table className="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col" width="15%">Ký hiệu</th>
-                                                <th scope="col">Tên trường</th>
-                                                <th scope="col" width="25%">Thành phố</th>
-                                                <th scope="col" width="15%">Thông tin</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><a href="/detail">NLS</a></td>
-                                                <td>Đại học Nông Lâm</td>
-                                                <td>Hồ Chí Minh</td>
-                                                <td><a href="/detail">Chi tiết</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="/detail">NEU</a></td>
-                                                <td>Đại học Kinh Tế Quốc Dân</td>
-                                                <td>Hà Nội</td>
-                                                <td><a href="/detail">Chi tiết</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <SearchList searchs={this.props.searchs}/>
                                 </div>
                             </div>
                             <div className="col-xs-12">
@@ -153,4 +150,19 @@ class Search extends Component {
     }
 }
 
-export default Search;
+
+
+const mapStateToProps = (state) => {
+    return {
+        searchs: state.searchs
+
+    }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        getOneName: (name, code, province, description) => dispatch(actions.getOneNameApi(name, code, province, description))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
