@@ -15,11 +15,11 @@ class UserApi {
     }
 
     static forgotPassword(data) {
-        return request.post(`${HOST}user/forgotPassword`).send({ data });
+        return request.post(`${HOST}user/forgotpassword`).send({ data });
     }
 
     static changePassword(data) {
-        return request.post(`${HOST}user/changePassword`).send({ data });
+        return request.post(`${HOST}user/changepassword`).send({ data });
     }
 }
 

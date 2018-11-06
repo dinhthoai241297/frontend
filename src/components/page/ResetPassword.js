@@ -19,8 +19,14 @@ class Register extends Component {
             password: '',
             passwordcfm: '',
             code: '',
-            mes: ''
+            mes: '',
+            mesEmail: '',
+            mesCode: '',
+            mesPass: '',
+            mesPassCfm: ''
         }
+
+        const MES_EMPTY = 'Trường này không được để trống!';
     }
 
     handleChangeInput = e => {
@@ -40,7 +46,7 @@ class Register extends Component {
         console.log(this.state);
         let { email } = this.state;
         if ('' === email) {
-            this.setState({mes: 'Email không được để trống!'});
+            this.setState({ mesEmail: 'Email không được để trống!' });
             return;
         }
         UserApi.forgotPassword({ email }).then(res => {
@@ -57,6 +63,21 @@ class Register extends Component {
 
     changePassword = e => {
         e.preventDefault();
+        const MES_EMPTY = 'Trường này không được để trống!';
+        let { code, password, passwordcfm } = this.state;
+        let mesCode = '', mesPass = '', mesPassCfm = '';
+        mesCode = code === '' ? MES_EMPTY : '';
+        mesPass = password === '' ? MES_EMPTY : '';
+        mesPassCfm = passwordcfm === '' ? MES_EMPTY : '';
+        if (password !== '' && passwordcfm !== '' && password !== passwordcfm) {
+            mesPass = mesPassCfm = 'Mật khẩu và xác nhận mật khẩu không khớp!';
+        }
+        if (mesCode !== '' || mesPass !== '' || mesPassCfm !== '') {
+            this.setState({
+                mesCode, mesPass, mesPassCfm
+            });
+            return;
+        }
         UserApi.changePassword({ code, password }).then(res => {
             if (res.body.code === 200) {
                 // success
@@ -70,6 +91,8 @@ class Register extends Component {
     }
 
     render() {
+
+        console.log(this.state.mesEmail);
         return (
             <Fragment>
                 <header style={{ backgroundImage: 'linear-gradient(to bottom right, #00a6c1, #a9c3ea)' }}>
@@ -114,23 +137,27 @@ class Register extends Component {
                                 </ul>
 
                                 <div className="row">
-                                    <div className="col-xs-12 text-center" style={{color: '#ff4600'}}>
+                                    <div className="col-xs-12 text-center" style={{ color: '#ff4600' }}>
                                         {this.state.mes}
                                     </div>
                                 </div>
 
                                 {/* Tab panes */}
                                 <div className="tab-content tpl-tabs-cont section-text">
-                                    <div className={'tab-pane fade' + (this.state.tab && ' active in')}>
+                                    <div className={'tab-pane fade' + (this.state.tab ? ' active in' : '')}>
                                         <form className="form">
                                             <div className="row">
                                                 <div className="col-xs-12 mb-20">
+                                                    <div className="cus-mes">
+                                                        {this.state.mesEmail}
+                                                    </div>
                                                     <input
                                                         type="email" name="email"
-                                                        className="form-control input-lg" placeholder="Email"
+                                                        className={'form-control input-lg' + (this.state.mesEmail !== '' ? ' cus-error-field' : '')}
+                                                        placeholder="Email"
                                                         maxLength="100"
                                                         onChange={this.handleChangeInput}
-                                                        onFocus={() => this.setState({mes: ''})}
+                                                        onFocus={() => this.setState({ mes: '', mesEmail: '' })}
                                                     />
                                                 </div>
                                                 <div className="col-xs-12 text-center">
@@ -144,39 +171,56 @@ class Register extends Component {
                                             </div>
                                         </form>
                                     </div>
-                                    <div className={'tab-pane fade' + (!this.state.tab && ' active in')}>
+                                    <div className={'tab-pane fade' + (!this.state.tab ? ' active in' : '')}>
                                         <form className="form">
-                                            <div className="col-xs-12 mb-20">
-                                                <input
-                                                    type="number" name="code"
-                                                    className="form-control input-lg" placeholder="Mã"
-                                                    maxLength="100"
-                                                    onChange={this.handleChangeInput}
-                                                />
-                                            </div>
-                                            <div className="col-xs-12 mb-20">
-                                                <input
-                                                    type="password" name="password"
-                                                    className="form-control input-lg" placeholder="Mật khẩu mới"
-                                                    maxLength="100"
-                                                    onChange={this.handleChangeInput}
-                                                />
-                                            </div>
-                                            <div className="col-xs-12 mb-20">
-                                                <input
-                                                    type="password" name="passwordcfm"
-                                                    className="form-control input-lg" placeholder="Xác nhận mật khẩu mới"
-                                                    maxLength="100"
-                                                    onChange={this.handleChangeInput}
-                                                />
-                                            </div>
-                                            <div className="col-xs-12 text-center">
-                                                <button
-                                                    className="btn btn-mod btn-border btn-large btn-round"
-                                                    onClick={this.changePassword}
-                                                >
-                                                    Gửi
+                                            <div className="row">
+                                                <div className="col-xs-12 mb-20">
+                                                    <div className="cus-mes">
+                                                        {this.state.mesCode}
+                                                    </div>
+                                                    <input
+                                                        type="number" name="code"
+                                                        className={'form-control input-lg' + (this.state.mesCode !== '' ? ' cus-error-field' : '')}
+                                                        placeholder="Mã"
+                                                        maxLength="100"
+                                                        onChange={this.handleChangeInput}
+                                                        onFocus={() => this.setState({ mesCode: '' })}
+                                                    />
+                                                </div>
+                                                <div className="col-xs-12 mb-20">
+                                                    <div className="cus-mes">
+                                                        {this.state.mesPass}
+                                                    </div>
+                                                    <input
+                                                        type="password" name="password"
+                                                        className={'form-control input-lg' + (this.state.mesPass !== '' ? ' cus-error-field' : '')}
+                                                        placeholder="Mật khẩu mới"
+                                                        maxLength="100"
+                                                        onChange={this.handleChangeInput}
+                                                        onFocus={() => this.setState({ mesPass: '' })}
+                                                    />
+                                                </div>
+                                                <div className="col-xs-12 mb-20">
+                                                    <div className="cus-mes">
+                                                        {this.state.mesPassCfm}
+                                                    </div>
+                                                    <input
+                                                        type="password" name="passwordcfm"
+                                                        className={'form-control input-lg' + (this.state.mesPassCfm !== '' ? ' cus-error-field' : '')}
+                                                        placeholder="Xác nhận mật khẩu mới"
+                                                        maxLength="100"
+                                                        onChange={this.handleChangeInput}
+                                                        onFocus={() => this.setState({ mesPassCfm: '' })}
+                                                    />
+                                                </div>
+                                                <div className="col-xs-12 text-center">
+                                                    <button
+                                                        className="btn btn-mod btn-border btn-large btn-round"
+                                                        onClick={this.changePassword}
+                                                    >
+                                                        Gửi
                                                 </button>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>

@@ -4,6 +4,7 @@ import Nav from './../common/Nav';
 import { init_all } from '../../assets/vendor/js/all';
 import Footer from '../common/Footer';
 import ProvinceApi from '../../api/ProvinceApi';
+import SubjectGroupApi from '../../api/SubjectGroupApi';
 import UserApi from '../../api/UserApi';
 
 class Register extends Component {
@@ -16,23 +17,26 @@ class Register extends Component {
         super(props);
         this.state = {
             fullName: '',
-            gender: '',
+            gender: 'male',
             dob: undefined,
             email: '',
-            phoneNumber: 0,
+            phoneNumber: undefined,
             province: undefined,
             subjectGroup: undefined,
+            password: '',
+            passwordcfm: '',
 
-            province: undefined,
             provinceName: 'Tỉnh thành',
             pageProvince: 1,
             provinces: [],
             nextProvince: false,
 
-            subjectGroup: undefined,
+            subjectGroupName: 'Khối Thi',
             pageSubjectGroup: 1,
             subjectGroups: [],
-            nextSubjectGroup: false
+            nextSubjectGroup: false,
+
+            check: false
         }
     }
 
@@ -63,6 +67,7 @@ class Register extends Component {
             return;
         } else {
             this.loadProvinces(pageProvince);
+            this.setState({ pageProvince });
         }
     }
 
@@ -74,6 +79,7 @@ class Register extends Component {
                 key={i}
                 className={"list-group-item h-hand " + (p.id === this.state.province ? 'active' : '')}
                 onClick={() => this.handleChangeProvince(p)}
+                style={{ cursor: 'pointer' }}
             >{p.name}</a>
         ));
         return rs;
@@ -85,7 +91,6 @@ class Register extends Component {
             province: s.id,
             provinceName: s.name
         });
-
     }
 
     toggleProvince = () => {
@@ -115,6 +120,7 @@ class Register extends Component {
             return;
         } else {
             this.loadSubjectGroups(pageSubjectGroup);
+            this.setState({ pageSubjectGroup });
         }
     }
 
@@ -125,7 +131,8 @@ class Register extends Component {
             <a
                 key={i}
                 className={"list-group-item h-hand " + (sg.id === this.state.subjectGroup ? 'active' : '')}
-                onClick={() => this.handleChangeProvince(sg)}
+                onClick={() => this.handleChangeSubjectGroup(sg)}
+                style={{ cursor: 'pointer' }}
             >{sg.code}</a>
         ));
         return rs;
@@ -135,20 +142,25 @@ class Register extends Component {
         $('#modal-subjectGroup').modal('hide');
         this.setState({
             subjectGroup: s.id,
+            subjectGroupName: s.code
         });
     }
 
     toggleSubjectGroup = () => {
         if (this.state.subjectGroups.length === 0) {
-            this.loadProvinces(this.state.pageSubjectGroup);
+            this.loadSubjectGroups(this.state.pageSubjectGroup);
         }
         $('#modal-subjectGroup').modal('toggle');
     }
 
     register = e => {
         e.preventDefault();
-        let { fullName, email, gender, dob, phoneNumber, province, subjectGroup } = this.state;
-        UserApi.register({ fullName, email, gender, dob, phoneNumber, province, subjectGroup }).then(res => {
+        let { fullName, email, gender, dob, phoneNumber, province, subjectGroup, password } = this.state;
+        if (fullName === '' || email === '' || !dob || !phoneNumber || !province || !subjectGroup || !password) {
+            this.setState({ check: true });
+            return;
+        }
+        UserApi.register({ fullName, email, gender, dob, phoneNumber, province, subjectGroup, password }).then(res => {
             if (code === 200) {
                 // success
             } else {
@@ -215,7 +227,7 @@ class Register extends Component {
                                     <li className="active">
                                         <a>{this.state.pageSubjectGroup}</a>
                                     </li>
-                                    <li className={this.state.nextProvince ? '' : 'disabled'}>
+                                    <li className={this.state.nextSubjectGroup ? '' : 'disabled'}>
                                         <a href="#" onClick={(e) => this.newPageSubjectGroup(e, 1)} >Next</a>
                                     </li>
                                 </ul>
@@ -252,77 +264,110 @@ class Register extends Component {
                             <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
                                 <div className="row">
                                     <div className="col-xs-12 mb-20">
+                                        <div className="cus-mes">
+                                            {(this.state.check && this.state.fullName === '') ? 'Trường này không được để trống!' : ''}
+                                        </div>
                                         <input
                                             type="text"
                                             name="fullName"
-                                            className="form-control input-lg"
+                                            className={'form-control input-lg' + ((this.state.check && this.state.fullName === '') ? ' cus-error-field' : '')}
                                             placeholder="Họ & Tên"
                                             maxLength="100"
                                             onChange={this.handleChangeInput}
+                                            onClick={() => this.setState({ check: false })}
                                         />
                                     </div>
                                     <div className="col-xs-12 mb-20">
                                         <div className="row text-center">
                                             <div className="col-xs-4">
                                                 <label className="radio-inline">
-                                                    <input type="radio" name="gender" value="male" onChange={this.handleChangeInput} /> Nam
-                                            </label>
+                                                    <input checked type="radio" name="gender" value="male" onChange={this.handleChangeInput} /> Nam
+                                                </label>
                                             </div>
                                             <div className="col-xs-4">
                                                 <label className="radio-inline">
                                                     <input type="radio" name="gender" value="female" onChange={this.handleChangeInput} /> Nữ
-                                            </label>
+                                                </label>
                                             </div>
                                             <div className="col-xs-4">
                                                 <label className="radio-inline">
                                                     <input type="radio" name="gender" value="dif" onChange={this.handleChangeInput} /> Khác
-                                            </label>
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="col-xs-12 mb-20">
+                                        <div className="cus-mes">
+                                            {(this.state.check && !this.state.dob) ? 'Trường này không được để trống!' : ''}
+                                        </div>
                                         <input
                                             type="date" name="dob"
-                                            className="form-control input-lg" placeholder="Ngày sinh"
+                                            className={'form-control input-lg' + ((this.state.check && !this.state.dob) ? ' cus-error-field' : '')}
+                                            placeholder="Ngày sinh"
                                             onChange={this.handleChangeInput}
+                                            onClick={() => this.setState({ check: false })}
                                         />
                                     </div>
                                     <div className="col-xs-12 mb-20">
+                                        <div className="cus-mes">
+                                            {(this.state.check && this.state.email === '') ? 'Trường này không được để trống!' : ''}
+                                        </div>
                                         <input
                                             type="email" name="email"
-                                            className="form-control input-lg" placeholder="Email"
+                                            className={'form-control input-lg' + ((this.state.check && this.state.email === '') ? ' cus-error-field' : '')}
+                                            placeholder="Email"
                                             maxLength="100"
                                             onChange={this.handleChangeInput}
+                                            onClick={() => this.setState({ check: false })}
                                         />
                                     </div>
                                     <div className="col-xs-12 mb-20">
+                                        <div className="cus-mes">
+                                            {(this.state.check && this.state.password === '') ? 'Trường này không được để trống!' : ''}
+                                        </div>
                                         <input
                                             type="password" name="password"
-                                            className="form-control input-lg" placeholder="Mật khẩu"
+                                            className={'form-control input-lg' + ((this.state.check && this.state.password === '') ? ' cus-error-field' : '')}
+                                            placeholder="Mật khẩu"
                                             maxLength="100"
                                             onChange={this.handleChangeInput}
+                                            onClick={() => this.setState({ check: false })}
                                         />
                                     </div>
                                     <div className="col-xs-12 mb-20">
+                                        <div className="cus-mes">
+                                            {(this.state.check && this.state.passwordcfm === '') ? 'Trường này không được để trống!' : (this.state.check && this.state.password !== this.state.passwordcfm) ? 'Mật khẩu và mật khẩu nhập lại không đúng' : ''}
+                                        </div>
                                         <input
                                             type="password" name="passwordcfm"
-                                            className="form-control input-lg" placeholder="Xác nhận mật khẩu"
+                                            className={'form-control input-lg' + (((this.state.check && this.state.passwordcfm === '') || (this.state.check && this.state.password !== this.state.passwordcfm)) ? ' cus-error-field' : '')}
+                                            placeholder="Xác nhận mật khẩu"
                                             maxLength="100"
                                             onChange={this.handleChangeInput}
+                                            onClick={() => this.setState({ check: false })}
                                         />
                                     </div>
                                     <div className="col-xs-12 mb-20">
                                         <input
-                                            type="text" name="phoneNumber" className="form-control input-lg"
+                                            type="number" name="phoneNumber" className="form-control input-lg"
                                             placeholder="Số điện thoại" maxLength="100"
                                             onChange={this.handleChangeInput}
                                         />
                                     </div>
                                     <div className="col-xs-12 mb-20">
+                                        <div className="cus-mes">
+                                            {(this.state.check && !this.state.subjectGroup) ? 'Trường này không được để trống!' : ''}
+                                        </div>
                                         <input
-                                            type="text" name="subjectGroup" className="form-control input-lg"
-                                            placeholder="Khối dự định thi" maxLength="100"
-                                            onChange={this.handleChangeInput}
+                                            type="text"
+                                            readOnly
+                                            style={{ cursor: 'pointer' }}
+                                            name="subjecGroup"
+                                            className={'form-control input-lg' + ((this.state.check && !this.state.subjectGroup) ? ' cus-error-field' : '')}
+                                            placeholder="Khối thi"
+                                            maxLength="100"
+                                            value={this.state.subjectGroupName}
+                                            onClick={() => { this.setState({ check: false }); this.toggleSubjectGroup() }}
                                         />
                                     </div>
                                     <div className="col-xs-12 mb-20">
@@ -343,7 +388,9 @@ class Register extends Component {
                                             href="#"
                                             className="btn btn-mod btn-border btn-large btn-round"
                                             onClick={this.register}
-                                        >Đăng ký</a>
+                                        >
+                                            Đăng ký
+                                        </a>
                                     </div>
                                 </div>
                             </div>

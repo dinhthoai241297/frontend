@@ -4,7 +4,7 @@ import { HOST } from './../contants/index';
 class ProvinceApi {
 
     static getAll(data) {
-        return request.post(`${HOST}province/getAll`).send({ data });
+        return request.post(`${HOST}province/getall`).send({ data });
     }
     
 }
