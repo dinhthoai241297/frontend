@@ -15,7 +15,7 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
+            email: '',
             password: '',
             mes: '',
             processing: false
@@ -25,9 +25,9 @@ class Login extends Component {
     login = (e) => {
         this.setState({ processing: true });
         e.preventDefault();
-        let { username, password } = this.state;
+        let { email, password } = this.state;
         let mes = '';
-        this.props.login(username, password).then(res => {
+        this.props.login(email, password).then(res => {
             if (res.body.code === 803) {
                 mes = 'Sai tài khoản hoặc mật khẩu'
             } else {
@@ -75,12 +75,12 @@ class Login extends Component {
                                     </div>
                                     <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 mb-20">
                                         <input
-                                            type="text"
+                                            type="email"
                                             className="cus-input cus-light"
                                             placeholder="Tên đăng nhập"
                                             onChange={this.handleChangeInput}
-                                            value={this.props.username}
-                                            name="username"
+                                            value={this.props.email}
+                                            name="email"
                                             onClick={this.clearMes}
                                             disabled={this.state.processing}
                                         />
@@ -132,7 +132,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        login: (username, password) => dispatch(actions.loginApi(username, password))
+        login: (email, password) => dispatch(actions.loginApi(email, password))
     }
 }
 

@@ -6,6 +6,8 @@ import Footer from '../common/Footer';
 import ProvinceApi from '../../api/ProvinceApi';
 import SubjectGroupApi from '../../api/SubjectGroupApi';
 import UserApi from '../../api/UserApi';
+import { toastrOption } from '../../contants/options';
+import toastr from 'toastr';
 
 class Register extends Component {
 
@@ -17,12 +19,12 @@ class Register extends Component {
         super(props);
         this.state = {
             fullName: '',
-            gender: 'male',
-            dob: undefined,
+            sex: 'male',
+            birthday: undefined,
             email: '',
-            phoneNumber: undefined,
+            phonenumber: undefined,
             province: undefined,
-            subjectGroup: undefined,
+            purpose: undefined,
             password: '',
             passwordcfm: '',
 
@@ -38,6 +40,8 @@ class Register extends Component {
 
             check: false
         }
+
+        toastr.options = toastrOption;
     }
 
     handleChangeInput = (e) => {
@@ -130,7 +134,7 @@ class Register extends Component {
         rs = subjectGroups.map((sg, i) => (
             <a
                 key={i}
-                className={"list-group-item h-hand " + (sg.id === this.state.subjectGroup ? 'active' : '')}
+                className={"list-group-item h-hand " + (sg.id === this.state.purpose ? 'active' : '')}
                 onClick={() => this.handleChangeSubjectGroup(sg)}
                 style={{ cursor: 'pointer' }}
             >{sg.code}</a>
@@ -141,7 +145,7 @@ class Register extends Component {
     handleChangeSubjectGroup = (s) => {
         $('#modal-subjectGroup').modal('hide');
         this.setState({
-            subjectGroup: s.id,
+            purpose: s.id,
             subjectGroupName: s.code
         });
     }
@@ -155,16 +159,16 @@ class Register extends Component {
 
     register = e => {
         e.preventDefault();
-        let { fullName, email, gender, dob, phoneNumber, province, subjectGroup, password } = this.state;
-        if (fullName === '' || email === '' || !dob || !phoneNumber || !province || !subjectGroup || !password) {
+        let { fullName, email, sex, birthday, phonenumber, province, purpose, password } = this.state;
+        if (fullName === '' || email === '' || !birthday || !phonenumber || !province || !purpose || !password) {
             this.setState({ check: true });
             return;
         }
-        UserApi.register({ fullName, email, gender, dob, phoneNumber, province, subjectGroup, password }).then(res => {
-            if (code === 200) {
-                // success
+        UserApi.register({ user: { fullName, email, sex, birthday, phonenumber, province, purpose, password } }).then(res => {
+            if (res.body.code === 200) {
+                toastr.success('Tạo tài khoản thành công!');
             } else {
-                // maybe fail
+                toastr.error('Có lỗi xảy ra: ' + res.body.code);
             }
         }).catch(error => {
             // error
@@ -281,28 +285,28 @@ class Register extends Component {
                                         <div className="row text-center">
                                             <div className="col-xs-4">
                                                 <label className="radio-inline">
-                                                    <input checked type="radio" name="gender" value="male" onChange={this.handleChangeInput} /> Nam
+                                                    <input checked type="radio" name="sex" value="male" onChange={this.handleChangeInput} /> Nam
                                                 </label>
                                             </div>
                                             <div className="col-xs-4">
                                                 <label className="radio-inline">
-                                                    <input type="radio" name="gender" value="female" onChange={this.handleChangeInput} /> Nữ
+                                                    <input type="radio" name="sex" value="female" onChange={this.handleChangeInput} /> Nữ
                                                 </label>
                                             </div>
                                             <div className="col-xs-4">
                                                 <label className="radio-inline">
-                                                    <input type="radio" name="gender" value="dif" onChange={this.handleChangeInput} /> Khác
+                                                    <input type="radio" name="sex" value="dif" onChange={this.handleChangeInput} /> Khác
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="col-xs-12 mb-20">
                                         <div className="cus-mes">
-                                            {(this.state.check && !this.state.dob) ? 'Trường này không được để trống!' : ''}
+                                            {(this.state.check && !this.state.birthday) ? 'Trường này không được để trống!' : ''}
                                         </div>
                                         <input
-                                            type="date" name="dob"
-                                            className={'form-control input-lg' + ((this.state.check && !this.state.dob) ? ' cus-error-field' : '')}
+                                            type="date" name="birthday"
+                                            className={'form-control input-lg' + ((this.state.check && !this.state.birthday) ? ' cus-error-field' : '')}
                                             placeholder="Ngày sinh"
                                             onChange={this.handleChangeInput}
                                             onClick={() => this.setState({ check: false })}
@@ -349,21 +353,21 @@ class Register extends Component {
                                     </div>
                                     <div className="col-xs-12 mb-20">
                                         <input
-                                            type="number" name="phoneNumber" className="form-control input-lg"
+                                            type="number" name="phonenumber" className="form-control input-lg"
                                             placeholder="Số điện thoại" maxLength="100"
                                             onChange={this.handleChangeInput}
                                         />
                                     </div>
                                     <div className="col-xs-12 mb-20">
                                         <div className="cus-mes">
-                                            {(this.state.check && !this.state.subjectGroup) ? 'Trường này không được để trống!' : ''}
+                                            {(this.state.check && !this.state.purpose) ? 'Trường này không được để trống!' : ''}
                                         </div>
                                         <input
                                             type="text"
                                             readOnly
                                             style={{ cursor: 'pointer' }}
                                             name="subjecGroup"
-                                            className={'form-control input-lg' + ((this.state.check && !this.state.subjectGroup) ? ' cus-error-field' : '')}
+                                            className={'form-control input-lg' + ((this.state.check && !this.state.purpose) ? ' cus-error-field' : '')}
                                             placeholder="Khối thi"
                                             maxLength="100"
                                             value={this.state.subjectGroupName}

@@ -3,7 +3,7 @@ import { HOST } from './../contants/index';
 
 class UserApi {
     static login(data) {
-        return request.post(`${HOST}user/login`).send({ data });
+        return request.post(`${HOST}user/loginuser`).send({ data });
     }
 
     static logout(data) {
