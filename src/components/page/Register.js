@@ -97,9 +97,9 @@ class Register extends Component {
         });
     }
 
-    toggleProvince = () => {
+    toggleProvince = async () => {
         if (this.state.provinces.length === 0) {
-            this.loadProvinces(this.state.pageProvince);
+            await this.loadProvinces(this.state.pageProvince);
         }
         $('#modal-province').modal('toggle');
     }
@@ -150,9 +150,9 @@ class Register extends Component {
         });
     }
 
-    toggleSubjectGroup = () => {
+    toggleSubjectGroup = async () => {
         if (this.state.subjectGroups.length === 0) {
-            this.loadSubjectGroups(this.state.pageSubjectGroup);
+            await this.loadSubjectGroups(this.state.pageSubjectGroup);
         }
         $('#modal-subjectGroup').modal('toggle');
     }
