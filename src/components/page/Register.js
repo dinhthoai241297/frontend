@@ -178,6 +178,39 @@ class Register extends Component {
     render() {
         return (
             <Fragment>
+
+                <div className="modal fade" id="modal-subjectGroup" style={{ width: '100vw' }}>
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <button type="button" className="close" data-dismiss="modal">
+                                    <span aria-hidden="true">×</span></button>
+                                <h4 className="modal-title">Khối thi</h4>
+                            </div>
+                            <div className="modal-body">
+                                <div className="list-group">
+                                    {this.genListSubjectGroup()}
+                                </div>
+                            </div>
+                            <div className="modal-footer">
+                                <ul className="pagination pagination-md no-margin pull-right">
+                                    <li className={this.state.pageSubjectGroup === 1 ? 'disabled' : ''}>
+                                        <a href="#" onClick={(e) => this.newPageSubjectGroup(e, -1)}>Pre</a>
+                                    </li>
+                                    <li className="active">
+                                        <a>{this.state.pageSubjectGroup}</a>
+                                    </li>
+                                    <li className={this.state.nextSubjectGroup ? '' : 'disabled'}>
+                                        <a href="#" onClick={(e) => this.newPageSubjectGroup(e, 1)} >Next</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        {/* /.modal-content */}
+                    </div>
+                    {/* /.modal-dialog */}
+                </div>
+
                 <div className="modal fade" id="modal-province" style={{ width: '100vw' }}>
                     <div className="modal-dialog">
                         <div className="modal-content">
@@ -210,37 +243,7 @@ class Register extends Component {
                     {/* /.modal-dialog */}
                 </div>
 
-                <div className="modal fade" id="modal-subjectGroup">
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <button type="button" className="close" data-dismiss="modal">
-                                    <span aria-hidden="true">×</span></button>
-                                <h4 className="modal-title">Khối thi</h4>
-                            </div>
-                            <div className="modal-body">
-                                <div className="list-group">
-                                    {this.genListSubjectGroup()}
-                                </div>
-                            </div>
-                            <div className="modal-footer">
-                                <ul className="pagination pagination-md no-margin pull-right">
-                                    <li className={this.state.pageSubjectGroup === 1 ? 'disabled' : ''}>
-                                        <a href="#" onClick={(e) => this.newPageSubjectGroup(e, -1)}>Pre</a>
-                                    </li>
-                                    <li className="active">
-                                        <a>{this.state.pageSubjectGroup}</a>
-                                    </li>
-                                    <li className={this.state.nextSubjectGroup ? '' : 'disabled'}>
-                                        <a href="#" onClick={(e) => this.newPageSubjectGroup(e, 1)} >Next</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        {/* /.modal-content */}
-                    </div>
-                    {/* /.modal-dialog */}
-                </div>
+
 
                 <header style={{ backgroundImage: 'linear-gradient(to bottom right, #00a6c1, #a9c3ea)' }}>
                     <div className="cover" />

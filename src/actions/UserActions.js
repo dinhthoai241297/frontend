@@ -1,8 +1,8 @@
 import * as actionTypes from './../actionTypes/UserActionTypes';
 import UserApi from './../api/UserApi';
 
-export const loginApi = (username, password) => {
-    return dispatch => UserApi.login({ username, password }).then(res => {
+export const loginApi = (email, password) => {
+    return dispatch => UserApi.login({ email, password }).then(res => {
         if (res.body.code === 200) {
             dispatch(loginState(res.body.data));
             localStorage.setItem('data', JSON.stringify(res.body.data));
