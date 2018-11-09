@@ -4,7 +4,7 @@ import { HOST } from './../contants/index';
 class SubjectGroupApi {
 
     static getAll(data) {
-        return request.post(`${HOST}admin/subjectgroup/getall`).send({ data });
+        return request.post(`${HOST}frontend/subjectgroup/getall`).send({ data });
     }
 
 }

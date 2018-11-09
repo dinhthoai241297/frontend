@@ -17,6 +17,7 @@ import './assets/styles/mainstyles.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'font-awesome-animation/dist/font-awesome-animation.min.css';
 import 'toastr/build/toastr.min.css';
+import 'react-datepicker/dist/react-datepicker.min.css';
 
 import jQueryBridget from 'jquery-bridget';
 

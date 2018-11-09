@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import { Redirect } from 'react-router-dom';
 import Nav from './../common/Nav';
 import { init_all } from '../../assets/vendor/js/all';
 import Footer from '../common/Footer';
@@ -8,11 +7,45 @@ import SubjectGroupApi from '../../api/SubjectGroupApi';
 import UserApi from '../../api/UserApi';
 import { toastrOption } from '../../contants/options';
 import toastr from 'toastr';
+import Select from 'react-select';
+import DatePicker from "react-datepicker";
+import moment from "moment";
+
+const selectStyle = {
+    control: (base) => ({
+        ...base,
+        minHeight: 46,
+        borderRadius: 0,
+        boxShadow: "none",
+        outline: "none",
+        border: "1px solid rgba(0,0,0, .1)",
+        '&:hover': {
+            borderColor: "#00000033"
+        },
+        backgroundColor: 'white'
+    }),
+    dropdownIndicator: base => ({
+        ...base,
+        paddingLeft: 15,
+        paddingRight: 15
+    }),
+    menu: (base) => ({
+        ...base,
+        zIndex: 100,
+        border: "0px !important",
+    }),
+    menuList: base => ({
+        ...base,
+        zIndex: 100,
+    })
+}
 
 class Register extends Component {
 
     componentDidMount() {
         init_all();
+        this.loadProvinces();
+        this.loadSubjectGroups();
     }
 
     constructor(props) {
@@ -22,149 +55,73 @@ class Register extends Component {
             sex: 'male',
             birthday: undefined,
             email: '',
-            phonenumber: undefined,
-            province: undefined,
-            purpose: undefined,
+            phonenumber: '',
+            province: '',
+            purpose: '',
             password: '',
             passwordcfm: '',
 
-            provinceName: 'Tỉnh thành',
-            pageProvince: 1,
-            provinces: [],
-            nextProvince: false,
+            provinceOptions: [],
+            provinceSelecled: undefined,
+            subjectGroupOptions: [],
+            subjectGroupSelected: undefined,
 
-            subjectGroupName: 'Khối Thi',
-            pageSubjectGroup: 1,
-            subjectGroups: [],
-            nextSubjectGroup: false,
-
-            check: false
+            mesEmail: '',
+            mesPassword: '',
+            mesPasswordCfm: '',
+            mesBirthday: '',
+            mesSG: '',
+            mesPhone: '',
+            mesName: ''
         }
 
         toastr.options = toastrOption;
+
+        this.MES_EMPTY = 'Trường này không được để trống!';
+
+        this.PHONES = ['086', '096', '097', '098', '032', '033', '034', '035', '036', '037', '038', '039',
+            '090', '093', '070', '079', '077', '076', '078', '091', '094', '083', '084', '085', '081', '082',
+            '092', '056', '058', '099', '059'];
     }
 
     handleChangeInput = (e) => {
         let { value, name } = e.target;
+        // check length phone number
+        if (name === 'phonenumber' && value.length > 10) {
+            return;
+        }
         this.setState({
             [name]: value
         });
     }
 
-    loadProvinces = async page => {
-        let rs = await ProvinceApi.getAll({
-            page
-        });
+    loadProvinces = async () => {
+        let rs = await ProvinceApi.getAll();
 
         this.setState({
-            provinces: rs.body.data.list,
-            nextProvince: rs.body.data.next,
-            pageProvince: page
+            provinceOptions: rs.body.list.map(el => ({ value: el.id, label: el.name }))
         });
+
     }
 
-    newPageProvince = (e, num) => {
-        e.preventDefault();
-        let { pageProvince, nextProvince } = this.state;
-        pageProvince += num;
-        if (pageProvince === 0 || (!nextProvince && num > 0)) {
-            return;
-        } else {
-            this.loadProvinces(pageProvince);
-            this.setState({ pageProvince });
-        }
-    }
-
-    genListProvince = () => {
-        let { provinces } = this.state;
-        let rs = null;
-        rs = provinces.map((p, i) => (
-            <a
-                key={i}
-                className={"list-group-item h-hand " + (p.id === this.state.province ? 'active' : '')}
-                onClick={() => this.handleChangeProvince(p)}
-                style={{ cursor: 'pointer' }}
-            >{p.name}</a>
-        ));
-        return rs;
-    }
-
-    handleChangeProvince = (s) => {
-        $('#modal-province').modal('hide');
-        this.setState({
-            province: s.id,
-            provinceName: s.name
-        });
-    }
-
-    toggleProvince = async () => {
-        if (this.state.provinces.length === 0) {
-            await this.loadProvinces(this.state.pageProvince);
-        }
-        $('#modal-province').modal('toggle');
-    }
-
-    loadSubjectGroups = async page => {
-        let rs = await SubjectGroupApi.getAll({
-            page
-        });
+    loadSubjectGroups = async () => {
+        let rs = await SubjectGroupApi.getAll();
 
         this.setState({
-            subjectGroups: rs.body.data.list,
-            nextSubjectGroup: rs.body.data.next,
-            pageSubjectGroup: page
+            subjectGroupOptions: rs.body.list.map(el => ({ value: el.id, label: el.code }))
         });
-    }
-
-    newPageSubjectGroup = (e, num) => {
-        e.preventDefault();
-        let { pageSubjectGroup, nextSubjectGroup } = this.state;
-        pageSubjectGroup += num;
-        if (pageSubjectGroup === 0 || (!nextSubjectGroup && num > 0)) {
-            return;
-        } else {
-            this.loadSubjectGroups(pageSubjectGroup);
-            this.setState({ pageSubjectGroup });
-        }
-    }
-
-    genListSubjectGroup = () => {
-        let { subjectGroups } = this.state;
-        let rs = null;
-        rs = subjectGroups.map((sg, i) => (
-            <a
-                key={i}
-                className={"list-group-item h-hand " + (sg.id === this.state.purpose ? 'active' : '')}
-                onClick={() => this.handleChangeSubjectGroup(sg)}
-                style={{ cursor: 'pointer' }}
-            >{sg.code}</a>
-        ));
-        return rs;
-    }
-
-    handleChangeSubjectGroup = (s) => {
-        $('#modal-subjectGroup').modal('hide');
-        this.setState({
-            purpose: s.id,
-            subjectGroupName: s.code
-        });
-    }
-
-    toggleSubjectGroup = async () => {
-        if (this.state.subjectGroups.length === 0) {
-            await this.loadSubjectGroups(this.state.pageSubjectGroup);
-        }
-        $('#modal-subjectGroup').modal('toggle');
     }
 
     register = e => {
         e.preventDefault();
-        let { fullName, email, sex, birthday, phonenumber, province, purpose, password } = this.state;
-        if (fullName === '' || email === '' || !birthday || !phonenumber || !province || !purpose || !password) {
-            this.setState({ check: true });
+        let { fullName, email, sex, birthday, phonenumber, province, purpose, password, passwordcfm } = this.state;
+        let check = this.checkName(fullName) && this.checkBirthday(birthday) && this.checkEmail(email)
+            && this.checkPassword(password) && this.checkPasswordCfm(password, passwordcfm) && this.checkPhone(phonenumber)
+            && this.checkSG(purpose);
+        if (!check) {
             return;
         }
-        UserApi.register({ user: { fullName, email, sex, birthday, phonenumber, province, purpose, password } }).then(res => {
+        UserApi.register({ user: { fullName, email, sex, birthday: birthday._d, phonenumber, province, purpose, password } }).then(res => {
             if (res.body.code === 200) {
                 toastr.success('Tạo tài khoản thành công!');
             } else {
@@ -175,76 +132,104 @@ class Register extends Component {
         });
     }
 
+    handleChangeProvince = provinceSelecled => {
+        this.setState({ provinceSelecled, province: provinceSelecled.value });
+    }
+
+    handleChangeSubjectGroup = subjectGroupSelected => {
+        this.setState({ subjectGroupSelected, purpose: subjectGroupSelected.value });
+    }
+
+    handleChangeBirthday = birthday => {
+        // Ngày sinh tối thiểu là ngày hiện tại
+        if (birthday._d < new Date()) {
+            this.setState({ birthday });
+        }
+    }
+
+    // validdate input
+
+    checkPassword = password => {
+        let mesPassword = '', check = false;
+        if (password === '') {
+            mesPassword = this.MES_EMPTY;
+        } else if (password.length < 6) {
+            mesPassword = 'Mật khẩu phải có độ dài từ 6 kí tự!';
+        } else {
+            check = true;
+        }
+        this.setState({ mesPassword });
+        return check;
+    }
+
+    checkPasswordCfm = (password, passwordcfm) => {
+        let mesPasswordCfm = '', check = false;
+        if (password !== passwordcfm) {
+            mesPasswordCfm = 'Mật khẩu và xác nhận mật khẩu không khớp!';
+        } else if (passwordcfm === '') {
+            mesPasswordCfm = this.MES_EMPTY;
+        } else {
+            check = true;
+        }
+        this.setState({ mesPasswordCfm });
+        return check;
+    }
+
+    checkBirthday = birthday => {
+        if (!birthday) {
+            this.setState({ mesBirthday: this.MES_EMPTY });
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    checkEmail = email => {
+        let mesEmail = '', check = false;
+        if (email === '') {
+            mesEmail = this.MES_EMPTY;
+        } else {
+            let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            check = re.test(String(email).toLowerCase());
+            if (!check) {
+                mesEmail = 'Email không hợp lệ!';
+            }
+        }
+        this.setState({ mesEmail });
+        return check;
+    }
+
+    checkPhone = phone => {
+        let mesPhone = '', check = false;
+        if (phone !== '' && (phone.length !== 10 || !this.PHONES.find(el => el === phone.substr(0, 3)))) {
+            mesPhone = 'Số điện thoại không hợp lệ!';
+        } else {
+            check = true;
+        }
+        this.setState({ mesPhone });
+        return check;
+    }
+
+    checkSG = subjectGroup => {
+        if (subjectGroup === '') {
+            this.setState({ mesSG: this.MES_EMPTY });
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    checkName = name => {
+        if (name === '') {
+            this.setState({ mesName: this.MES_EMPTY });
+            return false;
+        }
+        return true;
+    }
+
     render() {
         return (
             <Fragment>
-
-                <div className="modal fade" id="modal-subjectGroup" style={{ width: '100vw' }}>
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <button type="button" className="close" data-dismiss="modal">
-                                    <span aria-hidden="true">×</span></button>
-                                <h4 className="modal-title">Khối thi</h4>
-                            </div>
-                            <div className="modal-body">
-                                <div className="list-group">
-                                    {this.genListSubjectGroup()}
-                                </div>
-                            </div>
-                            <div className="modal-footer">
-                                <ul className="pagination pagination-md no-margin pull-right">
-                                    <li className={this.state.pageSubjectGroup === 1 ? 'disabled' : ''}>
-                                        <a href="#" onClick={(e) => this.newPageSubjectGroup(e, -1)}>Pre</a>
-                                    </li>
-                                    <li className="active">
-                                        <a>{this.state.pageSubjectGroup}</a>
-                                    </li>
-                                    <li className={this.state.nextSubjectGroup ? '' : 'disabled'}>
-                                        <a href="#" onClick={(e) => this.newPageSubjectGroup(e, 1)} >Next</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        {/* /.modal-content */}
-                    </div>
-                    {/* /.modal-dialog */}
-                </div>
-
-                <div className="modal fade" id="modal-province" style={{ width: '100vw' }}>
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <button type="button" className="close" data-dismiss="modal">
-                                    <span aria-hidden="true">×</span></button>
-                                <h4 className="modal-title">Tỉnh</h4>
-                            </div>
-                            <div className="modal-body">
-                                <div className="list-group">
-                                    {this.genListProvince()}
-                                </div>
-                            </div>
-                            <div className="modal-footer">
-                                <ul className="pagination pagination-md no-margin pull-right">
-                                    <li className={this.state.pageProvince === 1 ? 'disabled' : ''}>
-                                        <a href="#" onClick={(e) => this.newPageProvince(e, -1)}>Pre</a>
-                                    </li>
-                                    <li className="active">
-                                        <a>{this.state.pageProvince}</a>
-                                    </li>
-                                    <li className={this.state.nextProvince ? '' : 'disabled'}>
-                                        <a href="#" onClick={(e) => this.newPageProvince(e, 1)} >Next</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        {/* /.modal-content */}
-                    </div>
-                    {/* /.modal-dialog */}
-                </div>
-
-
-
                 <header style={{ backgroundImage: 'linear-gradient(to bottom right, #00a6c1, #a9c3ea)' }}>
                     <div className="cover" />
                     {/* Navigation panel */}
@@ -266,29 +251,29 @@ class Register extends Component {
                 </header>
 
                 <section className="container">
-                    <div className="small-section">
+                    <div style={{ padding: '70px 0' }}>
                         <div className="row form">
                             <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
                                 <div className="row">
-                                    <div className="col-xs-12 mb-20">
+                                    <div className="col-xs-12 mb-40">
                                         <div className="cus-mes">
-                                            {(this.state.check && this.state.fullName === '') ? 'Trường này không được để trống!' : ''}
+                                            {this.state.mesName === '' ? '(*)' : this.state.mesName}
                                         </div>
                                         <input
                                             type="text"
                                             name="fullName"
-                                            className={'form-control input-lg' + ((this.state.check && this.state.fullName === '') ? ' cus-error-field' : '')}
+                                            className={'form-control input-lg' + (this.state.mesName !== '' ? ' cus-error-field' : '')}
                                             placeholder="Họ & Tên"
                                             maxLength="100"
                                             onChange={this.handleChangeInput}
-                                            onClick={() => this.setState({ check: false })}
+                                            onClick={() => this.setState({ mesName: '' })}
                                         />
                                     </div>
-                                    <div className="col-xs-12 mb-20">
+                                    <div className="col-xs-12 mb-40">
                                         <div className="row text-center">
                                             <div className="col-xs-4">
                                                 <label className="radio-inline">
-                                                    <input checked type="radio" name="sex" value="male" onChange={this.handleChangeInput} /> Nam
+                                                    <input checked={this.state.sex === 'male' ? true : false} type="radio" name="sex" value="male" onChange={this.handleChangeInput} /> Nam
                                                 </label>
                                             </div>
                                             <div className="col-xs-4">
@@ -303,94 +288,104 @@ class Register extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-xs-12 mb-20">
+                                    <div className="col-xs-12 mb-40">
                                         <div className="cus-mes">
-                                            {(this.state.check && !this.state.birthday) ? 'Trường này không được để trống!' : ''}
+                                            {this.state.mesBirthday === '' ? '(*)' : this.state.mesBirthday}
                                         </div>
-                                        <input
-                                            type="date" name="birthday"
-                                            className={'form-control input-lg' + ((this.state.check && !this.state.birthday) ? ' cus-error-field' : '')}
-                                            placeholder="Ngày sinh"
-                                            onChange={this.handleChangeInput}
-                                            onClick={() => this.setState({ check: false })}
-                                        />
+                                        <div
+                                            onClick={() => this.setState({ mesBirthday: '' })}
+                                        >
+                                            <DatePicker
+                                                selected={this.state.birthday}
+                                                onChange={this.handleChangeBirthday}
+                                                className={'form-control input-lg' + (this.state.mesBirthday !== '' ? ' cus-error-field' : '')}
+                                                dateFormat="DD/MM/YYYY"
+                                                placeholderText="Ngày sinh"
+                                            />
+                                        </div>
                                     </div>
-                                    <div className="col-xs-12 mb-20">
+                                    <div className="col-xs-12 mb-40">
                                         <div className="cus-mes">
-                                            {(this.state.check && this.state.email === '') ? 'Trường này không được để trống!' : ''}
+                                            {this.state.mesEmail === '' ? '(*)' : this.state.mesEmail}
                                         </div>
                                         <input
                                             type="email" name="email"
-                                            className={'form-control input-lg' + ((this.state.check && this.state.email === '') ? ' cus-error-field' : '')}
+                                            className={'form-control input-lg' + (this.state.mesEmail !== '' ? ' cus-error-field' : '')}
                                             placeholder="Email"
                                             maxLength="100"
                                             onChange={this.handleChangeInput}
-                                            onClick={() => this.setState({ check: false })}
+                                            onClick={() => this.setState({ mesEmail: '' })}
                                         />
                                     </div>
-                                    <div className="col-xs-12 mb-20">
+                                    <div className="col-xs-12 mb-40">
                                         <div className="cus-mes">
-                                            {(this.state.check && this.state.password === '') ? 'Trường này không được để trống!' : ''}
+                                            {this.state.mesPassword === '' ? '(*)' : this.state.mesPassword}
                                         </div>
                                         <input
                                             type="password" name="password"
-                                            className={'form-control input-lg' + ((this.state.check && this.state.password === '') ? ' cus-error-field' : '')}
+                                            className={'form-control input-lg' + (this.state.mesPassword !== '' ? ' cus-error-field' : '')}
                                             placeholder="Mật khẩu"
                                             maxLength="100"
                                             onChange={this.handleChangeInput}
-                                            onClick={() => this.setState({ check: false })}
+                                            onClick={() => this.setState({ mesPassword: '' })}
                                         />
                                     </div>
-                                    <div className="col-xs-12 mb-20">
+                                    <div className="col-xs-12 mb-40">
                                         <div className="cus-mes">
-                                            {(this.state.check && this.state.passwordcfm === '') ? 'Trường này không được để trống!' : (this.state.check && this.state.password !== this.state.passwordcfm) ? 'Mật khẩu và mật khẩu nhập lại không đúng' : ''}
+                                            {this.state.mesPasswordCfm === '' ? '(*)' : this.state.mesPasswordCfm}
                                         </div>
                                         <input
                                             type="password" name="passwordcfm"
-                                            className={'form-control input-lg' + (((this.state.check && this.state.passwordcfm === '') || (this.state.check && this.state.password !== this.state.passwordcfm)) ? ' cus-error-field' : '')}
+                                            className={'form-control input-lg' + (this.state.mesPasswordCfm !== '' ? ' cus-error-field' : '')}
                                             placeholder="Xác nhận mật khẩu"
                                             maxLength="100"
                                             onChange={this.handleChangeInput}
-                                            onClick={() => this.setState({ check: false })}
+                                            onClick={() => this.setState({ mesPasswordCfm: '' })}
                                         />
                                     </div>
-                                    <div className="col-xs-12 mb-20">
-                                        <input
-                                            type="number" name="phonenumber" className="form-control input-lg"
-                                            placeholder="Số điện thoại" maxLength="100"
-                                            onChange={this.handleChangeInput}
-                                        />
-                                    </div>
-                                    <div className="col-xs-12 mb-20">
+                                    <div className="col-xs-12 mb-40">
                                         <div className="cus-mes">
-                                            {(this.state.check && !this.state.purpose) ? 'Trường này không được để trống!' : ''}
+                                            {this.state.mesPhone === '' ? '' : this.state.mesPhone}
                                         </div>
                                         <input
-                                            type="text"
-                                            readOnly
-                                            style={{ cursor: 'pointer' }}
-                                            name="subjecGroup"
-                                            className={'form-control input-lg' + ((this.state.check && !this.state.purpose) ? ' cus-error-field' : '')}
-                                            placeholder="Khối thi"
-                                            maxLength="100"
-                                            value={this.state.subjectGroupName}
-                                            onClick={() => { this.setState({ check: false }); this.toggleSubjectGroup() }}
+                                            type="number" name="phonenumber"
+                                            className={'form-control input-lg' + (this.state.mesPhone !== '' ? ' cus-error-field' : '')}
+                                            placeholder="Số điện thoại"
+                                            maxLength="10"
+                                            onChange={this.handleChangeInput}
+                                            value={this.state.phonenumber}
+                                            onClick={() => this.setState({ mesPhone: '' })}
                                         />
                                     </div>
-                                    <div className="col-xs-12 mb-20">
-                                        <input
-                                            type="text"
-                                            readOnly
-                                            style={{ cursor: 'pointer' }}
-                                            name="province"
-                                            className="form-control input-lg"
+                                    <div className="col-xs-12 mb-40">
+                                        <div className="cus-mes">
+                                            {this.state.mesSG === '' ? '(*)' : this.state.mesSG}
+                                        </div>
+                                        <div
+                                            style={{ border: '1px solid transparent' }}
+                                            className={this.state.mesSG !== '' ? ' cus-error-field' : ''}
+                                            onClick={() => this.setState({ mesSG: '' })}
+                                        >
+                                            <Select
+                                                value={this.state.subjectGroupSelected}
+                                                onChange={this.handleChangeSubjectGroup}
+                                                options={this.state.subjectGroupOptions}
+                                                styles={selectStyle}
+                                                placeholder="Khối thi"
+                                                onClick={() => this.setState({ mesSG: '' })}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="col-xs-12 mb-40">
+                                        <Select
+                                            value={this.state.provinceSelecled}
+                                            onChange={this.handleChangeProvince}
+                                            options={this.state.provinceOptions}
+                                            styles={selectStyle}
                                             placeholder="Tỉnh thành"
-                                            maxLength="100"
-                                            onClick={this.toggleProvince}
-                                            value={this.state.provinceName}
                                         />
                                     </div>
-                                    <div className="col-xs-12 mb-20 text-center">
+                                    <div className="col-xs-12 mb-40 text-center">
                                         <a
                                             href="#"
                                             className="btn btn-mod btn-border btn-large btn-round"
@@ -404,7 +399,6 @@ class Register extends Component {
                         </div>
                     </div>
                 </section>
-
                 <Footer />
             </Fragment>
         );
