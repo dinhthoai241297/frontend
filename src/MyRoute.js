@@ -10,6 +10,7 @@ import * as actions from './actions/UserActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ResetPassword from './components/page/ResetPassword';
+import ForgotPassword from './components/page/ForgotPassowrd';
 
 class MyRoute extends Component {
 
@@ -33,6 +34,7 @@ class MyRoute extends Component {
                             <Route path="/detail" component={Detail} />
                             <Route path="/register" component={Register} />
                             <Route path="/resetPassword" component={ResetPassword} />
+                            <Route path="/forgotPassword" component={ForgotPassword} />
                         </Switch>
                     </App>
                 )} />

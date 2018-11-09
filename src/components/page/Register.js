@@ -10,6 +10,7 @@ import toastr from 'toastr';
 import Select from 'react-select';
 import DatePicker from "react-datepicker";
 import moment from "moment";
+import { Redirect } from 'react-router-dom';
 
 const selectStyle = {
     control: (base) => ({
@@ -72,7 +73,9 @@ class Register extends Component {
             mesBirthday: '',
             mesSG: '',
             mesPhone: '',
-            mesName: ''
+            mesName: '',
+
+            time: 0
         }
 
         toastr.options = toastrOption;
@@ -114,6 +117,7 @@ class Register extends Component {
 
     register = e => {
         e.preventDefault();
+
         let { fullName, email, sex, birthday, phonenumber, province, purpose, password, passwordcfm } = this.state;
         let check = this.checkName(fullName) && this.checkBirthday(birthday) && this.checkEmail(email)
             && this.checkPassword(password) && this.checkPasswordCfm(password, passwordcfm) && this.checkPhone(phonenumber)
@@ -124,6 +128,8 @@ class Register extends Component {
         UserApi.register({ user: { fullName, email, sex, birthday: birthday._d, phonenumber, province, purpose, password } }).then(res => {
             if (res.body.code === 200) {
                 toastr.success('Tạo tài khoản thành công!');
+                this.countDown(3000);
+                toastr.success('Bạn đang được chuyển về trang ĐĂNG NHẬP', 'Tạo tài khoản thành công!', { timeOut: 3200 });
             } else {
                 toastr.error('Có lỗi xảy ra: ' + res.body.code);
             }
@@ -227,6 +233,18 @@ class Register extends Component {
         return true;
     }
 
+    countDown = time => {
+        if (time === 0) {
+            this.props.history.push("/login");
+        } else {
+            this.setState({ time }, () => {
+                setTimeout(() => {
+                    this.countDown(time - 1000);
+                }, 1000);
+            });
+        }
+    }
+
     render() {
         return (
             <Fragment>
@@ -257,14 +275,13 @@ class Register extends Component {
                                 <div className="row">
                                     <div className="col-xs-12 mb-40">
                                         <div className="cus-mes">
-                                            {this.state.mesName === '' ? '(*)' : this.state.mesName}
+                                            {this.state.mesName}
                                         </div>
                                         <input
                                             type="text"
                                             name="fullName"
                                             className={'form-control input-lg' + (this.state.mesName !== '' ? ' cus-error-field' : '')}
-                                            placeholder="Họ & Tên"
-                                            maxLength="100"
+                                            placeholder="Họ & Tên (*)"
                                             onChange={this.handleChangeInput}
                                             onClick={() => this.setState({ mesName: '' })}
                                         />
@@ -290,7 +307,7 @@ class Register extends Component {
                                     </div>
                                     <div className="col-xs-12 mb-40">
                                         <div className="cus-mes">
-                                            {this.state.mesBirthday === '' ? '(*)' : this.state.mesBirthday}
+                                            {this.state.mesBirthday}
                                         </div>
                                         <div
                                             onClick={() => this.setState({ mesBirthday: '' })}
@@ -300,58 +317,58 @@ class Register extends Component {
                                                 onChange={this.handleChangeBirthday}
                                                 className={'form-control input-lg' + (this.state.mesBirthday !== '' ? ' cus-error-field' : '')}
                                                 dateFormat="DD/MM/YYYY"
-                                                placeholderText="Ngày sinh"
+                                                placeholderText="Ngày sinh (*)"
+                                                peekNextMonth
+                                                showMonthDropdown
+                                                showYearDropdown
+                                                dropdownMode="select"
                                             />
                                         </div>
                                     </div>
                                     <div className="col-xs-12 mb-40">
                                         <div className="cus-mes">
-                                            {this.state.mesEmail === '' ? '(*)' : this.state.mesEmail}
+                                            {this.state.mesEmail}
                                         </div>
                                         <input
                                             type="email" name="email"
                                             className={'form-control input-lg' + (this.state.mesEmail !== '' ? ' cus-error-field' : '')}
-                                            placeholder="Email"
-                                            maxLength="100"
+                                            placeholder="Email (*)"
                                             onChange={this.handleChangeInput}
                                             onClick={() => this.setState({ mesEmail: '' })}
                                         />
                                     </div>
                                     <div className="col-xs-12 mb-40">
                                         <div className="cus-mes">
-                                            {this.state.mesPassword === '' ? '(*)' : this.state.mesPassword}
+                                            {this.state.mesPassword}
                                         </div>
                                         <input
                                             type="password" name="password"
                                             className={'form-control input-lg' + (this.state.mesPassword !== '' ? ' cus-error-field' : '')}
-                                            placeholder="Mật khẩu"
-                                            maxLength="100"
+                                            placeholder="Mật khẩu (*)"
                                             onChange={this.handleChangeInput}
                                             onClick={() => this.setState({ mesPassword: '' })}
                                         />
                                     </div>
                                     <div className="col-xs-12 mb-40">
                                         <div className="cus-mes">
-                                            {this.state.mesPasswordCfm === '' ? '(*)' : this.state.mesPasswordCfm}
+                                            {this.state.mesPasswordCfm}
                                         </div>
                                         <input
                                             type="password" name="passwordcfm"
                                             className={'form-control input-lg' + (this.state.mesPasswordCfm !== '' ? ' cus-error-field' : '')}
-                                            placeholder="Xác nhận mật khẩu"
-                                            maxLength="100"
+                                            placeholder="Xác nhận mật khẩu (*)"
                                             onChange={this.handleChangeInput}
                                             onClick={() => this.setState({ mesPasswordCfm: '' })}
                                         />
                                     </div>
                                     <div className="col-xs-12 mb-40">
                                         <div className="cus-mes">
-                                            {this.state.mesPhone === '' ? '' : this.state.mesPhone}
+                                            {this.state.mesPhone}
                                         </div>
                                         <input
                                             type="number" name="phonenumber"
                                             className={'form-control input-lg' + (this.state.mesPhone !== '' ? ' cus-error-field' : '')}
                                             placeholder="Số điện thoại"
-                                            maxLength="10"
                                             onChange={this.handleChangeInput}
                                             value={this.state.phonenumber}
                                             onClick={() => this.setState({ mesPhone: '' })}
@@ -359,7 +376,7 @@ class Register extends Component {
                                     </div>
                                     <div className="col-xs-12 mb-40">
                                         <div className="cus-mes">
-                                            {this.state.mesSG === '' ? '(*)' : this.state.mesSG}
+                                            {this.state.mesSG}
                                         </div>
                                         <div
                                             style={{ border: '1px solid transparent' }}
@@ -371,7 +388,7 @@ class Register extends Component {
                                                 onChange={this.handleChangeSubjectGroup}
                                                 options={this.state.subjectGroupOptions}
                                                 styles={selectStyle}
-                                                placeholder="Khối thi"
+                                                placeholder="Khối thi (*)"
                                                 onClick={() => this.setState({ mesSG: '' })}
                                             />
                                         </div>

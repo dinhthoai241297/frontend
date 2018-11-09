@@ -40,7 +40,6 @@ header {
     border-radius: 0px;
     border: 2px solid;
     background: transparent;
-    text-transform: uppercase;
     transition: all .3s;
     width: 100%;
 }
@@ -155,10 +154,6 @@ body {
     color: #ff5c00;
     text-align: right;
     font-size: 0.95em;
-    position: absolute;
-    top: -21px;
-    right: 0;
-    padding-right: 15px;
 }
 
 .cus-error-field {
@@ -180,6 +175,10 @@ body.modal-open {
     box-shadow: none !important;
 }
 
+.css-1492t68 {
+    letter-spacing: 1px;
+}
+
 /* css react datepicker */
 .react-datepicker {
     font-size: 1.3rem !important;
@@ -198,9 +197,14 @@ body.modal-open {
 }
   
 .react-datepicker__day-name, .react-datepicker__day {
-    margin: 0.5rem !important;
+    padding: 6px;
+    box-sizing: content-box;
 }
 
 .react-datepicker-wrapper, .react-datepicker__input-container {
     width: 100% !important;
+}
+
+.react-datepicker__day:hover {
+    background-color: #9997;
 }

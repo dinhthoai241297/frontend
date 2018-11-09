@@ -98,7 +98,7 @@ class Login extends Component {
                                         />
                                     </div>
                                     <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 mb-10">
-                                        <Link to="/resetPassword">Quên mật khẩu?</Link>
+                                        <Link to="/forgotPassword">Quên mật khẩu?</Link>
                                     </div>
                                     <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
                                         <a
