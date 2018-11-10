@@ -3,7 +3,8 @@ import Nav from './../common/Nav';
 import { init_all } from '../../assets/vendor/js/all';
 import Footer from '../common/Footer';
 import UserApi from '../../api/UserApi';
-import { Redirect } from 'react-router-dom';
+import toastr from 'toastr';
+import { toastrOption } from '../../contants/options';
 
 class Register extends Component {
 
@@ -22,16 +23,18 @@ class Register extends Component {
             mesPassword: '',
             mesPasswordCfm: '',
 
-            processing: false
+            processing: false,
+
+            time: 0
         }
         this.MES_EMPTY = 'Trường này không được để trống!';
+        toastr.options = toastrOption;
     }
 
     handleChangeInput = e => {
         let { name, value } = e.target;
 
         // validate code length
-        console.log(name, value.length);
         if (name === 'code' && value.length > 6) {
             return;
         }
@@ -44,17 +47,18 @@ class Register extends Component {
         e.preventDefault();
         this.setState({ processing: true });
         let { code, password, passwordCfm } = this.state;
-        let check = this.checkCode(code) && this.checkPassword(password) && this.checkPasswordCfm(passwordCfm);
+        let check = this.checkCode(code) && this.checkPassword(password) && this.checkPasswordCfm(password, passwordCfm);
         if (!check) {
             this.setState({ processing: false });
             return;
         }
-        UserApi.changePassword({ code, password }).then(res => {
+        UserApi.changePassword({ token: code, password }).then(res => {
             if (res.body.code === 200) {
                 // success
-                return <Redirect to="/login" />
+                this.countDown(3000);
+                toastr.success('Bạn đang được chuyển về trang ĐĂNG NHẬP', 'Đặt lại mật khẩu thành công!', { timeOut: 3200 });
             } else {
-                // mess error
+                toastr.error('Có lỗi xảy ra: ' + res.body.code);
             }
             this.setState({ processing: false });
         }).catch(error => {
@@ -105,6 +109,18 @@ class Register extends Component {
         return check;
     }
 
+    countDown = time => {
+        if (time === 0) {
+            this.props.history.push("/login");
+        } else {
+            this.setState({ time }, () => {
+                setTimeout(() => {
+                    this.countDown(time - 1000);
+                }, 1000);
+            });
+        }
+    }
+
     render() {
 
         return (
@@ -145,7 +161,7 @@ class Register extends Component {
                                                 {this.state.mesCode}
                                             </div>
                                             <input
-                                                type="number" name="code"
+                                                type="text" name="code"
                                                 className={'form-control input-lg' + (this.state.mesCode !== '' ? ' cus-error-field' : '')}
                                                 placeholder="Mã xác thực (*)"
                                                 onChange={this.handleChangeInput}

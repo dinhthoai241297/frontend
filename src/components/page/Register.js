@@ -10,7 +10,6 @@ import toastr from 'toastr';
 import Select from 'react-select';
 import DatePicker from "react-datepicker";
 import moment from "moment";
-import { Redirect } from 'react-router-dom';
 
 const selectStyle = {
     control: (base) => ({
@@ -127,7 +126,6 @@ class Register extends Component {
         }
         UserApi.register({ user: { fullName, email, sex, birthday: birthday._d, phonenumber, province, purpose, password } }).then(res => {
             if (res.body.code === 200) {
-                toastr.success('Tạo tài khoản thành công!');
                 this.countDown(3000);
                 toastr.success('Bạn đang được chuyển về trang ĐĂNG NHẬP', 'Tạo tài khoản thành công!', { timeOut: 3200 });
             } else {

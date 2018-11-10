@@ -3,7 +3,8 @@ import Nav from './../common/Nav';
 import { init_all } from '../../assets/vendor/js/all';
 import Footer from '../common/Footer';
 import UserApi from '../../api/UserApi';
-import { Redirect } from 'react-router-dom';
+import toastr from 'toastr';
+import { toastrOption } from '../../contants/options';
 
 class ForgotPassword extends Component {
 
@@ -16,8 +17,12 @@ class ForgotPassword extends Component {
         this.state = {
             email: '',
             mesEmail: '',
-            processing: false
+            processing: false,
+
+            time: 0
         }
+
+        toastr.options = toastrOption;
     }
 
     handleChangeInput = e => {
@@ -39,12 +44,15 @@ class ForgotPassword extends Component {
         UserApi.forgotPassword({ email }).then(res => {
             if (res.body.code === 200) {
                 // send mail success, redirect to changePassword
+                this.countDown(3000);
+                toastr.success('Bạn đang được chuyển về trang ĐẶT LẠI MẬT KHẨU', 'Gửi mail thành công!', { timeOut: 3200 });
             } else {
-                // something wrong
+                toastr.error('Có lỗi xảy ra: ' + res.body.code);
             }
             this.setState({ processing: false });
         }).catch(error => {
             // wrong
+            console.log(error);
             this.setState({ processing: false });
         });
     }
@@ -64,6 +72,18 @@ class ForgotPassword extends Component {
         }
         this.setState({ mesEmail });
         return check;
+    }
+
+    countDown = time => {
+        if (time === 0) {
+            this.props.history.push("/resetPassword");
+        } else {
+            this.setState({ time }, () => {
+                setTimeout(() => {
+                    this.countDown(time - 1000);
+                }, 1000);
+            });
+        }
     }
 
     render() {
