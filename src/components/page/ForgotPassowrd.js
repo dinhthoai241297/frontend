@@ -42,13 +42,13 @@ class ForgotPassword extends Component {
             return;
         }
         UserApi.forgotPassword({ email }).then(res => {
-            if (res.body.code === 200) {
-                // send mail success, redirect to changePassword
-                this.countDown(3000);
-                toastr.success('Bạn đang được chuyển về trang ĐẶT LẠI MẬT KHẨU', 'Gửi mail thành công!', { timeOut: 3200 });
-            } else {
-                toastr.error('Có lỗi xảy ra: ' + res.body.code);
-            }
+            // if (res.body.code === 200) {
+            //     // send mail success, redirect to changePassword
+            // } else {
+            //     toastr.error('Có lỗi xảy ra: ' + res.body.code);
+            // }
+            toastr.success('Vui lòng kiểm tra email để lấy mã xác thực', 'Gửi mail thành công!');
+            this.props.history.push("/resetPassword");
             this.setState({ processing: false });
         }).catch(error => {
             // wrong

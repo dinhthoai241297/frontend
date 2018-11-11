@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Redirect, Link } from 'react-router-dom';
 import Nav from './../common/Nav';
 import { init_all } from '../../assets/vendor/js/all';
+import Footer from '../common/Footer';
 
 class Login extends Component {
 
@@ -59,61 +60,76 @@ class Login extends Component {
 
         return (
             <Fragment>
-                <Nav />
 
-                <section className="bg-dark-alfa-30 parallax-2" id="home" style={{ backgroundImage: 'linear-gradient(to bottom right, #00a6c1, #a9c3ea)' }}>
-                    <div className="js-height-full container" style={{ height: 626 }}>
-                        {/* Hero Content */}
-                        <div className="home-content">
-                            <div className="home-text">
-                                <div className="row">
-                                    <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 mb-20">
+                <header style={{ backgroundImage: 'linear-gradient(to bottom right, #00a6c1, #a9c3ea)' }}>
+                    <div className="cover" />
+                    {/* Navigation panel */}
+
+                    <Nav />
+
+                    {/* End Navigation panel */}
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-xs-12 col-lg-8 col-lg-offset-2">
+                                <div className="row mb-20">
+                                    <div className="col-xs-12 text-center">
                                         <h1 className="cus-h1 mb-0">Đăng nhập</h1>
-                                    </div>
-                                    <div style={{ color: 'red' }} className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 mb-10 text-center">
-                                        {this.state.mes}
-                                    </div>
-                                    <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 mb-20">
-                                        <input
-                                            type="email"
-                                            className="cus-input cus-light"
-                                            placeholder="Tên đăng nhập"
-                                            onChange={this.handleChangeInput}
-                                            value={this.props.email}
-                                            name="email"
-                                            onClick={this.clearMes}
-                                            disabled={this.state.processing}
-                                        />
-                                    </div>
-                                    <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 mb-10">
-                                        <input
-                                            type="password"
-                                            className="cus-input cus-light"
-                                            placeholder="Mật khẩu"
-                                            onChange={this.handleChangeInput}
-                                            value={this.props.password}
-                                            name="password"
-                                            onClick={this.clearMes}
-                                            disabled={this.state.processing}
-                                        />
-                                    </div>
-                                    <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 mb-10">
-                                        <Link to="/forgotPassword">Quên mật khẩu?</Link>
-                                    </div>
-                                    <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
-                                        <a
-                                            href="#"
-                                            className="btn btn-mod btn-border-w btn-round btn-large"
-                                            onClick={this.login}
-                                            disabled={this.state.processing}
-                                        >Đăng nhập {this.state.processing && (<i className="fa fa-spinner fa-spin"></i>)}</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        {/* End Hero Content */}
+                    </div>
+                </header>
+
+                <section className="container">
+                    <div style={{ paddingTop: 70, paddingBottom: 70 }}>
+                        <div className="row">
+                            <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+                                <form className="form">
+                                    <div className="row">
+                                        <div className="col-xs-12 mb-20">
+                                            <input
+                                                type="email"
+                                                className="form-control input-lg"
+                                                placeholder="Email"
+                                                onChange={this.handleChangeInput}
+                                                value={this.props.email}
+                                                name="email"
+                                                onClick={this.clearMes}
+                                                disabled={this.state.processing}
+                                            />
+                                        </div>
+                                        <div className="col-xs-12 mb-20">
+                                            <input
+                                                type="password"
+                                                className="form-control input-lg"
+                                                placeholder="Mật khẩu"
+                                                onChange={this.handleChangeInput}
+                                                value={this.props.password}
+                                                name="password"
+                                                onClick={this.clearMes}
+                                                disabled={this.state.processing}
+                                            />
+                                        </div>
+                                        <div className="col-xs-12 mb-20 text-center">
+                                            <Link to="/forgotPassword">Quên mật khẩu?</Link>
+                                        </div>
+                                        <div className="col-xs-12 mb-20 text-center">
+                                            <a
+                                                href="#"
+                                                className="btn btn-mod btn-border btn-large btn-round"
+                                                onClick={this.login}
+                                                disabled={this.state.processing}
+                                            >Đăng nhập {this.state.processing && (<i className="fa fa-spinner fa-spin"></i>)}</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </section>
+
+                <Footer />
             </Fragment>
         );
     }

@@ -53,13 +53,14 @@ class Register extends Component {
             return;
         }
         UserApi.changePassword({ token: code, password }).then(res => {
-            if (res.body.code === 200) {
-                // success
-                this.countDown(3000);
-                toastr.success('Bạn đang được chuyển về trang ĐĂNG NHẬP', 'Đặt lại mật khẩu thành công!', { timeOut: 3200 });
-            } else {
-                toastr.error('Có lỗi xảy ra: ' + res.body.code);
-            }
+            // if (res.body.code === 200) {
+            //     // success
+            //     this.countDown(3000);
+            // } else {
+            //     toastr.error('Có lỗi xảy ra: ' + res.body.code);
+            // }
+            toastr.success('Hãy thử sử dụng mật khẩu mới để đăng nhập', 'Đặt lại mật khẩu thành công!');
+            this.props.history.push("/login");
             this.setState({ processing: false });
         }).catch(error => {
             // wrong
