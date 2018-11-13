@@ -1,13 +1,14 @@
 import { combineReducers } from 'redux';
 import SectorReducer from './SectorReducer';
 import UserReducer from './UserReducer';
-import searchs from './SearchReducer';
+import SchoolReducer from './SchoolReducer';
+import LoadingReducer from './LoadingReducer';
 
 const root = combineReducers({
     SectorReducer,
     UserReducer,
-    searchs
-
+    SchoolReducer,
+    LoadingReducer
 });
 
 export default root;

@@ -87,6 +87,9 @@ class Login extends Component {
                             <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
                                 <form className="form">
                                     <div className="row">
+                                        <div className="col-xs-12 mb-20" style={{ color: 'red' }}>
+                                            {this.state.mes}
+                                        </div>
                                         <div className="col-xs-12 mb-20">
                                             <input
                                                 type="email"

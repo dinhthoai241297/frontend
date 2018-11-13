@@ -1,1 +1,0 @@
-export const GET_ONE_NAME = 'GET_ONE_NAME';

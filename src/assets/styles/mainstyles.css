@@ -1,3 +1,12 @@
+@font-face {
+    src: url(../font/Roboto-Light.ttf);
+    font-family: 'Roboto';
+}
+
+body {
+    font-family: 'Roboto', "Open Sans", arial, sans-serif;
+}
+
 header {
     padding-top: 100px;
     background-image: url('../img/background.png');
@@ -75,16 +84,6 @@ header {
 .cus-btn-search:hover {
     color: #000000;
     background: #fff;
-}
-
-#adv-toggle {
-    color: rgba(255,255,255, .7);
-    text-decoration: none;
-    transition: all .3s;
-}
-
-#adv-toggle:hover {
-    color: #fff;
 }
 
 #adv-search option {
@@ -207,4 +206,92 @@ body.modal-open {
 
 .react-datepicker__day:hover {
     background-color: #9997;
+}
+
+.pr-70 {
+    padding-right: 70px !important;
+}
+
+.pl-70 {
+    padding-left: 70px !important;
+}
+
+.cus-search {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    line-height: 46px;
+    color: #0000001a;
+}
+
+.cus-search i {
+    box-sizing: content-box;
+    padding: 5px 12px;
+    border-left: 2px solid #0000001a;
+    transition: all .3s !important;
+}
+
+.cus-search:hover i {
+    border-color: #000000b3;
+}
+
+
+@media only screen and (max-width: 480px) {
+    .cus-search {
+        line-height: 38px;
+    }
+}
+
+.cus-table {
+    width: 100%;
+    border: 1px solid #bcbcbc;
+    min-width: 500px;
+}
+
+.cus-table thead th {
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.cus-table th, .cus-table td {
+    padding: 12px;
+    border-right: 1px solid #e5e5e5;
+}
+
+.cus-table th:last-child, .cus-table td:last-child {
+    border-right: none;
+}
+
+.cus-table tr {
+    border-bottom: 1px solid #bcbcbc;
+}
+
+.cus-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.cus-table tbody tr:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
+.pagination>li>a {
+    padding: 10px 16px;
+    border-color: #bcbcbc !important;
+    border-radius: 0px !important;
+    color: #5a5a5a;
+}
+
+.pagination>li>a:hover {
+    background-color: #f0f0f0;
+    color:#000000;
+}
+
+.cus-disabled {
+    cursor: not-allowed;
+}
+
+.page-loader {
+    background-color: #fefefea1;
 }

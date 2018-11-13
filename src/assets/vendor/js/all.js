@@ -11,10 +11,10 @@ function init_first() {
 
         // Page loader
 
-        $("body").imagesLoaded(function () {
-            $(".page-loader div").fadeOut();
-            $(".page-loader").delay(200).fadeOut("slow");
-        });
+        // $("body").imagesLoaded(function () {
+        //     $(".page-loader div").fadeOut();
+        //     $(".page-loader").delay(200).fadeOut("slow");
+        // });
 
 
         initWorkFilter();

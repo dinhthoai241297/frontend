@@ -3,7 +3,6 @@ import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import App from './App';
 import Home from './components/home/Home';
 import Search from './components/search/Search';
-import Detail from './components/detail/Detail';
 import Login from './components/page/Login';
 import Register from './components/page/Register';
 import * as actions from './actions/UserActions';
@@ -11,6 +10,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ResetPassword from './components/page/ResetPassword';
 import ForgotPassword from './components/page/ForgotPassowrd';
+import SchoolDetail from './components/school/SchoolDetail';
 
 class MyRoute extends Component {
 
@@ -31,10 +31,10 @@ class MyRoute extends Component {
                             <Route exact path="/" component={Home} />
                             <Route path="/login" component={Login} />
                             <Route path="/search" component={Search} />
-                            <Route path="/detail" component={Detail} />
                             <Route path="/register" component={Register} />
                             <Route path="/resetPassword" component={ResetPassword} />
                             <Route path="/forgotPassword" component={ForgotPassword} />
+                            <Route path="/school/detail/" component={SchoolDetail} />
                         </Switch>
                     </App>
                 )} />

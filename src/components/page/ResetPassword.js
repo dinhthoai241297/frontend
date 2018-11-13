@@ -196,7 +196,7 @@ class Register extends Component {
                                         </div>
                                         <div className="col-xs-12 text-center">
                                             <button
-                                                className="btn btn-mod btn-border btn-large btn-round"
+                                                className="btn btn-mod btn-border btn-large btn-round pr-70 pl-70"
                                                 onClick={this.changePassword}
                                                 disabled={this.state.processing}
                                             >
