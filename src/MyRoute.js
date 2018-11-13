@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import ResetPassword from './components/page/ResetPassword';
 import ForgotPassword from './components/page/ForgotPassowrd';
 import SchoolDetail from './components/school/SchoolDetail';
+import Profile from './components/page/Profile';
 
 class MyRoute extends Component {
 
@@ -35,6 +36,7 @@ class MyRoute extends Component {
                             <Route path="/resetPassword" component={ResetPassword} />
                             <Route path="/forgotPassword" component={ForgotPassword} />
                             <Route path="/school/detail/" component={SchoolDetail} />
+                            <Route path="/user/profile/" component={Profile} />
                         </Switch>
                     </App>
                 )} />

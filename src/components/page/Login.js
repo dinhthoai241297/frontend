@@ -23,18 +23,20 @@ class Login extends Component {
         }
     }
 
-    login = (e) => {
+    login = e => {
         this.setState({ processing: true });
         e.preventDefault();
         let { email, password } = this.state;
         let mes = '';
         this.props.login(email, password).then(res => {
-            if (res.body.code === 803) {
-                mes = 'Sai tài khoản hoặc mật khẩu'
-            } else {
-                mes = res.body.code;
+            if (res.body.code === 200) {
+                return;
             }
-
+            if (res.body.code === 803) {
+                mes = 'Sai tài khoản hoặc mật khẩu!'
+            } else {
+                mes = 'Có lỗi xảy ra vui lòng thử lại sau!';
+            }
             this.setState({ mes, processing: false });
         }).catch(error => {
             this.setState({ mes: 'Error!', processing: false });
@@ -50,6 +52,12 @@ class Login extends Component {
         this.setState({
             [name]: value
         });
+    }
+
+    enter = e => {
+        if (e.keyCode === 13) {
+            this.login(e);
+        }
     }
 
     render() {
@@ -87,7 +95,7 @@ class Login extends Component {
                             <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
                                 <form className="form">
                                     <div className="row">
-                                        <div className="col-xs-12 mb-20" style={{ color: 'red' }}>
+                                        <div className="col-xs-12 mb-20 text-center" style={{ color: 'red' }}>
                                             {this.state.mes}
                                         </div>
                                         <div className="col-xs-12 mb-20">
@@ -112,6 +120,7 @@ class Login extends Component {
                                                 name="password"
                                                 onClick={this.clearMes}
                                                 disabled={this.state.processing}
+                                                onKeyDown={this.enter}
                                             />
                                         </div>
                                         <div className="col-xs-12 mb-20 text-center">

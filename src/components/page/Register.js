@@ -126,10 +126,10 @@ class Register extends Component {
         }
         UserApi.register({ user: { fullName, email, sex, birthday: birthday._d, phonenumber, province, purpose, password } }).then(res => {
             if (res.body.code === 200) {
-                this.countDown(3000);
-                toastr.success('Bạn đang được chuyển về trang ĐĂNG NHẬP', 'Tạo tài khoản thành công!', { timeOut: 3200 });
+                toastr.success('Hãy thử sử dụng tài khoản mới để đăng nhập!', 'Tạo tài khoản thành công!');
+                this.props.history.push("/login");
             } else {
-                toastr.error('Có lỗi xảy ra: ' + res.body.code);
+                toastr.error('Có lỗi xảy ra vui lòng thử lại sau! ');
             }
         }).catch(error => {
             // error
@@ -229,18 +229,6 @@ class Register extends Component {
             return false;
         }
         return true;
-    }
-
-    countDown = time => {
-        if (time === 0) {
-            this.props.history.push("/login");
-        } else {
-            this.setState({ time }, () => {
-                setTimeout(() => {
-                    this.countDown(time - 1000);
-                }, 1000);
-            });
-        }
     }
 
     render() {

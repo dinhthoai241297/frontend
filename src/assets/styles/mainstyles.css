@@ -295,3 +295,23 @@ body.modal-open {
 .page-loader {
     background-color: #fefefea1;
 }
+
+.cus-media {
+    color: #7c7c7c;
+    padding: 15px;
+    border: 2px solid #7c7c7c;
+    overflow-x: auto;
+}
+
+.cus-media .media-body {
+    vertical-align: middle;
+    padding-left: 10px;
+    font-size: 2em;
+    overflow-x: auto;
+}
+
+
+.cus-media .media-left {
+    border-right: 2px solid #7c7c7c;
+    vertical-align: middle;
+}

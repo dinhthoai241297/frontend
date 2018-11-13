@@ -11,7 +11,6 @@ class App extends Component {
 
     render() {
         let { loading } = this.props;
-        console.log(loading);
         return (
             <Fragment>
                 {loading && (

@@ -5,7 +5,9 @@ export const loginApi = (email, password) => {
     return dispatch => UserApi.login({ email, password }).then(res => {
         if (res.body.code === 200) {
             dispatch(loginState(res.body.data));
-            localStorage.setItem('data', JSON.stringify(res.body.data));
+            let { data } = res.body;
+            data.user.password = '******';
+            localStorage.setItem('data', JSON.stringify(data));
         }
         return res;
     }).catch(error => {

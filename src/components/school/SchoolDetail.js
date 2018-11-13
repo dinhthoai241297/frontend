@@ -104,7 +104,7 @@ class SchoolDetail extends Component {
                                                 <b>Mã Trường: </b>{school.code}
                                             </h4>
                                             <h4>
-                                                <b>Website: </b><a href={school.description}>{school.description}</a>
+                                                <b>Website: </b><a target="_blank" href={'http://' + school.description}>{school.description}</a>
                                             </h4>
                                         </div>
                                     </div>
@@ -130,25 +130,28 @@ class SchoolDetail extends Component {
                                         </div>
                                     </div>
                                     <div className="row">
-                                        <div className="col-xs-12" style={{ overflow: 'auto' }}>
-                                            <table className="cus-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Mã ngành</th>
-                                                        <th>Tên ngành</th>
-                                                        <th className="text-center">Nguyện vọng</th>
-                                                        <th>Tổ hợp môn</th>
-                                                        <th>Điểm chuẩn</th>
-                                                        <th>Ghi chú</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {this.genListMark()}
-                                                </tbody>
-                                            </table>
+                                        <div className="col-xs-12">
+                                            <div style={{ overflow: 'auto' }}>
+                                                <table className="cus-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Mã ngành</th>
+                                                            <th>Tên ngành</th>
+                                                            <th className="text-center">Nguyện vọng</th>
+                                                            <th>Tổ hợp môn</th>
+                                                            <th>Điểm chuẩn</th>
+                                                            <th>Ghi chú</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {this.genListMark()}
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>)
+                                </div>
+                            )
                             }
                         </div>
                     </div>

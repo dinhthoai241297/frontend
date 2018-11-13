@@ -57,7 +57,7 @@ class Nav extends Component {
                                     <a href="#" className="mn-has-sub"><i className="fas fa-user"></i> {user.fullName} <i className="fa fa-angle-down"></i></a>
                                     <ul className="mn-sub to-left">
                                         <li>
-                                            <NavLink to='/profile'><i className="fas fa-info"></i> Thông tin</NavLink>
+                                            <NavLink to='/user/profile'><i className="fas fa-info"></i> Thông tin</NavLink>
                                         </li>
                                         <li>
                                             <a href="#" onClick={this.logout}><i className="fas fa-sign-out-alt"></i> Đăng xuất</a>

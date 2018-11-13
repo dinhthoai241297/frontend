@@ -140,6 +140,7 @@ class Search extends Component {
                                                     onChange={this.handeChangeInput}
                                                     value={this.state.keyword}
                                                     onKeyDown={this.enter}
+                                                    autoComplete="off"
                                                 />
                                                 <a
                                                     href="#" className="cus-search"
@@ -187,20 +188,22 @@ class Search extends Component {
                             <div className="col-xs-12 text-center">
                                 <h2>KẾT QUẢ TÌM KIẾM</h2>
                             </div>
-                            <div className="col-xs-12" style={{ overflow: 'auto' }}>
-                                <table className="cus-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Mã Trường</th>
-                                            <th>Tên Trường</th>
-                                            <th>Tỉnh Thành</th>
-                                            <th>Chi tiết</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {this.genListSchool()}
-                                    </tbody>
-                                </table>
+                            <div className="col-xs-12">
+                                <div style={{ overflow: 'auto' }}>
+                                    <table className="cus-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Mã Trường</th>
+                                                <th>Tên Trường</th>
+                                                <th>Tỉnh Thành</th>
+                                                <th>Chi tiết</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {this.genListSchool()}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <div className="col-xs-12 text-right">
                                 <nav className="d-inline-block" aria-label="Page navigation example">
