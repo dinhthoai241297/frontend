@@ -13,10 +13,10 @@ class SchooItem extends Component {
                     {school.name}
                 </td>
                 <td>
-                    {school.province.name}
+                    {school.province[0].name}
                 </td>
                 <td>
-                    <Link to={'/school/detail/?id=' + school.id} >Chi tiết</Link>
+                    <Link to={'/school/detail?id=' + school._id} >Chi tiết</Link>
                 </td>
             </tr>
         );

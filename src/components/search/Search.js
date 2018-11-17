@@ -19,17 +19,17 @@ class Search extends Component {
         }
     }
 
+    async componentDidMount() {
+        init_all();
+        await this.initFilter(qs.parse(this.props.location.search));
+        this.loadSchools();
+    }
+
     async componentWillReceiveProps(nextProps) {
         if (nextProps.location !== this.props.location) {
             await this.initFilter(qs.parse(nextProps.location.search));
             this.loadSchools();
         }
-    }
-
-    async componentDidMount() {
-        init_all();
-        await this.initFilter(qs.parse(this.props.location.search));
-        this.loadSchools();
     }
 
     handeChangeInput = e => {
@@ -70,6 +70,9 @@ class Search extends Component {
         this.props.loading(true);
         let { page, keyword } = this.state;
         this.props.loadSchools(page, keyword).then(res => {
+            console.log(res);
+            this.props.loading(false);
+        }).catch(error => {
             this.props.loading(false);
         });
     }
@@ -200,7 +203,13 @@ class Search extends Component {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {this.genListSchool()}
+                                            {this.props.data.schools.length !== 0 ? this.genListSchool() : (
+                                                <tr>
+                                                    <td className="text-center" colSpan={4}>
+                                                        Không tìm thấy trường
+                                                    </td>
+                                                </tr>
+                                            )}
                                         </tbody>
                                     </table>
                                 </div>

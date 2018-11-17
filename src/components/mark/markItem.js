@@ -16,7 +16,7 @@ class MarkItem extends Component {
                     {mark.aspiration}
                 </td>
                 <td>
-
+                    {mark.subjectGroups}
                 </td>
                 <td>
                     {mark.mark}

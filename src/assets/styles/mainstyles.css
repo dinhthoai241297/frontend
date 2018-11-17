@@ -1,3 +1,5 @@
+/* Custom style */
+
 @font-face {
     src: url(../font/Roboto-Light.ttf);
     font-family: 'Roboto';
@@ -100,7 +102,7 @@ header {
 
 #copyright {
     padding: 10px 0;
-    background: #3737ff;
+    background: #0f7f92;
     color: #fff;
 }
 
@@ -127,16 +129,20 @@ header {
 }
 
 footer {
-    border-top: 3px solid #3737ff;
+    border-top: 3px solid #0f7f92;
     padding-top: 30px;
 }
 
 .main-nav.cus-blue {
-    background-color: #3737ff;
+    background-color: #0f7f92;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
     color: rgba(255,255,255, .7);
+}
+
+.main-nav.dark .inner-nav ul > li > a {
+    font-weight: 600;
 }
 
 body {

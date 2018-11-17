@@ -9,6 +9,22 @@ import MarkApi from '../../api/MarkApi';
 import MarkItem from '../mark/markItem';
 import * as load from '../../actions/LoadingActions';
 import PropTypes from 'prop-types';
+import * as actions from '../../actions/SubjectGroupActions';
+
+const mapping = (marks, sgs) => {
+    return marks.map((m, index) => {
+        let s = JSON.parse(m.subjectGroups);
+        let tmp = '';
+        for (let i = 0; i < s.length; i++) {
+            tmp += sgs.find(sg => sg.id === s[i]).code;
+            if (i !== s.length - 1) {
+                tmp += ', ';
+            }
+        }
+        m.subjectGroups = tmp;
+        return m;
+    });
+}
 
 class SchoolDetail extends Component {
 
@@ -56,7 +72,23 @@ class SchoolDetail extends Component {
         this.props.loading(true);
         let { id } = this.state;
         MarkApi.getAll({ school: id, year }).then(res => {
-            this.setState({ marks: res.body.list });
+            let sg, marks;
+            marks = res.body.list;
+            sg = this.props.subjectGroups;
+            if (sg.length === 0) {
+                this.props.loadSG().then(res => {
+                    sg = res.body.data.list
+                    this.setState({ marks: mapping(marks, sg) }, () => {
+                        this.props.loading(false);
+                    });
+                }).catch(error => {
+                    this.props.loading(false);
+                });
+            } else {
+                this.setState({ marks: mapping(marks, sg) });
+                this.props.loading(false);
+            }
+        }).catch(error => {
             this.props.loading(false);
         });
     }
@@ -164,17 +196,21 @@ class SchoolDetail extends Component {
 }
 
 SchoolDetail.propTypes = {
-    loading: PropTypes.func
+    loading: PropTypes.func,
+    subjectGroups: PropTypes.array,
+    loadSG: PropTypes.func
 }
 
 const mapStateToProps = state => {
     return {
+        subjectGroups: state.SubjectGroupReducer.subjectGroups
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        loading: loading => dispatch(load.loading(loading))
+        loading: loading => dispatch(load.loading(loading)),
+        loadSG: () => dispatch(actions.loadSGApi())
     }
 }
 
