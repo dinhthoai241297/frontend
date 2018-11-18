@@ -177,7 +177,7 @@ class Search extends Component {
                                             </select>
                                         </div>
                                     </div>
-                                    <div className="row">
+                                    <div className="row" style={{ display: 'none' }}>
                                         <div className="col-xs-12">
                                             <div className="pull-right">
                                                 <a href="#" id="adv-toggle" onClick={this.toggleAdvSearch}>{this.state.label}</a>

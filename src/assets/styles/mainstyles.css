@@ -141,10 +141,6 @@ footer {
     color: rgba(255,255,255, .7);
 }
 
-.main-nav.dark .inner-nav ul > li > a {
-    font-weight: 600;
-}
-
 body {
     padding: 0 !important;
 }
