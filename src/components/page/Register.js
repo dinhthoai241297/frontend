@@ -110,7 +110,7 @@ class Register extends Component {
         let rs = await SubjectGroupApi.getAll();
 
         this.setState({
-            subjectGroupOptions: rs.body.list.map(el => ({ value: el.id, label: el.code }))
+            subjectGroupOptions: rs.body.data.list.map(el => ({ value: el.id, label: el.code }))
         });
     }
 

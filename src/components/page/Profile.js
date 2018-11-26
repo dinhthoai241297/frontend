@@ -58,91 +58,49 @@ class Profile extends Component {
                 <section className="container">
                     <div style={{ paddingTop: 70, paddingBottom: 70 }}>
                         <div className="row">
-                            <div className="col-xs-12 col-lg-8 col-lg-offset-2">
-                                <div className="row">
-                                    <div className="col-xs-12 mb-10">
-                                        <div className="cus-media">
-                                            <div className="media">
-                                                <div className="media-left">
-                                                    <i className="fas fa-4x fa-user"></i>
-                                                </div>
-                                                <div className="media-body">
-                                                    {user.fullName}
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div className="col-xs-12 col-lg-10 col-lg-offset-1">
+                                <div className="row text-center" style={{ color: '#4d4d4d' }}>
+                                    <div className="col-xs-12 mb-30">
+                                        <i className="fas fa-6x fa-user"></i>
+                                        <h1 style={{ textTransform: 'uppercase' }}>
+                                            {user.fullName}
+                                        </h1>
                                     </div>
-                                    <div className="col-xs-12 mb-10">
-                                        <div className="cus-media">
-                                            <div className="media">
-                                                <div className="media-left">
-                                                    <i className="fas fa-4x fa-transgender"></i>
-                                                </div>
-                                                <div className="media-body">
-                                                    {user.sex === 'male' ? 'Nam' : user.sex === 'female' ? 'Nữ' : 'Khác'}
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div className="col-xs-12 col-lg-4 mb-30">
+                                        <i className="fas fa-3x fa-transgender"></i>
+                                        <h4>
+                                            {user.sex === 'male' ? 'Nam' : user.sex === 'female' ? 'Nữ' : 'Khác'}
+                                        </h4>
                                     </div>
-                                    <div className="col-xs-12 mb-10">
-                                        <div className="cus-media">
-                                            <div className="media">
-                                                <div className="media-left">
-                                                    <i className="fas fa-4x fa-birthday-cake"></i>
-                                                </div>
-                                                <div className="media-body">
-                                                    {this.convertDate(user.birthday)}
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div className="col-xs-12 col-lg-4 mb-30">
+                                        <i className="fas fa-3x fa-birthday-cake"></i>
+                                        <h4>
+                                            {this.convertDate(user.birthday)}
+                                        </h4>
                                     </div>
-                                    <div className="col-xs-12 mb-10">
-                                        <div className="cus-media">
-                                            <div className="media">
-                                                <div className="media-left">
-                                                    <i className="fas fa-4x fa-phone"></i>
-                                                </div>
-                                                <div className="media-body">
-                                                    {user.phonenumber}
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div className="col-xs-12 col-lg-4 mb-30">
+                                        <i className="fas fa-3x fa-phone"></i>
+                                        <h4>
+                                            {user.phonenumber}
+                                        </h4>
                                     </div>
-                                    <div className="col-xs-12 mb-10">
-                                        <div className="cus-media">
-                                            <div className="media">
-                                                <div className="media-left">
-                                                    <i className="fas fa-4x fa-map"></i>
-                                                </div>
-                                                <div className="media-body">
-                                                    {user.province.name}
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div className="col-xs-12 col-lg-4 mb-30">
+                                        <i className="fas fa-3x fa-map"></i>
+                                        <h4>
+                                            {user.province.name}
+                                        </h4>
                                     </div>
-                                    <div className="col-xs-12 mb-10">
-                                        <div className="cus-media">
-                                            <div className="media">
-                                                <div className="media-left">
-                                                    <i className="fas fa-4x fa-envelope"></i>
-                                                </div>
-                                                <div className="media-body">
-                                                    {user.email}
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div className="col-xs-12 col-lg-4 mb-30">
+                                        <i className="fas fa-3x fa-envelope"></i>
+                                        <h4>
+                                            {user.email}
+                                        </h4>
                                     </div>
-                                    <div className="col-xs-12 mb-10">
-                                        <div className="cus-media">
-                                            <div className="media">
-                                                <div className="media-left">
-                                                    <i className="fas fa-4x fa-graduation-cap"></i>
-                                                </div>
-                                                <div className="media-body">
-                                                    {user.purpose.code}
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div className="col-xs-12 col-lg-4 mb-30">
+                                        <i className="fas fa-3x fa-graduation-cap"></i>
+                                        <h4>
+                                            {user.purpose.code}
+                                        </h4>
                                     </div>
                                 </div>
                             </div>

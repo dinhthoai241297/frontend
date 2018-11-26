@@ -28,6 +28,10 @@ class Nav extends Component {
         });
     }
 
+    closeMenu = () => {
+        this.setState({ open: false });
+    }
+
     render() {
 
         let { user } = this.props;
@@ -48,29 +52,37 @@ class Nav extends Component {
                     {/* Main Menu */}
                     <div className="inner-nav desktop-nav">
                         <ul className="clearlist scroll-nav local-scroll">
-                            <li><NavLink exact to='/'>Trang chủ</NavLink></li>
-                            <li><NavLink to='/search'>Tra cứu</NavLink></li>
-                            <li><a href="#">Tư vấn</a></li>
-                            <li><a href="#">Tin Tức</a></li>
+                            <li>
+                                <NavLink onClick={this.closeMenu} exact to='/'>Trang chủ</NavLink>
+                            </li>
+                            <li>
+                                <NavLink onClick={this.closeMenu} to='/search'>Tra cứu</NavLink>
+                            </li>
+                            <li>
+                                <a onClick={this.closeMenu} href="#">Tư vấn</a>
+                            </li>
+                            <li>
+                                <a onClick={this.closeMenu} href="#">Tin Tức</a>
+                            </li>
                             <li>
                                 {user ? (<Fragment>
                                     <a href="#" className="mn-has-sub"><i className="fas fa-user"></i> {user.fullName} <i className="fa fa-angle-down"></i></a>
                                     <ul className="mn-sub to-left">
                                         <li>
-                                            <NavLink to='/user/profile'><i className="fas fa-info"></i> Thông tin</NavLink>
+                                            <NavLink onClick={this.closeMenu} to='/user/profile'><i className="fas fa-info"></i> Thông tin</NavLink>
                                         </li>
                                         <li>
-                                            <a href="#" onClick={this.logout}><i className="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                                            <a href="#" onClick={e => { this.logout(e); this.closeMenu() }}><i className="fas fa-sign-out-alt"></i> Đăng xuất</a>
                                         </li>
                                     </ul>
                                 </Fragment>) : (<Fragment>
                                     <a href="#" className="mn-has-sub">Tài khoản <i className="fa fa-angle-down"></i></a>
                                     <ul className="mn-sub to-left">
                                         <li>
-                                            <NavLink to='/login'><i className="fas fa-sign-in-alt"></i> Đăng nhập</NavLink>
+                                            <NavLink onClick={this.closeMenu} to='/login'><i className="fas fa-sign-in-alt"></i> Đăng nhập</NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to='/register'><i className="fas fa-user-plus"></i> Đăng ký</NavLink>
+                                            <NavLink onClick={this.closeMenu} to='/register'><i className="fas fa-user-plus"></i> Đăng ký</NavLink>
                                         </li>
                                     </ul>
                                 </Fragment>)}
