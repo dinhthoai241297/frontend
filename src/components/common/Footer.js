@@ -4,7 +4,7 @@ class Footer extends Component {
     render() {
         return (
             <footer>
-                <div className="container mb-30">
+                {/* <div className="container mb-30">
                     <div className="row">
                         <div className="col-xs-12 col-md-4">
                             <div>
@@ -39,7 +39,7 @@ class Footer extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div id="copyright" className="text-center">
                     <div className="col-xs-12">
                         <p>Copyright © 2018 Nong Lam University. All rights reserved | Design by HCMUAF</p>

@@ -6,7 +6,7 @@ export const loginApi = (email, password) => {
         if (res.body.code === 200) {
             dispatch(loginState(res.body.data));
             let { data } = res.body;
-            data.user.password = '******';
+            // data.user.password = '******';
             localStorage.setItem('data', JSON.stringify(data));
         }
         return res;
@@ -46,3 +46,18 @@ export const registerApi = (fullName, email, gender, dob, phone, province, subje
 }).catch(error => {
     throw (error);
 });
+
+export const updateUserApi = data => {
+    return dispatch => UserApi.updateUser(data).then(res => {
+        return res;
+    }).catch(error => {
+        throw (error);
+    });
+}
+
+export const updateUserState = data => {
+    return {
+        type: actionTypes.UPDATE_USER,
+        data
+    }
+}

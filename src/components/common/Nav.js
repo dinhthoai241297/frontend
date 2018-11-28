@@ -59,7 +59,7 @@ class Nav extends Component {
                                 <NavLink onClick={this.closeMenu} to='/search'>Tra cứu</NavLink>
                             </li>
                             <li>
-                                <a onClick={this.closeMenu} href="#">Tư vấn</a>
+                                <NavLink onClick={this.closeMenu} to='/suggest'>Tư vấn</NavLink>
                             </li>
                             <li>
                                 <a onClick={this.closeMenu} href="#">Tin Tức</a>

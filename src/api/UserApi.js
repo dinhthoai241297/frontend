@@ -21,6 +21,10 @@ class UserApi {
     static changePassword(data) {
         return request.post(`${HOST}user/resetpass`).send({ data });
     }
+
+    static updateUser(data) {
+        return request.post(`${HOST}user/update`).send({ data });
+    }
 }
 
 export default UserApi;

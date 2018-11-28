@@ -10,6 +10,15 @@ export const loadSchoolApi = (page, keyword) => {
     });
 }
 
+export const loadSchoolSuggestApi = (page, province, subjectGroup) => {
+    return dispatch => SchoolApi.getSuggest({ page, province, subjectGroup }).then(res => {
+        if (res.body.code === 200) {
+            dispatch(loadSchooState(res.body.data));
+        }
+        return res;
+    });
+}
+
 export const loadSchooState = data => {
     return {
         type: actionTypes.LOAD_SCHOOL,

@@ -199,7 +199,6 @@ class Search extends Component {
                                                 <th>Mã Trường</th>
                                                 <th>Tên Trường</th>
                                                 <th>Tỉnh Thành</th>
-                                                <th>Chi tiết</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -214,7 +213,7 @@ class Search extends Component {
                                     </table>
                                 </div>
                             </div>
-                            <div className="col-xs-12 text-right">
+                            {(this.state.page !== 1 || this.props.data.next) && <div className="col-xs-12 text-right">
                                 <nav className="d-inline-block" aria-label="Page navigation example">
                                     <ul className="pagination">
                                         <li className="page-item">
@@ -244,7 +243,7 @@ class Search extends Component {
                                         </li>
                                     </ul>
                                 </nav>
-                            </div>
+                            </div>}
                         </div>
                     </div>
                 </section>

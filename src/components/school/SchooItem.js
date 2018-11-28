@@ -7,16 +7,17 @@ class SchooItem extends Component {
         return (
             <tr>
                 <td>
-                    {school.code}
+                    <Link to={'/school/detail?id=' + school._id} >
+                        {school.code}
+                    </Link>
                 </td>
                 <td>
-                    {school.name}
+                    <Link to={'/school/detail?id=' + school._id} >
+                        {school.name}
+                    </Link>
                 </td>
                 <td>
                     {school.province[0].name}
-                </td>
-                <td>
-                    <Link to={'/school/detail?id=' + school._id} >Chi tiết</Link>
                 </td>
             </tr>
         );

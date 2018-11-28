@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     mode: 'development',
@@ -57,7 +58,10 @@ module.exports = {
             'jquery': path.resolve(__dirname, './src/assets/vendor/js/jquery-1.11.2.min.js'),
             'window.jQuery': path.resolve(__dirname, './src/assets/vendor/js/jquery-1.11.2.min.js'),
             'window.$': path.resolve(__dirname, './src/assets/vendor/js/jquery-1.11.2.min.js'),
-            'window.OniREM' : '2412',
+        }),
+        new UglifyJSPlugin(),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production')
         })
     ]
 };

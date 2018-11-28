@@ -148,9 +148,9 @@ class SchoolDetail extends Component {
                                         </div>
                                     </div>
                                     <div className="row form mb-20">
-                                        <div className="col-xs-12 col-sm-6 col-sm-offset-6 col-md-4 col-md-offset-8 col-lg-3 col-lg-offset-9">
+                                        <div className="col-xs-12 col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10">
                                             <select
-                                                name="year" className="form-control input-lg"
+                                                name="year" className="form-control input-sm"
                                                 onChange={this.handleChangeSelect}
                                             >
                                                 <option value={2018}>2018</option>

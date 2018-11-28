@@ -4,14 +4,16 @@ import App from './App';
 import Home from './components/home/Home';
 import Search from './components/search/Search';
 import Login from './components/page/Login';
-import Register from './components/page/Register';
+import Register from './components/user/Register';
 import * as actions from './actions/UserActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import ResetPassword from './components/page/ResetPassword';
-import ForgotPassword from './components/page/ForgotPassowrd';
+import ResetPassword from './components/user/ResetPassword';
+import ForgotPassword from './components/user/ForgotPassowrd';
 import SchoolDetail from './components/school/SchoolDetail';
-import Profile from './components/page/Profile';
+import Profile from './components/user/Profile';
+import Update from './components/user/Update';
+import Suggest from './components/page/Suggest';
 
 class MyRoute extends Component {
 
@@ -33,10 +35,12 @@ class MyRoute extends Component {
                             <Route path="/login" component={Login} />
                             <Route path="/search" component={Search} />
                             <Route path="/register" component={Register} />
+                            <Route path="/user/update" component={Update} />
                             <Route path="/resetPassword" component={ResetPassword} />
                             <Route path="/forgotPassword" component={ForgotPassword} />
                             <Route path="/school/detail/" component={SchoolDetail} />
                             <Route path="/user/profile/" component={Profile} />
+                            <Route path="/suggest" component={Suggest} />
                         </Switch>
                     </App>
                 )} />
@@ -46,23 +50,20 @@ class MyRoute extends Component {
 }
 
 MyRoute.propTypes = {
-    user: PropTypes.object,
-    logout: PropTypes.func
+    logout: PropTypes.func,
+    login: PropTypes.func
 }
 
 const mapStateToProps = state => {
     return {
-        user: state.UserReducer.user
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
         logout: () => dispatch(actions.logoutApi()),
-        login: (data) => dispatch(actions.loginState(data))
+        login: data => dispatch(actions.loginState(data))
     }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyRoute);
-
-

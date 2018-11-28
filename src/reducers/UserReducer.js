@@ -1,7 +1,8 @@
 import * as actions from './../actionTypes/UserActionTypes';
 
 const intitState = {
-    user: undefined
+    user: undefined,
+    session: undefined
 }
 
 const UserReducer = (state = intitState, action) => {

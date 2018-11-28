@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Link, NavLink, Route, BrowserRouter } from 'react-router-dom';
 import Nav from '../common/Nav';
-import background from '../../assets/img/background.png';
 import { init_all } from '../../assets/vendor/js/all';
 
 class Home extends Component {
@@ -28,10 +27,12 @@ class Home extends Component {
                                 </h2>
                                 <div className="local-scroll">
                                     <Link to='/search' className="btn btn-mod btn-border-w btn-circle btn-large mb-10">
-                                        Tra cứu điểm thi
+                                        Tra cứu điểm chuẩn
                                     </Link>
                                     <span className="hidden-xs">&nbsp;</span>
-                                    <a href="#" className="btn btn-mod btn-border-w btn-circle btn-large mb-10">Tư vấn tuyển sinh</a>
+                                    <Link to='/suggest' className="btn btn-mod btn-border-w btn-circle btn-large mb-10">
+                                        Tư vấn chọn trường
+                                    </Link>
                                 </div>
                             </div>
                         </div>

@@ -128,10 +128,10 @@ header {
     padding: 0;
 }
 
-footer {
+/* footer {
     border-top: 3px solid #0f7f92;
     padding-top: 30px;
-}
+} */
 
 .main-nav.cus-blue {
     background-color: #0f7f92;
@@ -316,4 +316,8 @@ body.modal-open {
 .cus-media .media-left {
     border-right: 2px solid #7c7c7c;
     vertical-align: middle;
+}
+
+.cus-over-x-auto {
+    overflow-x: auto;
 }

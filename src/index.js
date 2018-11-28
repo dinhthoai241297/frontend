@@ -6,18 +6,18 @@ import MyRoute from './MyRoute';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore.dev';
 
-import './assets/vendor/css/bootstrap.min.css';
-import './assets/vendor/css/style.css';
-import './assets/vendor/css/style-responsive.css';
-import './assets/vendor/css/animate.min.css';
-import './assets/vendor/css/vertical-rhythm.min.css';
-import './assets/vendor/css/owl.carousel.css';
-import './assets/vendor/css/magnific-popup.css';
-import './assets/styles/mainstyles.css';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import 'font-awesome-animation/dist/font-awesome-animation.min.css';
-import 'toastr/build/toastr.min.css';
-import 'react-datepicker/dist/react-datepicker.min.css';
+// import './assets/vendor/css/bootstrap.min.css';
+// import './assets/vendor/css/style.css';
+// import './assets/vendor/css/style-responsive.css';
+// import './assets/vendor/css/animate.min.css';
+// import './assets/vendor/css/vertical-rhythm.min.css';
+// import './assets/vendor/css/owl.carousel.css';
+// import './assets/vendor/css/magnific-popup.css';
+// import './assets/styles/mainstyles.css';
+// import '@fortawesome/fontawesome-free/css/all.min.css';
+// import 'font-awesome-animation/dist/font-awesome-animation.min.css';
+// import 'toastr/build/toastr.min.css';
+// import 'react-datepicker/dist/react-datepicker.min.css';
 
 import jQueryBridget from 'jquery-bridget';
 
