@@ -5,9 +5,9 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "prestart": "babel-node tools/StartMessage.js",
-        "start": "babel-node tools/SrcServer.js",
-        "build": "webpack"
+        "build": "babel-node tools/build.js",
+        "start": "babel-node tools/distServer.js",
+        "startDev": "babel-node tools/SrcServer.js"
     },
     "author": "rem",
     "license": "ISC",
@@ -21,6 +21,7 @@
         "babel-plugin-transform-class-properties": "^6.24.1",
         "babel-plugin-transform-es2015-arrow-functions": "^6.22.0",
         "bootstrap": "^4.1.3",
+        "compression-webpack-plugin": "^2.0.0",
         "css-loader": "^1.0.0",
         "express": "^4.16.3",
         "file-loader": "^2.0.0",
