@@ -62,7 +62,7 @@ class Nav extends Component {
                                 <NavLink onClick={this.closeMenu} to='/suggest'>Tư vấn</NavLink>
                             </li>
                             <li>
-                                <a onClick={this.closeMenu} href="#">Tin Tức</a>
+                                <NavLink onClick={this.closeMenu} to='/new'>Tin tức</NavLink>
                             </li>
                             <li>
                                 {user ? (<Fragment>

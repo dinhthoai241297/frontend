@@ -6,19 +6,6 @@ import MyRoute from './MyRoute';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore.dev';
 
-// import './assets/vendor/css/bootstrap.min.css';
-// import './assets/vendor/css/style.css';
-// import './assets/vendor/css/style-responsive.css';
-// import './assets/vendor/css/animate.min.css';
-// import './assets/vendor/css/vertical-rhythm.min.css';
-// import './assets/vendor/css/owl.carousel.css';
-// import './assets/vendor/css/magnific-popup.css';
-// import './assets/styles/mainstyles.css';
-// import '@fortawesome/fontawesome-free/css/all.min.css';
-// import 'font-awesome-animation/dist/font-awesome-animation.min.css';
-// import 'toastr/build/toastr.min.css';
-// import 'react-datepicker/dist/react-datepicker.min.css';
-
 import jQueryBridget from 'jquery-bridget';
 
 import './assets/vendor/js/jquery.easing.1.3.js';
@@ -46,7 +33,6 @@ import './assets/vendor/js/jquery.simple-text-rotator.min.js';
 // import './assets/vendor/js/all.js';
 import './assets/vendor/js/contact-form.js';
 import './assets/vendor/js/jquery.ajaxchimp.min.js';
-
 
 const store = configureStore();
 

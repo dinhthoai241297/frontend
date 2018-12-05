@@ -14,6 +14,8 @@ import SchoolDetail from './components/school/SchoolDetail';
 import Profile from './components/user/Profile';
 import Update from './components/user/Update';
 import Suggest from './components/page/Suggest';
+import New from './components/new/New';
+import NewDetail from './components/new/NewDetail';
 
 class MyRoute extends Component {
 
@@ -41,6 +43,8 @@ class MyRoute extends Component {
                             <Route path="/school/detail/" component={SchoolDetail} />
                             <Route path="/user/profile/" component={Profile} />
                             <Route path="/suggest" component={Suggest} />
+                            <Route exact path="/new" component={New} />
+                            <Route path="/new/detail/" component={NewDetail} />
                         </Switch>
                     </App>
                 )} />

@@ -7,8 +7,8 @@ import SubjectGroupApi from '../../api/SubjectGroupApi';
 import { toastrOption } from '../../contants/options';
 import toastr from 'toastr';
 import Select from 'react-select';
-import DatePicker from "react-datepicker";
-import moment from "moment";
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as actions from '../../actions/UserActions';
@@ -48,7 +48,6 @@ class Update extends Component {
 
     componentDidMount() {
         if (!this.props.data.user) {
-            console.log(this.props.data.user);
             return this.props.history.push('/');
         } else {
             let { fullName, sex, email, birthday, province, purpose, password, phonenumber } = this.props.data.user;

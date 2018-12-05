@@ -1,5 +1,7 @@
 import webpack from 'webpack';
 import path from 'path';
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CompressionPlugin = require('compression-webpack-plugin');
 
 const GLOBALS = {
     'process.evn.NODE_EVN': JSON.stringify('production')
@@ -27,9 +29,16 @@ export default {
             'window.jQuery': path.resolve(__dirname, './src/assets/vendor/js/jquery-1.11.2.min.js'),
             'window.$': path.resolve(__dirname, './src/assets/vendor/js/jquery-1.11.2.min.js'),
         }),
+        new BundleAnalyzerPlugin(),
+        new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(en|zh-tw)$/),
+        new CompressionPlugin()
     ],
     optimization: {
-        minimize: true
+        minimize: true,
+        splitChunks: {
+            // include all types of chunks
+            chunks: 'all'
+        }
     },
     module: {
         rules: [

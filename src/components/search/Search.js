@@ -204,7 +204,7 @@ class Search extends Component {
                                         <tbody>
                                             {this.props.data.schools.length !== 0 ? this.genListSchool() : (
                                                 <tr>
-                                                    <td className="text-center" colSpan={4}>
+                                                    <td className="text-center" colSpan={3}>
                                                         Không tìm thấy trường
                                                     </td>
                                                 </tr>

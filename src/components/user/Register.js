@@ -9,7 +9,6 @@ import { toastrOption } from '../../contants/options';
 import toastr from 'toastr';
 import Select from 'react-select';
 import DatePicker from "react-datepicker";
-import moment from "moment";
 
 const selectStyle = {
     control: (base) => ({
