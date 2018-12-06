@@ -65,7 +65,7 @@ class New extends Component {
         }
     }
 
-    genListNew = () => {
+    getListNew = () => {
         let rs = null;
         let { news } = this.props.data;
         if (news) {
@@ -102,12 +102,26 @@ class New extends Component {
                 </header>
 
                 <section className="container">
-                    <div style={{ paddingTop: 70, paddingBottom: 70 }}>
+
+                   
+                    <div className="mod-content row">
+                        <div id="sidebar" className="col-lg-3 col-md-3 hidden-sm hidden-xs">
+                            <div className="menu-sidebar">
+                                <ul>
+                                    <li><a href='#' title='Sự kiện'><span>Sự kiện</span></a></li>
+                                    <li><a href='#' title='Blog'><span>Blog</span></a></li>
+                                    <li className="active"><Link to='/new' title='Hot News'><span>Hot News</span></Link></li>
+                                </ul>     
+                            </div>
+
+                        </div>
+
+                    <div id="main" className="col-lg-9 col-md-9 col-sm-12 col-xs-12 news-page">
                         <div className="row">
-                            {this.genListNew()}
+                            {this.getListNew()}
                         </div>
                         <div className="row">
-                            <div className="col-xs-12 text-right">
+                            <div className="text-right">
                                 <nav className="d-inline-block" aria-label="Page navigation example">
                                     <ul className="pagination">
                                         <li className="page-item">
@@ -140,6 +154,8 @@ class New extends Component {
                             </div>
                         </div>
                     </div>
+                    </div>
+                    
                 </section>
 
                 <Footer />

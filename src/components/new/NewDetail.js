@@ -9,6 +9,7 @@ import MarkApi from '../../api/MarkApi';
 import MarkItem from '../mark/markItem';
 import * as load from '../../actions/LoadingActions';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class NewDetail extends Component {
 
@@ -16,7 +17,9 @@ class NewDetail extends Component {
         super(props);
         this.state = {
             id: '',
-            myNew: undefined
+            myNew: undefined,
+            pholder: 'Bình luận ở đây!!!',
+            closeBtn: 'Đóng'
         }
     }
 
@@ -35,6 +38,22 @@ class NewDetail extends Component {
         let { id } = this.state;
         NewApi.getOne({ id }).then(res => {
             this.setState({ myNew: res.body.data });
+        });
+    }
+
+    toggleComment = e => {
+        let { pholder } = this.state;
+        pholder = 'Bình luận ở đây!!!' === pholder ? 'Mời nhập thắc mắc hoặc ý kiến của bạn' : 'Mời nhập thắc mắc hoặc ý kiến của bạn';
+        this.setState({ pholder }, () => {
+            $('.content-info').slideDown(700); 
+        });
+    }
+
+    closeCmt = e => {
+        let { closeBtn } = this.state;
+        closeBtn = 'Đóng';
+        this.setState({ closeBtn }, () => {
+            $(".content-info").slideUp(700);
         });
     }
 
@@ -65,16 +84,98 @@ class NewDetail extends Component {
                     </div>
                 </header>
 
+
+
                 <section className="container">
-                    <div style={{ paddingTop: 70, paddingBottom: 70 }}>
-                        <div className="row">
-                            {myNew && <div dangerouslySetInnerHTML={{ __html: myNew.content }}></div>}
+                    
+                    <div className="wrapper">
+                        <div className="box_mid">
+                           
+                            
+
+
+                    <div className="mid-content">
+                    <div className="mod-content row">
+                        <div id="main" className="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                            <div className="news-content desc">
+                                <div className="date">Thứ năm, 06/12/2018, 08:07 GMT+7</div>
+                                <div align="justify">
+                                  {myNew && <div dangerouslySetInnerHTML={{ __html: myNew.content }}></div>}
+
+                            </div>
+                            </div>
+
+                            <div className="product-tags">
+                                <p>Tags:</p>
+                                <ul className="list-inline text-left">
+                                    <li><Link to="#">Test 1</Link></li>
+                                    <li><Link to="#">Test 2</Link></li>
+                                    <li><Link to="#">Test 3</Link></li>
+                                    <li><Link to="#">Test 4</Link></li>
+                                    <li><Link to="#">Test 5</Link></li>
+                                </ul>
+                            </div>
+
+
+
+                            <div className="comment">
+                                <div className="title">Ý kiến của bạn</div>
+                                <div className="formComment">
+                                    <form action="#" method="post" name="fComment" id="fComment">
+                                        <div className="w_content">
+                                            <textarea id="content" name="content" className="form-control"
+                                                onClick={this.toggleComment} placeholder={this.state.pholder}></textarea>
+                                            <div className="content-info">
+                                                <div className="info-title">Nhập thông tin của bạn</div>
+                                                <input type="text" name="email" id="email" value=""
+                                                    className="form-control" placeholder="Email" /> <input
+                                                    type="text" name="name" id="name" value=""
+                                                    className="form-control" placeholder="Tên của bạn:" />
+                                                <button id="btnSend" name="btnSend" className="btn"
+                                                    type="submit" value="Gửi đánh giá">Gửi đánh giá</button>
+                                                <button id="btn-close" name="btn-close" className="btn"
+                                                    type="button" onClick={this.closeCmt}>{this.state.closeBtn}</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+
+
+                            <div className="box">
+                                <div className="box-title">
+                                    <div className="fTitle">Các tin khác</div>
+                                </div>
+                                <div className="box-content">
+                                    <ul className="news-other-list">
+                                        <li><Link to="#">Test test test <span>( 06-12-2017 )</span>
+                                        </Link></li>       
+                                        <li><Link to="#">Test test test <span>( 06/12/2018 )</span>
+                                        </Link></li>
+                                        <li><Link to="#">Test test test <span>( 06/12/2018 )</span>
+                                        </Link></li>
+                                        <li><Link to="#">Test test test <span>( 06/12/2018 )</span>
+                                        </Link></li>
+                                        <li><Link to="#">Test test test <span>( 06/12/2018 )</span>
+                                        </Link></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    </div>
+                    </div>
+                    </div>
+                  
+
+              
+                  
+
                 </section>
 
                 <Footer />
-            </Fragment >
+            </Fragment>
         );
     }
 }
