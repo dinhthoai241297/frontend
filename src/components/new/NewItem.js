@@ -7,104 +7,30 @@ class NewItem extends Component {
         let { myNew } = this.props;
 
         return (
-                <div>
-                                <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                    <div className="news">
-                                        <div className="img">
-                                            <Link to={'/new/detail?id=' + myNew.id} >
-                                                <img className="media-object" src={myNew.image} alt="onirem" />
-                                            </Link>
-                                        </div>
-                                        <div className="caption">
-                                            <div className="tend">
-                                                <h3>
-                                                    <Link to={'/new/detail?id=' + myNew.id} >
-                                                       Tiêu đề: {myNew.title}
-                                                    </Link>
-                                                </h3>
-                                            </div>
-                                            <hr></hr>
-                                            <i className="fa fa-clock-o" aria-hidden="true">06/12/2018 - 999 lượt xem</i>
-                                            
-                                            <div className="tomtat">{myNew.description}.</div>
-                                        </div>
-                                    </div>
-                                </div>
+            <div>
+                <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div className="news">
+                        <div className="img">
+                            <Link to={'/new/detail?id=' + myNew.id} >
+                                <img className="media-object" src={myNew.image} alt="onirem" />
+                            </Link>
+                        </div>
+                        <div className="caption">
+                            <div className="tend">
+                                <h3>
+                                    <Link to={'/new/detail?id=' + myNew.id} >
+                                        Tiêu đề: {myNew.title}
+                                    </Link>
+                                </h3>
+                            </div>
+                            <hr></hr>
+                            <i className="fa fa-clock-o" aria-hidden="true">06/12/2018 - 999 lượt xem</i>
 
-                                <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                    <div className="news">
-                                        <div className="img">
-                                            <Link to={'/new/detail?id=' + myNew.id} >
-                                                <img className="media-object" src={myNew.image} alt="onirem" />
-                                            </Link>
-                                        </div>
-                                        <div className="caption">
-                                            <div className="tend">
-                                                <h3>
-                                                    <Link to={'/new/detail?id=' + myNew.id} >
-                                                       Tiêu đề: {myNew.title}
-                                                    </Link>
-                                                </h3>
-                                            </div>
-                                            <hr></hr>
-                                            <i className="fa fa-clock-o" aria-hidden="true">06/12/2018 - 999 lượt xem</i>
-                                            
-                                            <div className="tomtat">{myNew.description}.</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                    <div className="news">
-                                        <div className="img">
-                                            <Link to={'/new/detail?id=' + myNew.id} >
-                                                <img className="media-object" src={myNew.image} alt="onirem" />
-                                            </Link>
-                                        </div>
-                                        <div className="caption">
-                                            <div className="tend">
-                                                <h3>
-                                                    <Link to={'/new/detail?id=' + myNew.id} >
-                                                       Tiêu đề: {myNew.title}
-                                                    </Link>
-                                                </h3>
-                                            </div>
-                                            <hr></hr>
-                                            <i className="fa fa-clock-o" aria-hidden="true">06/12/2018 - 999 lượt xem</i>
-                                            
-                                            <div className="tomtat">{myNew.description}.</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                    <div className="news">
-                                        <div className="img">
-                                            <Link to={'/new/detail?id=' + myNew.id} >
-                                                <img className="media-object" src={myNew.image} alt="onirem" />
-                                            </Link>
-                                        </div>
-                                        <div className="caption">
-                                            <div className="tend">
-                                                <h3>
-                                                    <Link to={'/new/detail?id=' + myNew.id} >
-                                                       Tiêu đề: {myNew.title}
-                                                    </Link>
-                                                </h3>
-                                            </div>
-                                            <hr></hr>
-                                            <i className="fa fa-clock-o" aria-hidden="true">06/12/2018 - 999 lượt xem</i>
-                                            
-                                            <div className="tomtat">{myNew.description}.</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
+                            <div className="tomtat">{myNew.description}.</div>
+                        </div>
+                    </div>
                 </div>
-
-                        
-                            
-
-          
+            </div>
         );
     }
 }

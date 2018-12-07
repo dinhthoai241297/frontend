@@ -7,12 +7,12 @@ class SchooItem extends Component {
         return (
             <tr>
                 <td>
-                    <Link to={'/school/detail?id=' + school._id} >
+                    <Link to={'/school/detail?id=' + (school._id || school.id)} >
                         {school.code}
                     </Link>
                 </td>
                 <td>
-                    <Link to={'/school/detail?id=' + school._id} >
+                    <Link to={'/school/detail?id=' + (school._id || school.id)} >
                         {school.name}
                     </Link>
                 </td>

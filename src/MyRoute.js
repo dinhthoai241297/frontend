@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
 import App from './App';
 import Home from './components/home/Home';
 import Search from './components/search/Search';
@@ -27,7 +27,12 @@ class MyRoute extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps.user);
+    }
+
     render() {
+        let { user } = this.props;
         return (
             <BrowserRouter>
                 <Route render={props => (
@@ -37,12 +42,15 @@ class MyRoute extends Component {
                             <Route path="/login" component={Login} />
                             <Route path="/search" component={Search} />
                             <Route path="/register" component={Register} />
-                            <Route path="/user/update" component={Update} />
+                            {/* <Route path="/user/update" component={Update} /> */}
+                            <Route path="/user/update" render={props => user ? <Update {...props} /> : <Redirect to={{ pathname: '/login', state: { path: '/user/update' } }} />} />
                             <Route path="/resetPassword" component={ResetPassword} />
                             <Route path="/forgotPassword" component={ForgotPassword} />
                             <Route path="/school/detail/" component={SchoolDetail} />
-                            <Route path="/user/profile/" component={Profile} />
-                            <Route path="/suggest" component={Suggest} />
+                            {/* <Route path="/user/profile/" component={Profile} /> */}
+                            <Route path="/user/profile/" render={props => user ? <Profile {...props} /> : <Redirect to={{ pathname: '/login', state: { path: '/user/profile' } }} />} />
+                            {/* <Route path="/suggest" component={Suggest} /> */}
+                            <Route path="/suggest" render={props => user ? <Suggest {...props} /> : <Redirect to={{ pathname: '/login', state: { path: '/suggest' } }} />} />
                             <Route exact path="/new" component={New} />
                             <Route path="/new/detail/" component={NewDetail} />
                         </Switch>
@@ -55,11 +63,13 @@ class MyRoute extends Component {
 
 MyRoute.propTypes = {
     logout: PropTypes.func,
-    loginSession: PropTypes.func
+    loginSession: PropTypes.func,
+    user: PropTypes.object
 }
 
 const mapStateToProps = state => {
     return {
+        user: state.UserReducer.user
     }
 }
 

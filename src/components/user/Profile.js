@@ -8,14 +8,14 @@ import Footer from '../common/Footer';
 
 class Profile extends Component {
 
-    componentDidMount() {
-        init_all();
-    }
-
     constructor(props) {
         super(props);
         this.state = {
         }
+    }
+
+    componentDidMount() {
+        init_all();
     }
 
     convertDate = date => {
@@ -27,9 +27,15 @@ class Profile extends Component {
 
         let { user } = this.props;
 
-        if (!user) {
-            return <Redirect to="/login" />
-        }
+        // if (!user) {
+        //     this.props.location.state = { path: '/profile' };
+        //     return <Redirect to={{
+        //         pathname: '/login',
+        //         state: {
+        //             path: '/user/profile'
+        //         }
+        //     }} />
+        // }
 
         return (
             <Fragment>

@@ -102,8 +102,6 @@ class New extends Component {
                 </header>
 
                 <section className="container">
-
-                   
                     <div className="mod-content row">
                         <div id="sidebar" className="col-lg-3 col-md-3 hidden-sm hidden-xs">
                             <div className="menu-sidebar">
@@ -111,53 +109,49 @@ class New extends Component {
                                     <li><a href='#' title='Sự kiện'><span>Sự kiện</span></a></li>
                                     <li><a href='#' title='Blog'><span>Blog</span></a></li>
                                     <li className="active"><Link to='/new' title='Hot News'><span>Hot News</span></Link></li>
-                                </ul>     
+                                </ul>
                             </div>
-
                         </div>
-
-                    <div id="main" className="col-lg-9 col-md-9 col-sm-12 col-xs-12 news-page">
-                        <div className="row">
-                            {this.getListNew()}
-                        </div>
-                        <div className="row">
-                            <div className="text-right">
-                                <nav className="d-inline-block" aria-label="Page navigation example">
-                                    <ul className="pagination">
-                                        <li className="page-item">
-                                            <a
-                                                className={'page-link' + (this.state.page === 1 ? ' cus-disabled' : '')}
-                                                href="#"
-                                                aria-label="Previous"
-                                                onClick={e => this.newPage(e, -1)}
-                                            >
-                                                <span aria-hidden="true">«</span>
-                                                <span className="sr-only">Previous</span>
-                                            </a>
-                                        </li>
-                                        <li className="page-item">
-                                            <a className="page-link">{this.state.page}</a>
-                                        </li>
-                                        <li className="page-item">
-                                            <a
-                                                className={'page-link' + (this.props.data.next ? '' : ' cus-disabled')}
-                                                aria-label="Next"
-                                                href="#"
-                                                onClick={e => this.newPage(e, 1)}
-                                            >
-                                                <span aria-hidden="true">»</span>
-                                                <span className="sr-only">Next</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
+                        <div id="main" className="col-lg-9 col-md-9 col-sm-12 col-xs-12 news-page">
+                            <div className="row">
+                                {this.getListNew()}
+                            </div>
+                            <div className="row">
+                                <div className="text-right">
+                                    <nav className="d-inline-block" aria-label="Page navigation example">
+                                        <ul className="pagination">
+                                            <li className="page-item">
+                                                <a
+                                                    className={'page-link' + (this.state.page === 1 ? ' cus-disabled' : '')}
+                                                    href="#"
+                                                    aria-label="Previous"
+                                                    onClick={e => this.newPage(e, -1)}
+                                                >
+                                                    <span aria-hidden="true">«</span>
+                                                    <span className="sr-only">Previous</span>
+                                                </a>
+                                            </li>
+                                            <li className="page-item">
+                                                <a className="page-link">{this.state.page}</a>
+                                            </li>
+                                            <li className="page-item">
+                                                <a
+                                                    className={'page-link' + (this.props.data.next ? '' : ' cus-disabled')}
+                                                    aria-label="Next"
+                                                    href="#"
+                                                    onClick={e => this.newPage(e, 1)}
+                                                >
+                                                    <span aria-hidden="true">»</span>
+                                                    <span className="sr-only">Next</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    </div>
-                    
                 </section>
-
                 <Footer />
             </Fragment>
         );

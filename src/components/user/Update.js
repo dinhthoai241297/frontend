@@ -218,7 +218,12 @@ class Update extends Component {
     render() {
         let { user } = this.props.data;
         if (!user) {
-            return <Redirect to='/' />
+            return <Redirect to={{
+                pathname: '/login',
+                state: {
+                    path: '/user/update'
+                }
+            }} />
         }
         return (
             <Fragment>

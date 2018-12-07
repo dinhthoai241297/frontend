@@ -62,8 +62,11 @@ class Login extends Component {
 
     render() {
 
+        console.log(this.props);
+
         if (this.props.user) {
-            return <Redirect to='/' />;
+            let path = (this.props.location.state && this.props.location.state.path) || '/';
+            return <Redirect to={path} />;
         }
 
         return (
