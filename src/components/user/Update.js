@@ -69,8 +69,6 @@ class Update extends Component {
             phonenumber: '',
             province: '',
             purpose: '',
-            password: '',
-            passwordcfm: '',
 
             provinceOptions: [],
             provinceSelecled: undefined,
@@ -78,8 +76,6 @@ class Update extends Component {
             subjectGroupSelected: undefined,
 
             mesEmail: '',
-            mesPassword: '',
-            mesPasswordCfm: '',
             mesBirthday: '',
             mesSG: '',
             mesPhone: '',
@@ -123,21 +119,20 @@ class Update extends Component {
     update = e => {
         this.props.loading(true);
         e.preventDefault();
-        let { fullName, email, sex, birthday, phonenumber, province, purpose, password, passwordcfm } = this.state;
-        let check = this.checkName(fullName) && this.checkBirthday(birthday) && this.checkEmail(email)
-            && this.checkPassword(password) && this.checkPasswordCfm(password, passwordcfm) && this.checkPhone(phonenumber)
-            && this.checkSG(purpose);
+        let { fullName, sex, birthday, province, purpose } = this.state;
+        let check = this.checkName(fullName) && this.checkBirthday(birthday) && this.checkSG(purpose);
         if (!check) {
             return;
         }
         let session, user;
-        user = { fullName, email, sex, birthday: birthday._d, phonenumber, province, purpose, password };
+        user = { id: this.props.data.user.id, fullName, sex, birthday: birthday._d, province, purpose };
         session = this.props.data.session;
         this.props.updateUser({ session, user }).then(res => {
             if (res.body.code === 200) {
-                user.province = { id: province, name: this.state.provinceSelecled.label };
-                user.purpose = { id: purpose, code: this.state.subjectGroupSelected.label };
-                this.props.login({ user, session });
+                let u = res.body.data.user;
+                u.province = { id: province, name: this.state.provinceSelecled.label };
+                u.purpose = { id: purpose, code: this.state.subjectGroupSelected.label };
+                this.props.updateUserState(u);
                 toastr.success('Cập nhật thông tin thành công!');
                 this.props.history.push("/user/profile");
             } else {
@@ -167,32 +162,6 @@ class Update extends Component {
     }
 
     // validdate input
-
-    checkPassword = password => {
-        let mesPassword = '', check = false;
-        if (password === '') {
-            mesPassword = this.MES_EMPTY;
-        } else if (password.length < 6) {
-            mesPassword = 'Mật khẩu phải có độ dài từ 6 kí tự!';
-        } else {
-            check = true;
-        }
-        this.setState({ mesPassword });
-        return check;
-    }
-
-    checkPasswordCfm = (password, passwordcfm) => {
-        let mesPasswordCfm = '', check = false;
-        if (password !== passwordcfm) {
-            mesPasswordCfm = 'Mật khẩu và xác nhận mật khẩu không khớp!';
-        } else if (passwordcfm === '') {
-            mesPasswordCfm = this.MES_EMPTY;
-        } else {
-            check = true;
-        }
-        this.setState({ mesPasswordCfm });
-        return check;
-    }
 
     checkBirthday = birthday => {
         if (!birthday) {
@@ -333,59 +302,6 @@ class Update extends Component {
                                     </div>
                                     <div className="col-xs-12 mb-40">
                                         <div className="cus-mes">
-                                            {this.state.mesEmail}
-                                        </div>
-                                        <input
-                                            type="email" name="email"
-                                            className={'form-control input-lg' + (this.state.mesEmail !== '' ? ' cus-error-field' : '')}
-                                            placeholder="Email (*)"
-                                            onClick={() => this.setState({ mesEmail: '' })}
-                                            value={this.state.email}
-                                            disabled
-                                        />
-                                    </div>
-                                    <div className="col-xs-12 mb-40">
-                                        <div className="cus-mes">
-                                            {this.state.mesPassword}
-                                        </div>
-                                        <input
-                                            type="password" name="password"
-                                            className={'form-control input-lg' + (this.state.mesPassword !== '' ? ' cus-error-field' : '')}
-                                            placeholder="Mật khẩu (*)"
-                                            onChange={this.handleChangeInput}
-                                            onClick={() => this.setState({ mesPassword: '' })}
-                                            value={this.state.password}
-                                        />
-                                    </div>
-                                    <div className="col-xs-12 mb-40">
-                                        <div className="cus-mes">
-                                            {this.state.mesPasswordCfm}
-                                        </div>
-                                        <input
-                                            type="password" name="passwordcfm"
-                                            className={'form-control input-lg' + (this.state.mesPasswordCfm !== '' ? ' cus-error-field' : '')}
-                                            placeholder="Xác nhận mật khẩu (*)"
-                                            onChange={this.handleChangeInput}
-                                            onClick={() => this.setState({ mesPasswordCfm: '' })}
-                                            value={this.state.passwordcfm}
-                                        />
-                                    </div>
-                                    <div className="col-xs-12 mb-40">
-                                        <div className="cus-mes">
-                                            {this.state.mesPhone}
-                                        </div>
-                                        <input
-                                            type="number" name="phonenumber"
-                                            className={'form-control input-lg' + (this.state.mesPhone !== '' ? ' cus-error-field' : '')}
-                                            placeholder="Số điện thoại"
-                                            value={this.state.phonenumber}
-                                            onClick={() => this.setState({ mesPhone: '' })}
-                                            value={this.state.phonenumber}
-                                            disabled
-                                        />
-                                    </div>
-                                    <div className="col-xs-12 mb-40">
-                                        <div className="cus-mes">
                                             {this.state.mesSG}
                                         </div>
                                         <div
@@ -435,6 +351,7 @@ class Update extends Component {
 Update.propTypes = {
     data: PropTypes.object,
     updateUser: PropTypes.func,
+    updateUserState: PropTypes.func,
     loading: PropTypes.func,
     login: PropTypes.func,
 }
@@ -449,7 +366,8 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         updateUser: data => dispatch(actions.updateUserApi(data)),
         login: data => dispatch(actions.loginState(data)),
-        loading: loading => dispatch(load.loading(loading))
+        loading: loading => dispatch(load.loading(loading)),
+        updateUserState: data => dispatch(actions.updateUserState(data))
     }
 }
 

@@ -119,7 +119,7 @@ class Suggest extends Component {
                                         <tbody>
                                             {this.props.data.schools.length !== 0 ? this.genListSchool() : (
                                                 <tr>
-                                                    <td className="text-center" colSpan={4}>
+                                                    <td className="text-center" colSpan={3}>
                                                         Không có dữ liệu hiển thị
                                                     </td>
                                                 </tr>

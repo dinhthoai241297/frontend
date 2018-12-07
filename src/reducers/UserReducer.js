@@ -14,6 +14,12 @@ const UserReducer = (state = intitState, action) => {
                 session: action.data.session
             }
         }
+        case actions.UPDATE_USER: {
+            return {
+                ...state,
+                user: action.data
+            }
+        }
         case actions.LOGOUT: {
             return {
                 ...state,

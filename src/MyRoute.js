@@ -21,9 +21,9 @@ class MyRoute extends Component {
 
     constructor(props) {
         super(props);
-        let data = JSON.parse(localStorage.getItem('data'));
-        if (data) {
-            this.props.login(data);
+        let session = localStorage.getItem('session');
+        if (session) {
+            this.props.loginSession(session);
         }
     }
 
@@ -55,7 +55,7 @@ class MyRoute extends Component {
 
 MyRoute.propTypes = {
     logout: PropTypes.func,
-    login: PropTypes.func
+    loginSession: PropTypes.func
 }
 
 const mapStateToProps = state => {
@@ -66,7 +66,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, props) => {
     return {
         logout: () => dispatch(actions.logoutApi()),
-        login: data => dispatch(actions.loginState(data))
+        loginSession: session => dispatch(actions.loginSession(session))
     }
 }
 

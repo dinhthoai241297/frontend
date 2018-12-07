@@ -7,7 +7,7 @@ class SchoolApi {
     }
 
     static getSuggest(data) {
-        return request.post(`${HOST}frontend/school/getSuggest`).send({ data });
+        return request.post(`${HOST}frontend/school/getlist`).send({ data });
     }
 
     static getOne(data) {

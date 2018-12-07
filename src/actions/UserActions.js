@@ -5,9 +5,7 @@ export const loginApi = (email, password) => {
     return dispatch => UserApi.login({ email, password }).then(res => {
         if (res.body.code === 200) {
             dispatch(loginState(res.body.data));
-            let { data } = res.body;
-            // data.user.password = '******';
-            localStorage.setItem('data', JSON.stringify(data));
+            localStorage.setItem('session', res.body.data.session);
         }
         return res;
     }).catch(error => {
@@ -26,9 +24,10 @@ export const logoutApi = () => {
     return (dispatch, getState) => UserApi.logout({
         session: getState().UserReducer.session
     }).then(res => {
+        console.log(res);
         if (res.body.code === 200) {
             dispatch(logoutState());
-            localStorage.setItem('data', null);
+            localStorage.setItem('session', null);
         }
     }).catch(error => {
         throw (error);
@@ -60,4 +59,16 @@ export const updateUserState = data => {
         type: actionTypes.UPDATE_USER,
         data
     }
+}
+
+export const loginSession = session => {
+    return dispatch => UserApi.loginSession({ session }).then(res => {
+        if (res.body.code === 200) {
+            let { user } = res.body.data;
+            dispatch(loginState({ user, session }));
+        }
+        return res;
+    }).catch(error => {
+        throw (error);
+    });
 }
