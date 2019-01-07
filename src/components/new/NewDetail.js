@@ -22,6 +22,7 @@ class NewDetail extends Component {
     }
 
     async componentDidMount() {
+        console.log(this.props);
         init_all();
         await this.initFilter(qs.parse(this.props.location.search));
         this.loadNew();
@@ -91,9 +92,9 @@ class NewDetail extends Component {
                                                 {myNew && <div dangerouslySetInnerHTML={{ __html: myNew.content }}></div>}
                                             </div>
                                         </div>
-                                        
-                                        
-                                        
+
+
+
                                     </div>
                                 </div>
                             </div>
