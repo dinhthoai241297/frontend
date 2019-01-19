@@ -13,6 +13,12 @@ const SchoolReducer = (state = intitState, action) => {
                 next: action.data.next
             }
         }
+        case actions.CLEAR_SCHOOL: {
+            return {
+                schools: [],
+                next: false
+            }
+        }
         default: {
             return { ...state };
         }

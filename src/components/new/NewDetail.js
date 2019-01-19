@@ -7,7 +7,7 @@ import Footer from '../common/Footer';
 import { init_all } from '../../assets/vendor/js/all';
 import * as load from '../../actions/LoadingActions';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { convertDate } from '../../custom/index';
 
 class NewDetail extends Component {
 
@@ -84,16 +84,20 @@ class NewDetail extends Component {
                         <div className="box_mid">
                             <div className="mid-content">
                                 <div className="mod-content row">
-                                    <div id="main" className="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                                    <div id="main" className="col-xs-12 col-md-10 col-md-offset-1">
                                         <div className="news-content desc">
-                                            <div className="date">Thứ năm, 06/12/2018, 08:07 GMT+7</div>
+                                            <div>
+                                                <h1 style={{ color: '#3d3d3d', marginBottom: '10px' }}>
+                                                    {myNew && myNew.title}
+                                                </h1>
+                                            </div>
+                                            <div>
+                                                {myNew && convertDate(myNew.createdAt)}
+                                            </div>
                                             <div align="justify">
                                                 {myNew && <div dangerouslySetInnerHTML={{ __html: myNew.content }}></div>}
                                             </div>
                                         </div>
-                                        
-                                        
-                                        
                                     </div>
                                 </div>
                             </div>

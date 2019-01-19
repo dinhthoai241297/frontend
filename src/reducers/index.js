@@ -5,6 +5,8 @@ import SchoolReducer from './SchoolReducer';
 import LoadingReducer from './LoadingReducer';
 import SubjectGroupReducer from './SubjectGroupReducer';
 import NewReducer from './NewReducer';
+import MajorReducer from './MajorReducer';
+import ProvinceReducer from './ProvinceReducer';
 
 const root = combineReducers({
     SectorReducer,
@@ -12,7 +14,9 @@ const root = combineReducers({
     SchoolReducer,
     LoadingReducer,
     SubjectGroupReducer,
-    NewReducer
+    NewReducer,
+    MajorReducer,
+    ProvinceReducer
 });
 
 export default root;

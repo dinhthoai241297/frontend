@@ -73,7 +73,7 @@ class SchoolDetail extends Component {
         let { id } = this.state;
         MarkApi.getAll({ school: id, year }).then(res => {
             let sg, marks;
-            marks = res.body.list;
+            marks = res.body.data.list;
             sg = this.props.subjectGroups;
             if (sg.length === 0) {
                 this.props.loadSG().then(res => {

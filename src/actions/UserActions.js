@@ -72,3 +72,15 @@ export const loginSession = session => {
         throw (error);
     });
 }
+
+export const loginFacebook = accessToken => {
+    return dispatch => UserApi.loginFacebook({ accessToken }).then(res => {
+        if (res.body.code === 200) {
+            let { user } = res.body.data;
+            dispatch(loginState({ user, session }));
+        }
+        return res;
+    }).catch(error => {
+        throw (error);
+    });
+}

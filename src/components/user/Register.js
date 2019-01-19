@@ -100,7 +100,7 @@ class Register extends Component {
         let rs = await ProvinceApi.getAll();
 
         this.setState({
-            provinceOptions: rs.body.list.map(el => ({ value: el.id, label: el.name }))
+            provinceOptions: rs.body.data.list.map(el => ({ value: el.id, label: el.name }))
         });
 
     }

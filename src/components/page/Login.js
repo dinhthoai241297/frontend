@@ -6,6 +6,7 @@ import { Redirect, Link } from 'react-router-dom';
 import Nav from './../common/Nav';
 import { init_all } from '../../assets/vendor/js/all';
 import Footer from '../common/Footer';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 
 class Login extends Component {
 
@@ -60,6 +61,15 @@ class Login extends Component {
         }
     }
 
+    responseFacebook = res => {
+        let { accessToken } = res;
+        this.props.loginFacebook(accessToken);
+    }
+
+    componentClicked = () => {
+        console.log('click');
+    }
+
     render() {
 
         console.log(this.props);
@@ -93,7 +103,7 @@ class Login extends Component {
                 </header>
 
                 <section className="container">
-                    <div style={{ paddingTop: 70, paddingBottom: 70 }}>
+                    <div>
                         <div className="row">
                             <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
                                 <form className="form">
@@ -127,6 +137,21 @@ class Login extends Component {
                                             />
                                         </div>
                                         <div className="col-xs-12 mb-20 text-center">
+
+                                            <FacebookLogin
+                                                appId="284637609076699"
+                                                fields="name,email"
+                                                onClick={this.componentClicked}
+                                                callback={this.responseFacebook}
+                                                render={renderProps => (
+                                                    <a
+                                                        className="btn-fb"
+                                                        onClick={renderProps.onClick}
+                                                    >Đăng nhập bằng facebook</a>
+                                                )}
+                                            />
+                                        </div>
+                                        <div className="col-xs-12 mb-20 text-center">
                                             <Link to="/forgotPassword">Quên mật khẩu?</Link>
                                         </div>
                                         <div className="col-xs-12 mb-20 text-center">
@@ -152,7 +177,8 @@ class Login extends Component {
 
 Login.propTypes = {
     user: PropTypes.object,
-    login: PropTypes.func
+    login: PropTypes.func,
+    loginFacebook: PropTypes.func
 }
 
 const mapStateToProps = state => {
@@ -163,7 +189,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        login: (email, password) => dispatch(actions.loginApi(email, password))
+        login: (email, password) => dispatch(actions.loginApi(email, password)),
+        loginFacebook: accessToken => dispatch(actions.loginFacebook(accessToken)),
     }
 }
 

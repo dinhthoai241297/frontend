@@ -7,8 +7,11 @@ class SchoolApi {
     }
 
     static getSuggest(data) {
-        return request.post(`${HOST}frontend/school/getlist`).send({ data });
+        return request.post(`${HOST}frontend/school/suggest`).send({ data });
     }
+    // static getSuggest(data) {
+    //     return request.post(`${HOST}frontend/school/getlist`).send({ data });
+    // }
 
     static getOne(data) {
         return request.post(`${HOST}frontend/school/getid`).send({ data });

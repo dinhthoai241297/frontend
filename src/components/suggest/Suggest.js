@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import Footer from './../common/Footer';
+import Footer from '../common/Footer';
 import { connect } from 'react-redux';
-import * as actions from './../../actions/SchoolActions';
+import * as actions from '../../actions/SchoolActions';
 import Nav from '../common/Nav';
 import { init_all } from '../../assets/vendor/js/all';
 import qs from 'query-string';
 import PropTypes from 'prop-types';
-import SchoolItem from '../school/SchooItem';
+import SuggestItem from './SuggestItem';
 import * as load from '../../actions/LoadingActions';
 
 class Suggest extends Component {
@@ -74,9 +74,10 @@ class Suggest extends Component {
     genListSchool = () => {
         let rs = null;
         let { schools } = this.props.data;
+        console.log(schools);
         if (schools) {
             rs = schools.map((el, index) => (
-                <SchoolItem key={index} school={el} />
+                <SuggestItem key={index} school={el} />
             ));
         }
         return rs;

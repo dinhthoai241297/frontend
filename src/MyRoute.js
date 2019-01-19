@@ -13,9 +13,11 @@ import ForgotPassword from './components/user/ForgotPassowrd';
 import SchoolDetail from './components/school/SchoolDetail';
 import Profile from './components/user/Profile';
 import Update from './components/user/Update';
-import Suggest from './components/page/Suggest';
+import Suggest from './components/suggest/Suggest';
+import Suggest2 from './components/suggest/Suggest2';
 import New from './components/new/New';
 import NewDetail from './components/new/NewDetail';
+import Test from './components/page/Test';
 
 class MyRoute extends Component {
 
@@ -53,6 +55,8 @@ class MyRoute extends Component {
                             <Route path="/suggest" render={props => user ? <Suggest {...props} /> : <Redirect to={{ pathname: '/login', state: { path: '/suggest' } }} />} />
                             <Route exact path="/new" component={New} />
                             <Route path="/new/detail/" component={NewDetail} />
+                            <Route path="/suggest2/" component={Suggest2} />
+                            <Route path="/test/" component={Test} />
                         </Switch>
                     </App>
                 )} />

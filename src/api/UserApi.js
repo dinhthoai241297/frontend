@@ -29,6 +29,10 @@ class UserApi {
     static loginSession(data) {
         return request.post(`${HOST}user/loginsession`).send({ data });
     }
+
+    static loginFacebook(data) {
+        return request.post(`${HOST}user/loginfacebook`).send({ data });
+    }
 }
 
 export default UserApi;

@@ -2,9 +2,9 @@ import * as actionTypes from './../actionTypes/ProvinceActionTypes';
 import ProvinceApi from './../api/ProvinceApi';
 
 export const loadProvinceApi = page => {
-    return dispatch => ProvinceApi.getall({ page }).then(res => {
+    return dispatch => ProvinceApi.getAll({ page }).then(res => {
         if (res.body.code === 200) {
-            dispatch(loadProvinceApi(res.body.data));
+            dispatch(loadProvinceState(res.body.data));
         }
         return res;
     });

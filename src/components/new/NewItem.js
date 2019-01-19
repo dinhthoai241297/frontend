@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { changeText } from '../../custom/index';
 
 class NewItem extends Component {
     render() {
@@ -11,14 +12,14 @@ class NewItem extends Component {
                 <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <div className="news">
                         <div className="img">
-                            <Link to={'/new/detail?id=' + myNew.id} >
+                            <Link to={'/new/detail/' + changeText(myNew.title) + '?id=' + myNew.id} >
                                 <img className="media-object" src={myNew.image} alt="onirem" />
                             </Link>
                         </div>
                         <div className="caption">
                             <div className="tend">
                                 <h3>
-                                    <Link to={'/new/detail?id=' + myNew.id} >
+                                    <Link to={'/new/detail/' + changeText(myNew.title) + '?id=' + myNew.id} >
                                         Tiêu đề: {myNew.title}
                                     </Link>
                                 </h3>
